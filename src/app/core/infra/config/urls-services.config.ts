@@ -7,7 +7,7 @@
  * IDE:          WebStorm
  */
 
-import { ApiUrlServiceModel } from '../../domain/models/api-url-service.model';
+import type { ApiUrlServiceModel } from '@/domain/models/api-url-service.model';
 
 export const URL_SERVICES: ApiUrlServiceModel = {
   auth: {
