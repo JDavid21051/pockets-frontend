@@ -110,8 +110,8 @@ export class CoreHttpClientService {
       })
       .catch((errorResponse: HttpErrorResponse) => {
         newResponse.status = errorResponse.status;
-        newResponse.errorMessage = errorResponse.error.message;
-        newResponse.errorCode = errorResponse.error.detail;
+        newResponse.errorMessage = String(errorResponse.error.message);
+        newResponse.errorCode = String(errorResponse.error.detail);
       });
     return newResponse;
   }
@@ -142,8 +142,8 @@ export class CoreHttpClientService {
       })
       .catch((errorResponse: HttpErrorResponse) => {
         newResponse.status = errorResponse.status;
-        newResponse.errorMessage = errorResponse.error.message;
-        newResponse.errorCode = errorResponse.error.detail;
+        newResponse.errorMessage = String(errorResponse.error.message);
+        newResponse.errorCode = String(errorResponse.error.detail);
       });
     return newResponse;
   }
