@@ -7,10 +7,14 @@
  * IDE:          WebStorm
  */
 
-export interface ApiUrlAuthModel {
+export interface ApiUrlBaseModel {
+  readonly base: string;
+}
+export interface ApiUrlAuthModel extends ApiUrlBaseModel {
   readonly login: string;
   readonly profile: string;
   readonly logout: string;
+  readonly refresh: string;
 }
 export interface ApiUrlServiceModel {
   readonly auth: ApiUrlAuthModel;

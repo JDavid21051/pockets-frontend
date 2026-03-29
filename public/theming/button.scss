@@ -1,0 +1,23 @@
+/*
+* Project:      pockets-frontend
+* Developed by: Juan David Pelaez Cumbe
+* Date:         3/23/2026 - 3:43 PM
+* Module name:  button.scss
+* File name:    button
+* IDE:          WebStorm
+*/
+
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.button-overrides((
+    filled-container-color: orange,
+    filled-label-text-color: rebeccapurple,
+  ));
+}
+
+button {
+  &.mdc-button {
+    border-radius: 8px;
+  }
+}

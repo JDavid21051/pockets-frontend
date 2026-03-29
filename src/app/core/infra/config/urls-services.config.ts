@@ -7,12 +7,14 @@
  * IDE:          WebStorm
  */
 
-import type { ApiUrlServiceModel } from '@/domain/models/api-url-service.model';
+import type { ApiUrlServiceModel } from '@/domain/models/app/api-url-service.model';
 
 export const URL_SERVICES: ApiUrlServiceModel = {
   auth: {
-    login: 'z8uXmF16AInhqHUaG/',
+    base: 'auth/',
+    login: 'bG9naW4tYXBw/',
     logout: 'logout/',
+    refresh: 'refresh-token/',
     profile: 'profile/get/',
   },
-};
+} as const;

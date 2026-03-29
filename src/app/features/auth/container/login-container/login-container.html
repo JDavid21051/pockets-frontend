@@ -1,0 +1,15 @@
+<div class="grid size-full place-content-center">
+  <form
+    [formGroup]="form"
+    class="md:max-w-80 md:w-80 max-w-full flex gap-3 flex-col w-full"
+    (ngSubmit)="onSubmitForm()"
+  >
+    <h3>Inicio de sesión</h3>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Acceso</mat-label>
+      <input matInput placeholder="Ingrese la contraseña" required />
+      <mat-icon matSuffix class="material-symbols-outlined">lock</mat-icon>
+    </mat-form-field>
+    <button matButton="outlined" class="uppercase" color="primary" type="submit">INGRESAR</button>
+  </form>
+</div>

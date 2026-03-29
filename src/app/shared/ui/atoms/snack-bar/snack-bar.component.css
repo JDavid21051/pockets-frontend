@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 400px;
+  min-height: 58px;
+  max-width: 400px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.krih_snack_bar_icon {
+  background: var(--mat-app-background-color, var(--mat-app-background, transparent));
+
+  & .material-symbols-outlined,
+  & mat-icon {
+    font-size: 1.5rem;
+  }
+}
+
+.snack_text {
+  & .krih_snack_msm {
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 4px 8px;
+  }
+
+  & .krih_snack_title {
+    margin: 0;
+    padding-inline: 4px 8px;
+  }
+}
