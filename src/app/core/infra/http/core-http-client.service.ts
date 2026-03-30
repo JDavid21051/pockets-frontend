@@ -8,17 +8,10 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import type {
-  HttpContext,
-  HttpErrorResponse,
-  HttpResponse,
-  HttpResponseBase,
-} from '@angular/common/http';
-import { HttpRequest } from '@angular/common/http';
+import type { HttpContext, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
-import { pipe } from 'rxjs';
 import { map } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/token-config/modules-config.token';

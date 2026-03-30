@@ -10,7 +10,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-import { AuthStoreService } from '@/infra/service/auth-store.service';
 
 interface LoginFormControls {
   token: FormControl<string>;
@@ -25,7 +24,6 @@ interface LoginFormControls {
 export class LoginContainer implements OnInit {
   private readonly builder = inject(NonNullableFormBuilder);
   private readonly loginStore: LoginStoreModel = inject(LoginStore);
-  private readonly authStore: AuthStoreService = inject(AuthStoreService);
   readonly form: FormGroup<LoginFormControls> = this.builder.group<LoginFormControls>({
     token: this.builder.control('', [Validators.required, Validators.minLength(8)]),
   });
