@@ -8,10 +8,18 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import type { HttpContext, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import type {
+  HttpContext,
+  HttpErrorResponse,
+  HttpResponse,
+  HttpResponseBase,
+} from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/token-config/modules-config.token';
 import type { ApiResponse, ApiResponseModel } from '@/domain/models/app/api-core.models';
@@ -48,9 +56,12 @@ export class CoreHttpClientService {
   }
 
   private mapResponse<T>(response: ApiResponse<T>): T {
-    if (!response.success) throw ApiExceptionCore.createError(response);
-    if (typeof response.result === 'string') return JSON.parse(response.result);
-    return response.result;
+    console.log(response);
+    if (response.success) {
+      if (typeof response.data === 'string') return JSON.parse(response.data);
+      return response.data;
+    }
+    throw ApiExceptionCore.createError(response);
   }
 
   get<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
@@ -61,17 +72,14 @@ export class CoreHttpClientService {
     return this.httpClient.get<T>(url, { headers: headers });
   }
 
-  post<T>(
-    endpoint: string,
-    body?: object,
-    headers?: HttpHeaders,
-    context?: HttpContext,
-  ): Observable<T> {
+  post<T>(endpoint: string, body?: object, headers?: HttpHeaders, context?: HttpContext) {
     const url = this.getUrl(endpoint);
     if (!headers) {
       headers = this.getHttpHeaders();
     }
-    return this.httpClient.post<T>(url, body, { headers, context });
+    return this.httpClient
+      .post<ApiResponse<T>>(url, body, { headers, context })
+      .pipe(map((data) => this.mapResponse<T>(data)));
   }
 
   put(endpoint: string, body?: object, headers?: HttpHeaders): Observable<HttpResponse<object>> {

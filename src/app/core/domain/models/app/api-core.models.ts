@@ -14,32 +14,29 @@ export interface ApiErrorBase {
   readonly message: string;
 }
 
-export interface ApiResponseBase<T, E extends ApiErrorBase = ApiErrorBase> {
-  code: string;
+export interface ApiResponseBase<TResult, TError extends ApiErrorBase = ApiErrorBase> {
   success: boolean;
   message: string;
-  result?: T;
-  errors?: [E];
+  data: TResult;
+  error?: TError;
 }
 
-export interface ApiResponseSuccessfully<T> extends ApiResponseBase<T> {
+export interface ApiSuccessResponse<TResult> extends ApiResponseBase<TResult> {
   success: true;
-  result: T;
-  errors?: never;
+  data: TResult;
 }
 
-export interface ApiResponseFailure<E extends ApiErrorBase = ApiErrorBase> extends ApiResponseBase<
-  never,
-  E
-> {
+export interface ApiFailedResponse<
+  TError extends ApiErrorBase = ApiErrorBase,
+> extends ApiResponseBase<never, TError> {
   success: false;
-  result?: never;
-  errors: [E];
+  data: never;
+  error: TError;
 }
 
-export type ApiResponse<T, E extends ApiErrorBase = ApiErrorBase> =
-  | ApiResponseSuccessfully<T>
-  | ApiResponseFailure<E>;
+export type ApiResponse<TSuccess, TError extends ApiErrorBase = ApiErrorBase> =
+  | ApiSuccessResponse<TSuccess>
+  | ApiFailedResponse<TError>;
 
 /**
  * interface defining the http response of the system

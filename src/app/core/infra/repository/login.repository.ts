@@ -10,16 +10,17 @@
 import { inject, Injectable } from '@angular/core';
 import { CoreHttpClientService } from '@/infra/http/core-http-client.service';
 import { URL_SERVICES } from '@/infra/config/urls-services.config';
-import type { LoginDto } from '@/domain/models/auth/login.model';
+import type { LoginDto, LoginResponse } from '@/domain/models/auth/login.model';
+import type { LoginPort } from '@/application/ports/login.port';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginRepository {
+export class LoginRepository implements LoginPort {
   private readonly urls = URL_SERVICES.auth;
   private readonly http = inject(CoreHttpClientService);
 
-  login<TResponse = string>(param: LoginDto) {
-    return this.http.post<TResponse>(this.urls.base + this.urls.login, param);
+  login(dto: LoginDto) {
+    return this.http.post<LoginResponse>(this.urls.base + this.urls.login, dto);
   }
 }

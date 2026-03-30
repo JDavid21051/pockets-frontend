@@ -36,15 +36,15 @@ export class SnackBarService {
   }
 
   showSnackByStatus(
-    message: string,
+    title: string,
     param: Partial<SnackBarParamsModel>,
     status: AppStatusCoreEnum,
   ): void {
     console.log('pasando por showSuccess en service');
     this.showSnack({
-      message: message || param.message || '',
+      message: param.message || '',
       status,
-      title: message || param.title,
+      title: title || param.title,
       actionText: param.actionText ?? 'Cancel',
       config: {
         ...param.config,

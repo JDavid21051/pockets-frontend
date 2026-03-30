@@ -6,10 +6,11 @@
   >
     <h3>Inicio de sesión</h3>
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Acceso</mat-label>
-      <input matInput placeholder="Ingrese la contraseña" required />
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="token" placeholder="Ingrese la contraseña" required />
       <mat-icon matSuffix class="material-symbols-outlined">lock</mat-icon>
+      <mat-error> Error, ingrese la contraseña </mat-error>
     </mat-form-field>
-    <button matButton="outlined" class="uppercase" color="primary" type="submit">INGRESAR</button>
+    <button matButton="outlined" class="uppercase" color="primary" type="submit">Ingresar</button>
   </form>
 </div>

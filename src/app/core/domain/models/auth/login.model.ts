@@ -8,5 +8,12 @@
  */
 
 export interface LoginDto {
-  password: string;
+  readonly password: string;
+}
+
+export interface LoginResponse {
+  readonly updatedAt: string;
+  readonly userId: string;
+  readonly accessToken: string;
+  readonly refreshToken: string;
 }

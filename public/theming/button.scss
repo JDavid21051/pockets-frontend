@@ -19,5 +19,9 @@
 button {
   &.mdc-button {
     border-radius: 8px;
+
+    &.uppercase .mdc-button__label {
+      text-transform: uppercase;
+    }
   }
 }

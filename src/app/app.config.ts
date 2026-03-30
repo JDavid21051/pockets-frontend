@@ -9,6 +9,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { AllowedLanguagesEnum } from '@/domain/enums/allowed-languages.enum';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/token-config/modules-config.token';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AUTH_STORAGE_KEY } from '@/infra/itoken/auth-storage-key.itoken';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,6 +34,10 @@ export const appConfig: ApplicationConfig = {
         baseEndpoint: 'https://invoices-api-theta.vercel.app/api/',
         tokenKeyword: 'jwt',
       },
+    },
+    {
+      provide: AUTH_STORAGE_KEY,
+      useValue: 'auth_app_data',
     },
   ],
 };

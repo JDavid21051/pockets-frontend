@@ -9,7 +9,7 @@
 
 import { catchError, EMPTY, of, pipe, tap } from 'rxjs';
 import type { UnaryFunction, Observable } from 'rxjs';
-import type { HttpErrorResponse } from '@angular/common/http';
+import type { ApiFailedResponse } from '@/domain/models/app/api-core.models';
 
 export function handleResponse<TResponse, TError = Error>(
   onSuccess: (response: TResponse) => void,
@@ -26,7 +26,7 @@ export function handleResponse<TResponse, TError = Error>(
   );
 }
 
-export function handleRxResponse<TResponse, TError = HttpErrorResponse>(
+export function handleRxResponse<TResponse, TError = ApiFailedResponse>(
   onSuccess: (response: TResponse) => void,
   onError?: (error: TError) => void,
   onFinally?: () => void,
