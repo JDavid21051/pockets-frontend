@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/container/login-container'),
   },
   {
+    path: 'admin',
+    loadComponent: () => import('./features/admin/admin-container'),
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',

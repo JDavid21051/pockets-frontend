@@ -15,6 +15,7 @@ import type { LoginDto } from '@/domain/models/auth/login.model';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
 import { SnackBarService } from '@/application/services/app-snack-bar.service';
 import { AuthStoreService } from '@/infra/service/auth-store.service';
+import { Router } from '@angular/router';
 
 interface LoginStateModel {
   loading: boolean;
@@ -31,9 +32,13 @@ export const LoginStore = signalStore(
     (
       store,
       snackService = inject(SnackBarService),
+      router = inject(Router),
       loginRepo = inject(LoginRepository),
       authStore = inject(AuthStoreService),
     ) => {
+      const redirectTo = async () => {
+        await router.navigate(['/admin']);
+      };
       const login = rxMethod<LoginDto>(($) =>
         $.pipe(
           switchMap((params) =>
@@ -43,6 +48,8 @@ export const LoginStore = signalStore(
                   console.log({ response });
                   snackService.showSuccess('Has iniciado sesión con exito');
                   authStore.authorizeUser(response);
+
+                  redirectTo().then((r) => console.log(r));
                 },
                 (error): void => {
                   console.log(error.error);

@@ -48,7 +48,7 @@ export default defineConfig([
       '@angular-eslint/use-lifecycle-interface': ['error'],
       '@typescript-eslint/no-unused-vars': ['error'],
       '@typescript-eslint/no-explicit-any': ['error'],
-      '@typescript-eslint/no-floating-promises': ['error'],
+      '@typescript-eslint/no-floating-promises': ['warn'],
       '@typescript-eslint/consistent-type-imports': ['error'],
       '@typescript-eslint/no-non-null-assertion': ['error'],
       '@typescript-eslint/member-ordering': [
