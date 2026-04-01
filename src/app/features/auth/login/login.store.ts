@@ -53,10 +53,7 @@ export const LoginStore = signalStore(
                     snackService.showError(String(error));
                   });
                 },
-                (error): void => {
-                  console.log(error.error);
-                  snackService.showError(String(error.error.message));
-                },
+                (error): void => snackService.showError(String(error.error.message)),
               ),
             ),
           ),

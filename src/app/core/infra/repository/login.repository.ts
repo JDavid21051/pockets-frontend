@@ -11,7 +11,7 @@ import { inject, Injectable } from '@angular/core';
 import { CoreHttpClientService } from '@/infra/http/core-http-client.service';
 import { URL_SERVICES } from '@/infra/config/urls-services.config';
 import type { LoginDto, LoginResponse } from '@/domain/models/auth/login.model';
-import type { LoginPort } from '@/application/ports/login.port';
+import type { LoginPort } from '@/application/ports/auth/login.port';
 
 @Injectable({
   providedIn: 'root',
