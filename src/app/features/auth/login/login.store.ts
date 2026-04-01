@@ -49,7 +49,9 @@ export const LoginStore = signalStore(
                   snackService.showSuccess('Has iniciado sesión con exito');
                   authStore.authorizeUser(response);
 
-                  redirectTo().then((r) => console.log(r));
+                  redirectTo().catch((error) => {
+                    snackService.showError(String(error));
+                  });
                 },
                 (error): void => {
                   console.log(error.error);

@@ -1,4 +1,3 @@
-import type { OnInit } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { LoginStore } from '../../login/login.store';
 import type { LoginStoreModel } from '../../login/login.store';
@@ -21,16 +20,12 @@ interface LoginFormControls {
   templateUrl: './login-container.html',
   styleUrl: './login-container.css',
 })
-export class LoginContainer implements OnInit {
+export class LoginContainer {
   private readonly builder = inject(NonNullableFormBuilder);
   private readonly loginStore: LoginStoreModel = inject(LoginStore);
   readonly form: FormGroup<LoginFormControls> = this.builder.group<LoginFormControls>({
     token: this.builder.control('', [Validators.required, Validators.minLength(8)]),
   });
-
-  ngOnInit(): void {
-    console.log('aaaa this.store.doLogin()');
-  }
 
   onSubmitForm(): void {
     if (!this.form.valid) {
