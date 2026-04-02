@@ -1,1 +1,46 @@
-<p>vista admin-container works!</p>
+<mat-drawer-container [hasBackdrop]="false" class="example-container h-full">
+  @if (!isResponsive()) {
+    <mat-drawer
+      [class.collapsed]="!sidebarOpen()"
+      class="border border-neutral-300 rounded-xs"
+      mode="push"
+      opened
+    >
+      Drawer content
+    </mat-drawer>
+  }
+  <mat-drawer-content
+    [class.collapsed]="!sidebarOpen()"
+    [class.expanded]="sidebarOpen()"
+    class="w-full"
+  >
+    @if (isResponsive()) {
+      <mat-toolbar class="border-b border-neutral-400">
+        <button matIconButton aria-label="Example icon-button with menu icon" class="example-icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>My App</span>
+        <span class="example-spacer"></span>
+        <button
+          matIconButton
+          aria-label="Example icon-button with heart icon"
+          class="example-icon favorite-icon"
+        >
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button matIconButton aria-label="Example icon-button with share icon" class="example-icon">
+          <mat-icon>share</mat-icon>
+        </button>
+      </mat-toolbar>
+    }
+    Main content
+
+    <div style="display: flex; padding: 1rem; flex-direction: row; gap: 1rem">
+      <button matButton="filled">Basic</button>
+      <button matButton="filled" disabled>Disabled</button>
+      <a matButton="filled" href="https://www.google.com/" target="_blank">Link</a>
+    </div>
+
+    <button mat-button type="button" (click)="onToggleSidebar()">Toggle sidenav</button>
+  </mat-drawer-content>
+</mat-drawer-container>
