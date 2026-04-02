@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
+import { SpinnerDirective } from '@/infra/directives/spinner.directive';
 
 interface LoginFormControls {
   token: FormControl<string>;
@@ -16,7 +17,14 @@ interface LoginFormControls {
 
 @Component({
   selector: 'krih-login-container',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButton],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButton,
+    SpinnerDirective,
+  ],
   templateUrl: './login-container.html',
   styleUrl: './login-container.css',
 })
@@ -26,6 +34,8 @@ export class LoginContainer {
   readonly form: FormGroup<LoginFormControls> = this.builder.group<LoginFormControls>({
     token: this.builder.control('', [Validators.required, Validators.minLength(8)]),
   });
+
+  readonly isLoading = this.loginStore.loading;
 
   onSubmitForm(): void {
     if (!this.form.valid) {

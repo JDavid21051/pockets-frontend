@@ -1,0 +1,45 @@
+:host {
+  opacity: 1;
+  position: absolute;
+  border-radius: inherit;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+  background-color: rgb(200 206 228 / 0.5);
+
+  & .spinner_msm {
+    margin-left: .5rem;
+  }
+
+  &.size-xs mat-spinner {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  &.size-sm mat-spinner {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  &.size-md mat-spinner {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  &.size-lg mat-spinner {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  &.size-xl mat-spinner {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}

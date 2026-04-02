@@ -6,7 +6,7 @@
  * File name:    login.store
  * IDE:          WebStorm
  */
-import { signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { LoginRepository } from '@/infra/repository/login.repository';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -22,7 +22,7 @@ interface LoginStateModel {
 }
 
 const initLoginState: LoginStateModel = {
-  loading: true,
+  loading: false,
 };
 
 export const LoginStore = signalStore(
@@ -41,22 +41,26 @@ export const LoginStore = signalStore(
       };
       const login = rxMethod<LoginDto>(($) =>
         $.pipe(
-          switchMap((params) =>
-            loginRepo.login(params).pipe(
+          switchMap((params) => {
+            patchState(store, { loading: true });
+            return loginRepo.login(params).pipe(
               handleRxResponse(
                 (response) => {
                   console.log({ response });
                   snackService.showSuccess('Has iniciado sesión con exito');
                   authStore.authorizeUser(response);
-
                   redirectTo().catch((error) => {
                     snackService.showError(String(error));
                   });
+                  patchState(store, { loading: false });
                 },
-                (error): void => snackService.showError(String(error.error.message)),
+                (error): void => {
+                  snackService.showError(String(error.error.message));
+                  patchState(store, { loading: false });
+                },
               ),
-            ),
-          ),
+            );
+          }),
         ),
       );
 
