@@ -47,6 +47,18 @@ html {
   @include mat.system-classes();
 }
 
+:root {
+  --sidebar-width-expanded: 360px;
+  --sidebar-width-collapsed: 60px;
+}
+
+@media (width <= 1007px) {
+  :root {
+    --sidebar-width-expanded: 0;
+    --sidebar-width-collapsed: 0;
+  }
+}
+
 body {
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);

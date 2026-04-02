@@ -1,7 +1,16 @@
-// Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
+@use "tailwindcss";
 @use 'public/theming/mat-theme.scss';
 @use 'public/theming/button.scss';
+@use 'public/theming/field.scss';
+@use 'public/theming/sidebar.scss';
+@use 'public/theming/icon.scss';
+
+@theme {
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1007px;
+}

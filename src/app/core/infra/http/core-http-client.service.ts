@@ -14,9 +14,9 @@ import { HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
-import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/token-config/modules-config.token';
 import type { ApiResponse, ApiResponseModel } from '@/domain/models/app/api-core.models';
 import { ApiExceptionCore } from '@/infra/class/api-exception.class';
+import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 
 /**
  * Class to encapsulate original HttpClient and incorporate facilities to invoke it.

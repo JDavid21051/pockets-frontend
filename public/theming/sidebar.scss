@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+mat-drawer.mat-drawer-opened {
+  &.collapsed {
+    @include mat.sidenav-overrides((
+      container-width: var(--sidebar-width-collapsed),
+    ));
+  }
+}
+
+mat-drawer-content {
+  max-width: calc(100% - var(--sidebar-width-collapsed));
+
+  &.collapsed {
+    margin-left: var(--sidebar-width-collapsed) !important;
+    margin-right: calc(var(--sidebar-width-collapsed) * -1) !important;
+  }
+
+  &.expanded {
+    margin-left: var(--sidebar-width-expanded) !important;
+    margin-right: calc(var(--sidebar-width-expanded) * -1) !important;
+  }
+
+}
