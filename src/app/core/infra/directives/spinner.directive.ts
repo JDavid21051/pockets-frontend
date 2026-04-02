@@ -53,14 +53,6 @@ export class SpinnerDirective {
   @HostBinding('class.zb-spinner-container')
   isSpinnerExist = false;
 
-  /**
-   * Constructor of the spinner directive
-   * @param directiveView ViewContainerRef dependency injection
-   * @param renderer Renderer2 dependency injection
-   * @param injector Injector dependency injection
-   * @param directiveElement ElementRef dependency injection
-   */
-
   hide(): boolean | undefined {
     console.log(this.isSpinnerExist, 'isSpinnerExist hidden');
     if (this.isSpinnerExist) {

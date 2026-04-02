@@ -1,4 +1,4 @@
-import { Component, HostBinding, input, model } from '@angular/core';
+import { Component, HostBinding, model } from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AppStatusCoreEnum } from '@/domain/enums/app/app-status-core.enum';
 
