@@ -28,6 +28,9 @@ export class IconRegisterService {
     ['close', 'icons/close.svg'],
     ['check', 'icons/check.svg'],
     ['notifications', 'icons/notifications.svg'],
+    ['arrow_circle_left', 'icons/arrow_circle_left.svg'],
+    ['arrow_circle_right', 'icons/arrow_circle_right.svg'],
+    ['more_vert', 'icons/more_vert.svg'],
   ];
 
   register(): void {

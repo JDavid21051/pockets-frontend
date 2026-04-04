@@ -1,9 +1,28 @@
-<mat-drawer-container [hasBackdrop]="false" class="example-container h-full">
+@if (!isResponsive()) {
+  <div
+    [class.left-10]="!sidebarOpen()"
+    [class.left-65]="sidebarOpen()"
+    class="absolute size-10 top-2 z-10 rounded-lg"
+  >
+    <button
+      matButton
+      class="size-10 max-w-10 min-w-10! transition border! border-secondary-700/30! rounded-full! bg-secondary-700/10! max-h-10 p-0!"
+      type="button"
+      (click)="onToggleSidebar()"
+    >
+      <mat-icon
+        [svgIcon]="sidebarOpen() ? 'arrow_circle_left' : 'arrow_circle_right'"
+        class="size-6! text-neutral-900! m-0!"
+      />
+    </button>
+  </div>
+}
+<mat-drawer-container [hasBackdrop]="false" class="relative h-full">
   @if (!isResponsive()) {
     <mat-drawer
       [class.collapsed]="!sidebarOpen()"
       [class.expanded]="sidebarOpen()"
-      class="border border-neutral-300 pt-3 rounded-xs"
+      class="border relative border-neutral-300 pt-3 rounded-xs"
       mode="push"
       opened
     >

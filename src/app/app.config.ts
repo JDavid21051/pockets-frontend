@@ -1,7 +1,7 @@
 import type { ApplicationConfig } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
 import { provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -14,7 +14,7 @@ import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken'
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withViewTransitions()),
     provideHttpClient(withFetch()),
     provideTranslateService({
       lang: AllowedLanguagesEnum.es,

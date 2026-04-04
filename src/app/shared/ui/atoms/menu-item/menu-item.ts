@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
-import type { MenuItemModel } from '@/domain/models/ui/menu-item.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { cn } from '@/infra/parsers/css-class-name';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 
 @Component({
   selector: 'krih-menu-item',
   imports: [MatIconModule, TranslatePipe, RouterLink, RouterLinkActive],
-  styleUrl: './menu-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `

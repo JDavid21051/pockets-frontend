@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import type { SnackBarParamsModel } from '@/domain/models/ui/snack-bar.model';
 import { AppStatusCoreEnum } from '@/domain/enums/app/app-status-core.enum';
 import { SnackBarComponent } from '@/shared/ui/atoms/snack-bar/snack-bar.component';
 import { UI_SNACK_CSS_CLASS } from '@/infra/const/ui/snack.const';
+import type { SnackBarParamsModel } from '@/domain/models/uix/snack-bar.model';
 
 const MILLISECONDS = 2000000;
 

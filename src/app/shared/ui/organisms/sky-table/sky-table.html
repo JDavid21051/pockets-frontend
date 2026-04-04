@@ -1,0 +1,50 @@
+<div class="p-3 flex flex-col gap-2">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Ex. Mia" (keyup)="applyFilter($event)" #input />
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource()" (matSortChange)="onSortTable($event)">
+      @for (item of columnsConfig(); track item.field) {
+        <ng-container [matColumnDef]="item.field">
+          <th
+            *matHeaderCellDef
+            mat-header-cell
+            mat-sort-header
+            [disableClear]="true"
+            [disabled]="item.field === 'id'"
+          >
+            {{ item.header | translate }}
+          </th>
+          <td *matCellDef="let row" mat-cell>{{ row[item.field] }}</td>
+        </ng-container>
+      }
+      <!--
+      <ng-container matColumnDef="id">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+        <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="progress">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Progress</th>
+        <td *matCellDef="let row" mat-cell>{{ row.progress }}%</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
+        <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="fruit">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Fruit</th>
+        <td *matCellDef="let row" mat-cell>{{ row.fruit }}</td>
+      </ng-container>-->
+      <tr *matHeaderRowDef="columnsField()" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: columnsField()" mat-row></tr>
+
+      <tr *matNoDataRow class="mat-row">
+        <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" />
+  </div>
+</div>

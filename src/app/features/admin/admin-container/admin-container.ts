@@ -11,7 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ResponsiveControlService } from '@/infra/service/responsive-control.service';
 import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
-import { PanelMainMenu } from '@/shared/ui/layout/panel-main-menu/panel-main-menu';
+import { PanelMainMenu } from '@/shared/ui/modules/panel-main-menu/panel-main-menu';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

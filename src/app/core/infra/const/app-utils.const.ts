@@ -10,3 +10,7 @@
 export const THROTTLE_TIME_MS = 300;
 
 export const MOBILE_BREAKPOINT = 1007;
+
+export const DESKTOP_MAX_ROWS = 50;
+
+export const MOBILE_MAX_ROWS = 50;

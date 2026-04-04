@@ -7,4 +7,6 @@
  * IDE:          WebStorm
  */
 
-export type SimplePositionType = 'right' | 'left' | 'top' | 'bottom';
+export type PositionType = 'right' | 'left' | 'top' | 'bottom';
+
+export type VerbSimplePosition = 'before' | 'after';

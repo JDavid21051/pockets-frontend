@@ -7,7 +7,7 @@
  * IDE:          WebStorm
  */
 
-import type { ClassNameArray } from '@/domain/models/ui/class-name.type';
+import type { ClassNameArray } from '@/domain/types/uix/class-name.type';
 
 const toValue = (mix: ClassNameArray | string | number): string => {
   if (typeof mix === 'string') return mix;

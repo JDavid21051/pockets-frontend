@@ -8,7 +8,7 @@
  */
 
 import type { ElementRef, TemplateRef } from '@angular/core';
-import type { SimplePositionType } from '@/domain/types/app/simple-position.type';
+import type { PositionType } from '@/domain/types/app/position.type';
 import type { DangerousAny } from '@/domain/types/types';
 
 /**
@@ -23,7 +23,7 @@ export interface TooltipOptionsModel {
   /**
    * Position of tooltip.
    */
-  tooltipPosition?: SimplePositionType;
+  tooltipPosition?: PositionType;
   /**
    * Event to show the tooltip.
    */

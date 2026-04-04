@@ -3,8 +3,8 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarModule, MatSnackBarRef } from '@angular/
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import type { AppStatusCoreEnum } from '@/domain/enums/app/app-status-core.enum';
-import type { SnackBarParamsModel } from '@/domain/models/ui/snack-bar.model';
 import { UI_SNACK_ICON } from '@/infra/const/ui/snack.const';
+import type { SnackBarParamsModel } from '@/domain/models/uix/snack-bar.model';
 
 @Component({
   selector: 'krih-snack-bar',

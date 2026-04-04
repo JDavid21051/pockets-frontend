@@ -7,7 +7,7 @@
  * IDE:          WebStorm
  */
 
-import type { MenuItemModel } from '@/domain/models/ui/menu-item.model';
+import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 
 export const APP_MENU_MODULES: MenuItemModel[] = [
   {

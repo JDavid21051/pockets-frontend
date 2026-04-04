@@ -8,7 +8,7 @@
  */
 
 import type { QueryParamsHandling } from '@angular/router';
-import type { TooltipOptionsModel } from '@/domain/models/ui/app-tooltip-options.model';
+import type { TooltipOptionsModel } from '@/domain/models/uix/app-tooltip-options.model';
 import type { DangerousAny } from '@/domain/types/types';
 
 /**

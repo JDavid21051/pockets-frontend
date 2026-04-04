@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
-import type { MenuItemModel } from '@/domain/models/ui/menu-item.model';
-import { MenuItem } from '@/shared/ui/layout/menu-item/menu-item';
+import { MenuItem } from '@/shared/ui/atoms/menu-item/menu-item';
+import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 
 @Component({
   selector: 'krih-panel-main-menu',
   imports: [MenuItem],
-  styleUrl: './panel-main-menu.css',
   template: `
     <div class="flex flex-col gap-1 px-3 py-2">
       @for (item of menuItems(); track item.id) {
