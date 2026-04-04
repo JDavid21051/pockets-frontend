@@ -11,15 +11,15 @@ import { AppStatusCoreEnum } from '@/domain/enums/app/app-status-core.enum';
 
 export const UI_SNACK_ICON: Record<AppStatusCoreEnum, string> = {
   [AppStatusCoreEnum.success]: 'check',
-  [AppStatusCoreEnum.alert]: 'error',
-  [AppStatusCoreEnum.warning]: 'warning',
+  [AppStatusCoreEnum.alert]: 'close',
+  [AppStatusCoreEnum.warning]: 'close',
   [AppStatusCoreEnum.error]: 'close',
-  [AppStatusCoreEnum.info]: 'bell',
-  [AppStatusCoreEnum.basic]: 'bell',
-  [AppStatusCoreEnum.extra]: 'bell',
-  [AppStatusCoreEnum.primary]: 'bell',
-  [AppStatusCoreEnum.secondary]: 'bell',
-  [AppStatusCoreEnum.ternary]: 'bell',
+  [AppStatusCoreEnum.info]: 'notifications',
+  [AppStatusCoreEnum.basic]: 'notifications',
+  [AppStatusCoreEnum.extra]: 'notifications',
+  [AppStatusCoreEnum.primary]: 'notifications',
+  [AppStatusCoreEnum.secondary]: 'notifications',
+  [AppStatusCoreEnum.ternary]: 'notifications',
 };
 
 export const UI_SNACK_CSS_CLASS: Record<AppStatusCoreEnum, string> = {

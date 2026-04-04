@@ -24,6 +24,10 @@ export class IconRegisterService {
     ['visibility', 'icons/visibility.svg'],
     ['visibility_off', 'icons/visibility_off.svg'],
     ['person', 'icons/person.svg'],
+    ['account_balance', 'icons/account_balance.svg'],
+    ['close', 'icons/close.svg'],
+    ['check', 'icons/check.svg'],
+    ['notifications', 'icons/notifications.svg'],
   ];
 
   register(): void {

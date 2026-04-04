@@ -11,12 +11,6 @@
         [menuItems]="menuItems"
         [minView]="isResponsive() ? false : !sidebarOpen()"
       />
-      <ul>
-        @for (item of menuItems; track item.id) {
-          <li>{{ item.label }}</li>
-        }
-      </ul>
-      Drawer content
     </mat-drawer>
   }
   <mat-drawer-content
@@ -44,7 +38,10 @@
         </button>
       </mat-toolbar>
     }
-    Main content
+    <main>
+      <router-outlet />
+    </main>
+    <!--Main content
 
     <div style="display: flex; padding: 1rem; flex-direction: row; gap: 1rem">
       <button matButton="filled">Basic</button>
@@ -52,6 +49,6 @@
       <a matButton="filled" href="https://www.google.com/" target="_blank">Link</a>
     </div>
 
-    <button mat-button type="button" (click)="onToggleSidebar()">Toggle sidenav</button>
+    <button mat-button type="button" (click)="onToggleSidebar()">Toggle sidenav</button>-->
   </mat-drawer-content>
 </mat-drawer-container>

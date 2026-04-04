@@ -30,10 +30,13 @@ html {
     font-size: 0.875rem;
   }
 
+
   @include mat.theme((
     color: (
-      primary: mat.$cyan-palette,
-      tertiary: mat.$orange-palette
+      primary: mat.$azure-palette,
+      tertiary: mat.$cyan-palette,
+      error: mat.$red-palette,
+      neutral-variant: "#627c7b"
     ),
     typography: (
       plain-family: Roboto,

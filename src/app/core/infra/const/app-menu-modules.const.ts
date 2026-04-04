@@ -14,12 +14,18 @@ export const APP_MENU_MODULES: MenuItemModel[] = [
     id: crypto.randomUUID(),
     label: 'Dashboard',
     iconStart: 'dashboard',
-    routerLink: '/home',
+    routerLink: '/admin/dashboard',
   },
   {
     id: crypto.randomUUID(),
     label: 'Titulares',
     iconStart: 'person',
-    routerLink: '/headlines',
+    routerLink: '/admin/headlines',
+  },
+  {
+    id: crypto.randomUUID(),
+    label: 'Cuentas',
+    iconStart: 'account_balance',
+    routerLink: '/admin/accounts',
   },
 ];

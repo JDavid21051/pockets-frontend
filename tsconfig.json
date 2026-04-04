@@ -20,6 +20,7 @@
       "@/application/*": ["src/app/core/application/*"],
       "@/infra/*": ["src/app/core/infra/*"],
       "@/shared/*": ["src/app/shared/*"],
+      "@/features/*": ["src/app/features/*"],
       "@/environments/*": ["src/environments/*"]
     }
   },

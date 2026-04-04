@@ -12,10 +12,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ResponsiveControlService } from '@/infra/service/responsive-control.service';
 import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
 import { PanelMainMenu } from '@/shared/ui/layout/panel-main-menu/panel-main-menu';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'krih-admin-container',
-  imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, PanelMainMenu],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    PanelMainMenu,
+    RouterOutlet,
+  ],
   templateUrl: './admin-container.html',
   styleUrl: './admin-container.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,9 +11,7 @@ import { UI_SNACK_ICON } from '@/infra/const/ui/snack.const';
   imports: [MatSnackBarModule, MatButton, MatIconModule],
   template: `
     <section class="krih_snack_bar_icon py-2 pr-2 pl-1.5 self-center rounded-md my-0 size-10">
-      <span class="material-symbols-outlined">
-        {{ getIcon(snackData.status) }}
-      </span>
+      <mat-icon [svgIcon]="getIcon(snackData.status)" />
     </section>
     <section [class]="'flex flex-col justify-start gap-0.5 snack_text my-auto ' + snackCssClass">
       @if (snackData.title) {
