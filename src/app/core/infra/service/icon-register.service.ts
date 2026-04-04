@@ -1,0 +1,34 @@
+/*
+ * Project:      pockets-frontend
+ * Developed by: Juan David Pelaez Cumbe
+ * Date:         4/3/2026
+ * Module name:  icon-register.service.ts
+ * File name:    icon-registrer.service
+ * IDE:          WebStorm
+ */
+
+import { inject, Injectable } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class IconRegisterService {
+  private iconRegistry: MatIconRegistry = inject(MatIconRegistry);
+  private sanitizer: DomSanitizer = inject(DomSanitizer);
+  private readonly iconsToRegister: [name: string, path: string][] = [
+    ['home', 'icons/home.svg'],
+    ['dashboard', 'icons/dashboard.svg'],
+    ['lock', 'icons/lock.svg'],
+    ['visibility', 'icons/visibility.svg'],
+    ['visibility_off', 'icons/visibility_off.svg'],
+    ['person', 'icons/person.svg'],
+  ];
+
+  register(): void {
+    for (const [name, path] of this.iconsToRegister) {
+      this.iconRegistry.addSvgIcon(name, this.sanitizer.bypassSecurityTrustResourceUrl(path));
+    }
+  }
+}

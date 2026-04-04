@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import type { MenuItemModel } from '@/domain/models/ui/menu-item.model';
+import { MenuItem } from '@/shared/ui/layout/menu-item/menu-item';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-panel-main-menu',
-  imports: [],
-  templateUrl: './panel-main-menu.html',
+  selector: 'krih-panel-main-menu',
+  imports: [MenuItem, RouterLinkActive],
   styleUrl: './panel-main-menu.css',
+  template: `
+    <div class="flex flex-col gap-1 px-3 py-2">
+      @for (item of menuItems(); track item.id) {
+        <krih-menu-item routerLinkActive [dataItem]="item" [minView]="minView()" />
+      }
+    </div>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PanelMainMenu {
-
+  readonly menuItems = input.required<MenuItemModel[]>();
+  readonly minView = input(false);
 }

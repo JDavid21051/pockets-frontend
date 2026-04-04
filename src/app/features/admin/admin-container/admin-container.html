@@ -2,16 +2,27 @@
   @if (!isResponsive()) {
     <mat-drawer
       [class.collapsed]="!sidebarOpen()"
-      class="border border-neutral-300 rounded-xs"
+      [class.expanded]="sidebarOpen()"
+      class="border border-neutral-300 pt-3 rounded-xs"
       mode="push"
       opened
     >
+      <krih-panel-main-menu
+        [menuItems]="menuItems"
+        [minView]="isResponsive() ? false : !sidebarOpen()"
+      />
+      <ul>
+        @for (item of menuItems; track item.id) {
+          <li>{{ item.label }}</li>
+        }
+      </ul>
       Drawer content
     </mat-drawer>
   }
   <mat-drawer-content
     [class.collapsed]="!sidebarOpen()"
     [class.expanded]="sidebarOpen()"
+    [style]=""
     class="w-full"
   >
     @if (isResponsive()) {
