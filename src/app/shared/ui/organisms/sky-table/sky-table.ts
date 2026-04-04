@@ -14,39 +14,6 @@ import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
 import type { SkyColumnsConfig, TableActionsConfig } from '@/domain/models/uix/sky-table.model';
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
 @Component({
   selector: 'krih-sky-table',
   imports: [
