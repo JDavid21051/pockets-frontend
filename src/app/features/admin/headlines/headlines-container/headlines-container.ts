@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -7,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { SkyTable } from '@/shared/ui/organisms/sky-table/sky-table';
 import type { SkyColumnsConfig } from '@/domain/models/uix/sky-table.model';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
+import { HeadlinesStore } from '@/infra/store/headlines.store';
+import { readonly } from '@angular/forms/signals';
 
 export interface UserData {
   id: string;
@@ -61,7 +64,8 @@ const NAMES: string[] = [
   templateUrl: './headlines-container.html',
   styleUrl: './headlines-container.css',
 })
-export class HeadlinesContainer {
+export class HeadlinesContainer implements OnInit {
+  private readonly store = inject(HeadlinesStore);
   protected columnsConfig: SkyColumnsConfig[] = [
     { field: 'headlines_name', header: 'Nombre', type: 'text' },
     { field: 'document_type', header: 'Progreso %', type: 'text' },
@@ -82,6 +86,10 @@ export class HeadlinesContainer {
     this.dataTableSource.data = [...users];
     // this.dataTableSource = new MatTableDataSource<HeadlinesModelList>(users);
     //this.dataTableSource.renderRows();
+  }
+
+  ngOnInit() {
+    this.store.getHeadlines();
   }
 }
 

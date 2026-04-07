@@ -6,6 +6,4 @@
  * File name:    is-nullish.const
  * IDE:          WebStorm
  */
-export function isNullish(value?: unknown): value is null | undefined {
-  return value == null;
-}
+export const isNullish = (value?: unknown): value is null | undefined => value == null

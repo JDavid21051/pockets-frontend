@@ -8,18 +8,14 @@
  */
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { LoginRepository } from '@/infra/repository/login.repository';
+import { AuthRepository } from '@/infra/repository/auth.repository';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
-import type { LoginDto } from '@/domain/models/auth/login.model';
+import type { LoginDto, LoginStateModel } from '@/domain/models/auth/login.model';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
-import { SnackBarService } from '@/application/services/app-snack-bar.service';
+import { SnackBarService } from '@/infra/service/app-snack-bar.service';
 import { AuthStoreService } from '@/infra/service/auth-store.service';
 import { Router } from '@angular/router';
-
-interface LoginStateModel {
-  loading: boolean;
-}
 
 const initLoginState: LoginStateModel = {
   loading: false,
@@ -33,11 +29,11 @@ export const LoginStore = signalStore(
       store,
       snackService = inject(SnackBarService),
       router = inject(Router),
-      loginRepo = inject(LoginRepository),
+      loginRepo = inject(AuthRepository),
       authStore = inject(AuthStoreService),
     ) => {
-      const redirectTo = async () => {
-        await router.navigate(['/admin']);
+      const redirectTo = async (path = '/admin') => {
+        await router.navigate([path]);
       };
       const login = rxMethod<LoginDto>(($) =>
         $.pipe(

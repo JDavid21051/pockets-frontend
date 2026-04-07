@@ -7,15 +7,16 @@ import { routes } from './app.routes';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideTranslateService } from '@ngx-translate/core';
 import { AllowedLanguagesEnum } from '@/domain/enums/allowed-languages.enum';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { AUTH_STORAGE_KEY } from '@/infra/itoken/auth-storage-key.itoken';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
+import { authInterceptor } from '@/infra/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withViewTransitions()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideTranslateService({
       lang: AllowedLanguagesEnum.es,
       fallbackLang: AllowedLanguagesEnum.en,

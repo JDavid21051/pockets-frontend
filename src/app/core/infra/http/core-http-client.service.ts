@@ -14,7 +14,11 @@ import { HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { lastValueFrom } from 'rxjs';
-import type { ApiResponse, ApiResponseModel } from '@/domain/models/app/api-core.models';
+import type {
+  ApiRequestOptions,
+  ApiResponse,
+  ApiResponseModel,
+} from '@/domain/models/app/api-core.models';
 import { ApiExceptionCore } from '@/infra/class/api-exception.class';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 
@@ -65,13 +69,17 @@ export class CoreHttpClientService {
     return this.httpClient.get<T>(url, { headers: headers });
   }
 
-  post<T>(endpoint: string, body?: object, headers?: HttpHeaders, context?: HttpContext) {
+  post<T>(endpoint: string, body?: object, options?: ApiRequestOptions) {
     const url = this.getUrl(endpoint);
+    const optionsRef: ApiRequestOptions = {
+      ...options,
+    };
+    const headers = optionsRef.headers;
     if (!headers) {
-      headers = this.getHttpHeaders();
+      optionsRef.headers = this.getHttpHeaders();
     }
     return this.httpClient
-      .post<ApiResponse<T>>(url, body, { headers, context })
+      .post<ApiResponse<T>>(url, body, optionsRef)
       .pipe(map((data) => this.mapResponse<T>(data)));
   }
 

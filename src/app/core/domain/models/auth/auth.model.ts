@@ -11,9 +11,9 @@ import type { UserRoleEnum } from '@/domain/enums/app/user-role.enum';
 
 export interface AuthAccessModel {
   accessToken: string;
-  accessTokenEndDate: string;
+  accessTokenEndDate: number;
   refreshToken: string;
-  refreshTokenEndDate: string;
+  refreshTokenEndDate: number;
   userId: string | null;
   userRole: UserRoleEnum;
 }
@@ -22,9 +22,9 @@ export interface AuthenticatedUserModel extends AuthAccessModel {
   isAuthenticated: true;
   refreshing: boolean;
   accessToken: string;
-  accessTokenEndDate: string;
+  accessTokenEndDate: number;
   refreshToken: string;
-  refreshTokenEndDate: string;
+  refreshTokenEndDate: number;
   userId: string;
   userRole: UserRoleEnum;
 }

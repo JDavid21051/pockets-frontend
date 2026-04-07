@@ -16,7 +16,7 @@ export const INITIAL_AUTH_STATE: UnauthenticatedUserModel = {
   userRole: UserRoleEnum.Guest,
   userId: null,
   accessToken: '',
-  accessTokenEndDate: '',
+  accessTokenEndDate: 0,
   refreshToken: '',
-  refreshTokenEndDate: '',
+  refreshTokenEndDate: 0,
 };

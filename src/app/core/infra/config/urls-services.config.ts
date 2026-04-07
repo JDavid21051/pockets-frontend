@@ -17,4 +17,8 @@ export const URL_SERVICES: ApiUrlServiceModel = {
     refresh: 'refresh-token/',
     profile: 'profile/get/',
   },
+  headlines: {
+    base: 'headlines/',
+    list: '',
+  },
 } as const;

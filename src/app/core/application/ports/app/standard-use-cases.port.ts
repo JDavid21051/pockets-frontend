@@ -7,6 +7,10 @@
  * IDE:          WebStorm
  */
 
-export interface BoolUseCasesPort<T = never> {
-  readonly execute: (...params: T[]) => boolean;
+export interface BaseUseCasesPort<TParam = never, TResponse = unknown> {
+  readonly execute: (...params: TParam[]) => TResponse;
 }
+
+export type BoolUseCasesPort = BaseUseCasesPort<never, boolean>;
+export type StringUseCasesPort = BaseUseCasesPort<never, string>;
+export type NullishStringUseCasesPort = BaseUseCasesPort<never, string | null>;

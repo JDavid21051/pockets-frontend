@@ -1,5 +1,5 @@
 <div class="p-3 flex flex-col gap-2">
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Filter</mat-label>
     <input matInput placeholder="Ex. Mia" (keyup)="applyFilter($event)" #input />
   </mat-form-field>
@@ -20,23 +20,6 @@
           <td *matCellDef="let row" mat-cell>{{ row[item.field] }}</td>
         </ng-container>
       }
-      <!--
-      <ng-container matColumnDef="id">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
-        <td *matCellDef="let row" mat-cell>{{ row.id }}</td>
-      </ng-container>
-      <ng-container matColumnDef="progress">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Progress</th>
-        <td *matCellDef="let row" mat-cell>{{ row.progress }}%</td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
-        <td *matCellDef="let row" mat-cell>{{ row.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="fruit">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Fruit</th>
-        <td *matCellDef="let row" mat-cell>{{ row.fruit }}</td>
-      </ng-container>-->
       <tr *matHeaderRowDef="columnsField()" mat-header-row></tr>
       <tr *matRowDef="let row; columns: columnsField()" mat-row></tr>
 

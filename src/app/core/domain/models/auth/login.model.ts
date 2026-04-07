@@ -15,5 +15,15 @@ export interface LoginResponse {
   readonly updatedAt: string;
   readonly userId: string;
   readonly accessToken: string;
+  readonly accessTokenExp: number;
   readonly refreshToken: string;
+  readonly refreshTokenExp: number;
+}
+
+export interface LoginStateModel {
+  loading: boolean;
+}
+
+export interface LogoutDto {
+  readonly accessToken: string;
 }

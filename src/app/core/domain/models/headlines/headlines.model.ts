@@ -17,3 +17,18 @@ export interface HeadlinesModelList {
   headlines_document: string;
   created_at: string;
 }
+
+export interface CreateHeadlinesDto {
+  headlines_name: string;
+  headlines_document: string;
+  document_type: string;
+}
+
+export interface UpdateHeadlinesDto extends CreateHeadlinesDto {
+  id: string;
+}
+
+export interface HeadlinesStateModel {
+  listLoading: boolean;
+  dataList: HeadlinesModelList[];
+}

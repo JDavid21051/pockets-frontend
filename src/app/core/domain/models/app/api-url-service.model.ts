@@ -16,6 +16,10 @@ export interface ApiUrlAuthModel extends ApiUrlBaseModel {
   readonly logout: string;
   readonly refresh: string;
 }
+export interface ApiUrlHeadlinesModel extends ApiUrlBaseModel {
+  readonly list: string;
+}
 export interface ApiUrlServiceModel {
   readonly auth: ApiUrlAuthModel;
+  readonly headlines: ApiUrlHeadlinesModel;
 }

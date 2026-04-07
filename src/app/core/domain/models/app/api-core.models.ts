@@ -7,7 +7,7 @@
  * IDE:          WebStorm
  */
 
-import type { HttpStatusCode } from '@angular/common/http';
+import type { HttpContext, HttpHeaders, HttpParams, HttpStatusCode } from '@angular/common/http';
 
 export interface ApiErrorBase {
   readonly code: number;
@@ -38,12 +38,18 @@ export type ApiResponse<TSuccess, TError extends ApiErrorBase = ApiErrorBase> =
   | ApiSuccessResponse<TSuccess>
   | ApiFailedResponse<TError>;
 
-/**
- * interface defining the http response of the system
- */
 export interface ApiResponseModel<T> {
   status: HttpStatusCode;
   errorMessage?: string;
   errorCode?: string;
   body?: T | null;
+}
+
+export interface ApiRequestOptions {
+  headers?: HttpHeaders | Record<string, string | string[]>;
+  context?: HttpContext;
+  timeout?: number;
+  params?:
+    | HttpParams
+    | Record<string, string | number | boolean | readonly (string | number | boolean)[]>;
 }
