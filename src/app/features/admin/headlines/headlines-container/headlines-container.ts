@@ -9,7 +9,6 @@ import { SkyTable } from '@/shared/ui/organisms/sky-table/sky-table';
 import type { SkyColumnsConfig } from '@/domain/models/uix/sky-table.model';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
 import { HeadlinesStore } from '@/infra/store/headlines.store';
-import { readonly } from '@angular/forms/signals';
 
 export interface UserData {
   id: string;

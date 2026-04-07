@@ -8,7 +8,7 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import type { HttpContext, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import type { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
