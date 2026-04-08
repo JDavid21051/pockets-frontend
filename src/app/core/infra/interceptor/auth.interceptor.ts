@@ -44,7 +44,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         const reqCloned = req.clone({ setHeaders: { Authorization: addTokenPrefix(accessToken) } });
 
         return next(reqCloned).pipe(
-          catchError((err) => {
+          catchError((err: unknown) => {
             console.log({ catchErrorRefreshing: err });
             return EMPTY;
           }),
