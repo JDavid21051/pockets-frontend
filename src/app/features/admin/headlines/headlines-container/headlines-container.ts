@@ -9,6 +9,7 @@ import { SkyTable } from '@/shared/ui/organisms/sky-table/sky-table';
 import type { SkyColumnsConfig } from '@/domain/models/uix/sky-table.model';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
 import { HeadlinesStore } from '@/infra/store/headlines.store';
+import { StandardModuleHeader } from '@/shared/ui/modules/standard-header/standard-header';
 
 export interface UserData {
   id: string;
@@ -59,6 +60,7 @@ const NAMES: string[] = [
     MatSortModule,
     MatPaginatorModule,
     SkyTable,
+    StandardModuleHeader,
   ],
   templateUrl: './headlines-container.html',
   styleUrl: './headlines-container.css',
@@ -67,13 +69,15 @@ export class HeadlinesContainer implements OnInit {
   private readonly store = inject(HeadlinesStore);
   protected columnsConfig: SkyColumnsConfig[] = [
     { field: 'headlines_name', header: 'Nombre', type: 'text' },
-    { field: 'document_type', header: 'Progreso %', type: 'text' },
-    { field: 'headlines_document', header: 'Fruta', type: 'text' },
+    { field: 'document_type', header: 'Tipo', type: 'text' },
+    { field: 'headlines_document', header: 'Documento', type: 'text' },
   ];
 
   // protected dataTableSource!: ;
   protected dataTableSource: MatTableDataSource<HeadlinesModelList> =
     new MatTableDataSource<HeadlinesModelList>([]);
+
+  readonly dataTable = this.store.dataTableSource;
 
   constructor() {
     // Create 100 users

@@ -30,12 +30,12 @@ import type { SkyColumnsConfig, TableActionsConfig } from '@/domain/models/uix/s
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkyTable<T> implements AfterViewInit {
+  protected readonly input = input;
   readonly showSimpleFilter = input(false);
   readonly actionIcon = input('more_vert');
   readonly columnsConfig = input.required<SkyColumnsConfig[]>();
   readonly dataSource = input.required<MatTableDataSource<T>>();
   readonly actionsConfig = input<TableActionsConfig[]>([]);
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   readonly columnsField = computed(() => this.columnsConfig().map((col) => col.field));

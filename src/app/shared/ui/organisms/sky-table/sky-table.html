@@ -1,5 +1,5 @@
 <div class="p-3 flex flex-col gap-2">
-  <mat-form-field appearance="outline">
+  <mat-form-field [class.hidden!]="!showSimpleFilter()" appearance="outline">
     <mat-label>Filter</mat-label>
     <input matInput placeholder="Ex. Mia" (keyup)="applyFilter($event)" #input />
   </mat-form-field>
