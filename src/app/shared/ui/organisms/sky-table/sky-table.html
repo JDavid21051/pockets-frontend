@@ -6,7 +6,7 @@
 
   <div class="mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource()" (matSortChange)="onSortTable($event)">
-      @for (item of columnsConfig(); track item.field) {
+      @for (item of columnsConfig(); track item.field; let lastItem = $last) {
         <ng-container [matColumnDef]="item.field">
           <th
             *matHeaderCellDef
@@ -19,6 +19,22 @@
           </th>
           <td *matCellDef="let row" mat-cell>{{ row[item.field] }}</td>
         </ng-container>
+        @if (actionsConfig() && lastItem) {
+          <ng-container matColumnDef="id">
+            <th
+              *matHeaderCellDef
+              mat-header-cell
+              mat-sort-header
+              [disableClear]="true"
+              [disabled]="true"
+            >
+              {{ '' }}
+            </th>
+            <td *matCellDef="let row" mat-cell>
+              <mat-icon svgIcon="person" />
+            </td>
+          </ng-container>
+        }
       }
       <tr *matHeaderRowDef="columnsField()" mat-header-row></tr>
       <tr *matRowDef="let row; columns: columnsField()" mat-row></tr>
@@ -27,7 +43,12 @@
         <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
       </tr>
     </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users" />
+    <mat-paginator
+      [hidePageSize]="true"
+      [length]="dataSource().data.length"
+      [pageSize]="DESKTOP_MAX_ROWS"
+      aria-label="Select page"
+      (page)="onChangePaginatorPage($event)"
+    />
   </div>
 </div>
