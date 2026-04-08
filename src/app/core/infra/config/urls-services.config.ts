@@ -19,6 +19,6 @@ export const URL_SERVICES: ApiUrlServiceModel = {
   },
   headlines: {
     base: 'headlines/',
-    list: '',
+    list: 'list/',
   },
 } as const;

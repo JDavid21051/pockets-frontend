@@ -66,7 +66,9 @@ export class CoreHttpClientService {
     if (!headers) {
       headers = this.getHttpHeaders();
     }
-    return this.httpClient.get<T>(url, { headers: headers });
+    return this.httpClient
+      .get<ApiResponse<T>>(url, { headers: headers })
+      .pipe(map((data) => this.mapResponse<T>(data)));
   }
 
   post<T>(endpoint: string, body?: object, options?: ApiRequestOptions) {

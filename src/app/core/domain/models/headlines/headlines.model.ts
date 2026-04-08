@@ -8,6 +8,7 @@
  */
 
 import type { UUID } from '@/domain/types/types';
+import type { MatTableDataSource } from '@angular/material/table';
 
 export interface HeadlinesModelList {
   id: UUID;
@@ -31,4 +32,5 @@ export interface UpdateHeadlinesDto extends CreateHeadlinesDto {
 export interface HeadlinesStateModel {
   listLoading: boolean;
   dataList: HeadlinesModelList[];
+  dataTableSource: MatTableDataSource<HeadlinesModelList>;
 }

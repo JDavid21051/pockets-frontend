@@ -2,11 +2,11 @@
   <div
     [class.left-10]="!sidebarOpen()"
     [class.left-65]="sidebarOpen()"
-    class="absolute size-10 top-2 z-10 rounded-lg"
+    class="absolute max-w-8 max-h-8 top-2 z-10 rounded-lg"
   >
     <button
       matButton
-      class="size-10 max-w-10 min-w-10! transition border! border-secondary-700/30! rounded-full! bg-secondary-700/10! max-h-10 p-0!"
+      class="max-w-8 max-h-8 min-w-8! min-h-8! transition border! border-secondary-700/30! rounded-xl! bg-secondary-700/10! p-0!"
       type="button"
       (click)="onToggleSidebar()"
     >
@@ -22,7 +22,7 @@
     <mat-drawer
       [class.collapsed]="!sidebarOpen()"
       [class.expanded]="sidebarOpen()"
-      class="border relative border-neutral-300 pt-3 rounded-xs"
+      class="border relative border-neutral-300 pt-6 rounded-xs"
       mode="push"
       opened
     >

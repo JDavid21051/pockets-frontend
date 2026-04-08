@@ -14,6 +14,7 @@ import { IsRefreshTokenExpiredUseCase } from '@/application/use-cases/auth/is-re
 import { AuthStoreService } from '@/infra/service/auth-store.service';
 import { catchError, EMPTY, filter, first, switchMap } from 'rxjs';
 import { AUTH_REQUEST_CONTEXT } from '@/infra/http/context-tokens/auth-request.context-token';
+import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const interceptRequest = req.context.get(AUTH_REQUEST_CONTEXT);
@@ -21,6 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const accessTokenUC = inject(IsAccessTokenExpiredUseCase);
   const refreshTokenUC = inject(IsRefreshTokenExpiredUseCase);
+  const configToken = inject(KRIH_MODULES_CONFIG_TOKEN);
   const authStore = inject(AuthStoreService);
 
   if (!authStore.isAuthenticated()) {
@@ -31,6 +33,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     authStore.unauthorizeUser();
     return EMPTY;
   }
+  const addTokenPrefix = (token: string): string => `${configToken.tokenKeyword} ${token}`;
   const accessToken = authStore.accessToken();
   const refreshToken = authStore.refreshToken();
   if (accessToken && refreshToken) {
@@ -38,7 +41,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       filter((refreshing) => !refreshing),
       first(),
       switchMap(() => {
-        const reqCloned = req.clone({ setHeaders: { Authorization: accessToken } });
+        const reqCloned = req.clone({ setHeaders: { Authorization: addTokenPrefix(accessToken) } });
 
         return next(reqCloned).pipe(
           catchError((err) => {

@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
       provide: KRIH_MODULES_CONFIG_TOKEN,
       useValue: {
         baseEndpoint: 'https://invoices-api-theta.vercel.app/api/',
-        tokenKeyword: 'jwt',
+        tokenKeyword: 'JWT',
       },
     },
     {
