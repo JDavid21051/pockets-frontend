@@ -12,15 +12,23 @@ import type { SortDirection } from '@/domain/types/app/sort-direction.type';
 import type { VerbSimplePosition } from '@/domain/types/app/position.type';
 
 export interface SkyColumnsConfig {
-  field: string;
-  header: string;
-  type: SkyColumnType;
-  sortable?: boolean;
-  clearSort?: boolean;
-  startSort?: SortDirection;
-  iconPosition?: VerbSimplePosition;
+  readonly field: string;
+  readonly header: string;
+  readonly type: SkyColumnType;
+  readonly grow?: number;
+  readonly sortable?: boolean;
+  readonly clearSort?: boolean;
+  readonly startSort?: SortDirection;
+  readonly iconPosition?: VerbSimplePosition;
+}
+
+export interface TableActionsConfigs {
+  type: SkyTableActionsType;
 }
 
 export interface TableActionsConfig {
   type: SkyTableActionsType;
+  label: string;
+  icon: string;
 }
+export type TableActionsFullConfig = Record<SkyTableActionsType, TableActionsConfig>;

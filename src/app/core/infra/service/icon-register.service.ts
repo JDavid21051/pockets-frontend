@@ -31,6 +31,9 @@ export class IconRegisterService {
     ['arrow_circle_left', 'icons/arrow_circle_left.svg'],
     ['arrow_circle_right', 'icons/arrow_circle_right.svg'],
     ['more_vert', 'icons/more_vert.svg'],
+    ['delete', 'icons/delete.svg'],
+    ['edit', 'icons/edit.svg'],
+    ['cached', 'icons/cached.svg'],
   ];
 
   register(): void {

@@ -3,7 +3,6 @@
     <mat-label>Filter</mat-label>
     <input matInput placeholder="Ex. Mia" (keyup)="applyFilter($event)" #input />
   </mat-form-field>
-
   <div class="mat-elevation-z8">
     <table mat-table matSort [dataSource]="dataSource()" (matSortChange)="onSortTable($event)">
       @for (item of columnsConfig(); track item.field; let lastItem = $last) {
@@ -12,26 +11,47 @@
             *matHeaderCellDef
             mat-header-cell
             mat-sort-header
+            [class]="getColumnWidth(item.grow)"
             [disableClear]="true"
             [disabled]="item.field === 'id'"
           >
             {{ item.header | translate }}
           </th>
-          <td *matCellDef="let row" mat-cell>{{ row[item.field] }}</td>
+          <td *matCellDef="let row" mat-cell [class]="getColumnWidth(item.grow)">
+            {{ row[item.field] }}
+          </td>
         </ng-container>
-        @if (actionsConfig() && lastItem) {
+        @if (actionsConfig().length > 0 && lastItem) {
           <ng-container matColumnDef="id">
             <th
               *matHeaderCellDef
               mat-header-cell
               mat-sort-header
+              [class]="getColumnWidth(actionColWidth())"
               [disableClear]="true"
               [disabled]="true"
+            ></th>
+            <td
+              *matCellDef="let row"
+              mat-cell
+              [class]="cn(getColumnWidth(actionColWidth()), 'text-center!')"
             >
-              {{ '' }}
-            </th>
-            <td *matCellDef="let row" mat-cell>
-              <mat-icon svgIcon="person" />
+              <button
+                matIconButton
+                [matMenuTriggerFor]="menu"
+                class="min-w-8! min-h-8! size-8! rounded-full! grid place-content-center p-0!"
+                type="button"
+              >
+                <mat-icon svgIcon="more_vert" class="m-0!" />
+              </button>
+              <mat-menu class="[&>.mat-mdc-menu-content]:py-0!" #menu="matMenu">
+                @for (actionItem of actionFullConfig(); track actionItem.type) {
+                  <button mat-menu-item>
+                    <mat-icon [svgIcon]="actionItem.icon" />
+                    <span class="font-medium!">{{ actionItem.label | translate }}</span>
+                  </button>
+                }
+              </mat-menu>
             </td>
           </ng-container>
         }

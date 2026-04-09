@@ -10,6 +10,7 @@ import type { SkyColumnsConfig } from '@/domain/models/uix/sky-table.model';
 import { HeadlinesStore } from '@/infra/store/headlines.store';
 import { StandardModuleHeader } from '@/shared/ui/modules/standard-header/standard-header';
 import type { RxMethod } from '@ngrx/signals/rxjs-interop';
+import type { SkyTableActionsType } from '@/domain/types/uix/table.type';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -28,10 +29,12 @@ import type { RxMethod } from '@ngrx/signals/rxjs-interop';
 export class HeadlinesContainer implements OnInit {
   private readonly store = inject(HeadlinesStore);
   protected columnsConfig: SkyColumnsConfig[] = [
-    { field: 'headlines_name', header: 'Nombre', type: 'text' },
-    { field: 'document_type', header: 'Tipo', type: 'text' },
+    { field: 'headlines_name', header: 'Nombre', type: 'text', grow: 2 },
+    { field: 'document_type', header: 'Tipo', type: 'text', grow: 0.5 },
     { field: 'headlines_document', header: 'Documento', type: 'text' },
   ];
+
+  protected actionTable: SkyTableActionsType[] = ['update'];
 
   readonly dataTable = this.store.dataTableSource;
   readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;

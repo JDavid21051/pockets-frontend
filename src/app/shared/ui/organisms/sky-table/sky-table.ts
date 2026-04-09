@@ -18,6 +18,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import type { SkyColumnsConfig, TableActionsConfig } from '@/domain/models/uix/sky-table.model';
 import { DESKTOP_MAX_ROWS } from '@/infra/const/app-utils.const';
 import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import type { SkyTableActionsType } from '@/domain/types/uix/table.type';
+import { TABLE_ACTIONS_FULL_CONFIG_MAP } from '@/infra/const/ui/table-actions.const';
+import { cn } from '@/infra/parsers/css-class-name';
 
 @Component({
   selector: 'krih-sky-table',
@@ -30,6 +35,8 @@ import { MatIcon } from '@angular/material/icon';
     MatLabel,
     TranslatePipe,
     MatIcon,
+    MatButtonModule,
+    MatMenuModule,
   ],
   templateUrl: './sky-table.html',
   styleUrl: './sky-table.css',
@@ -37,24 +44,38 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class SkyTable<T> implements AfterViewInit {
   protected readonly DESKTOP_MAX_ROWS = DESKTOP_MAX_ROWS;
+  protected readonly cn = cn;
   readonly showSimpleFilter = input(false);
   readonly actionIcon = input('more_vert');
-  readonly actionsConfig = input<TableActionsConfig[]>([]);
+  readonly actionColWidth = input(0.5);
+  readonly actionsConfig = input<SkyTableActionsType[]>([]);
   readonly columnsConfig = input.required<SkyColumnsConfig[]>();
   readonly dataSource = input.required<MatTableDataSource<T>>();
   readonly clickAction = output();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  readonly columnsField = computed(() => {
+  readonly columnsField = computed<string[]>(() => {
     const actionHeader = ['id'];
     console.log({ aa: this.columnsConfig() });
     console.log({ vvv: actionHeader });
     return this.columnsConfig()
       .map((col) => col.field)
-      .concat(actionHeader);
+      .concat(this.actionsConfig().length > 0 ? actionHeader : []);
   });
 
+  readonly actionFullConfig = computed<TableActionsConfig[]>(() =>
+    this.actionsConfig().map(
+      (valueAction): TableActionsConfig => TABLE_ACTIONS_FULL_CONFIG_MAP[valueAction],
+    ),
+  );
+
   readonly pageIndex = signal(0);
+
+  getColumnWidth = (grow?: number) => {
+    const percentPerCol = 100 / this.columnsField().length;
+    const colWidth = (percentPerCol * (grow ?? 1)).toFixed(1);
+    return `w-[${colWidth}%] max-w-[${colWidth}%]`;
+  };
 
   ngAfterViewInit() {
     this.dataSource().paginator = this.paginator;
