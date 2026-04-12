@@ -1,4 +1,3 @@
-import type { ElementRef } from '@angular/core';
 import {
   type AfterViewInit,
   ChangeDetectionStrategy,
