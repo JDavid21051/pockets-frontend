@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import type { AppStatusCoreEnum } from '@/domain/enums/app/app-status-core.enum';
 import { UI_SNACK_ICON } from '@/infra/const/ui/snack.const';
 import type { SnackBarParamsModel } from '@/domain/models/uix/snack-bar.model';
+import { cn } from '@/infra/parsers/css-class-name';
 
 @Component({
   selector: 'krih-snack-bar',
@@ -13,7 +14,10 @@ import type { SnackBarParamsModel } from '@/domain/models/uix/snack-bar.model';
     <section class="krih_snack_bar_icon py-2 pr-2 pl-1.5 self-center rounded-md my-0 size-10">
       <mat-icon [svgIcon]="getIcon(snackData.status)" />
     </section>
-    <section [class]="'flex flex-col justify-start gap-0.5 snack_text my-auto ' + snackCssClass">
+    <section
+      [class.gap-0.5]="snackData.message"
+      [class]="cn('flex flex-col justify-start snack_text my-auto', snackCssClass)"
+    >
       @if (snackData.title) {
         <h6 class="krih_snack_title text-base!">{{ snackData.title }}</h6>
       }
@@ -37,6 +41,7 @@ import type { SnackBarParamsModel } from '@/domain/models/uix/snack-bar.model';
 export class SnackBarComponent {
   private readonly snackBarData = inject<SnackBarParamsModel>(MAT_SNACK_BAR_DATA);
   private readonly snackBarRef = inject<MatSnackBarRef<SnackBarComponent>>(MatSnackBarRef);
+  protected readonly cn = cn;
 
   get snackData(): SnackBarParamsModel {
     return this.snackBarData;

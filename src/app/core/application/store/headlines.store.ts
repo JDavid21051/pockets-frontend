@@ -18,6 +18,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { HeadlinesRepository } from '@/infra/repository/modules/headlines.repository';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
 import { MatTableDataSource } from '@angular/material/table';
+import { TranslateService } from '@ngx-translate/core';
 
 const initHeadlinesState: HeadlinesStateModel = {
   listLoading: false,
@@ -32,6 +33,7 @@ export const HeadlinesStore = signalStore(
     (
       store,
       snackService = inject(SnackBarService),
+      translate = inject(TranslateService),
       headlinesRepository = inject(HeadlinesRepository),
     ) => {
       const getHeadlines = rxMethod<void>(() => {
@@ -39,7 +41,7 @@ export const HeadlinesStore = signalStore(
         return headlinesRepository.list().pipe(
           handleRxResponse(
             (response) => {
-              snackService.showSuccess('Titulares cargados con exito');
+              snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
               console.log({ response });
               store.dataTableSource().data = [...response];
               patchState(store, { listLoading: false, dataList: response });

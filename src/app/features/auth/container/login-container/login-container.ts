@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { LoginStore } from '@/infra/store/login.store';
-import type { LoginStoreModel } from '@/infra/store/login.store';
+import { LoginStore } from '@/application/store/login.store';
+import type { LoginStoreModel } from '@/application/store/login.store';
 import type { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';

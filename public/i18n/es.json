@@ -1,8 +1,25 @@
 {
   "app": {},
+  "headline": {
+    "title": "Headlines",
+    "fields": {
+      "document": "Dcoumento"
+    },
+    "msm": {
+      "listedSuccess": "Titulares cargados con éxito."
+    }
+  },
   "shared": {
     "text": {
-      "login": "Iniciar sesión"
+      "login": "Iniciar sesión",
+      "name": "Nombre",
+      "type": "Tipo"
+    },
+    "maps": {
+      "ti": "Tarjeta de identidad",
+      "cc": "Cédula de ciudadanía",
+      "ce": "Cédula de extranjería",
+      "pt": "Pasaporte"
     }
   }
 }

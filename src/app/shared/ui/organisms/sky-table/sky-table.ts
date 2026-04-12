@@ -1,3 +1,4 @@
+import type { ElementRef } from '@angular/core';
 import {
   type AfterViewInit,
   ChangeDetectionStrategy,
@@ -6,9 +7,10 @@ import {
   input,
   output,
   signal,
+  viewChild,
   ViewChild,
 } from '@angular/core';
-import type { MatTableDataSource } from '@angular/material/table';
+import type { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { type Sort, MatSort, MatSortModule } from '@angular/material/sort';
 import type { PageEvent } from '@angular/material/paginator';
@@ -45,24 +47,29 @@ import { cn } from '@/infra/parsers/css-class-name';
 export class SkyTable<T> implements AfterViewInit {
   protected readonly DESKTOP_MAX_ROWS = DESKTOP_MAX_ROWS;
   protected readonly cn = cn;
+
+  readonly columnsConfig = input.required<SkyColumnsConfig[]>();
+  readonly dataSource = input.required<MatTableDataSource<T>>();
   readonly showSimpleFilter = input(false);
   readonly actionIcon = input('more_vert');
   readonly actionColWidth = input(0.5);
   readonly actionsConfig = input<SkyTableActionsType[]>([]);
-  readonly columnsConfig = input.required<SkyColumnsConfig[]>();
-  readonly dataSource = input.required<MatTableDataSource<T>>();
   readonly clickAction = output();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  // @ViewChild('tableHeaderRef') headerRef!: ElementRef;
+
+  readonly tableHeaderRef = viewChild<MatTable<unknown>>('tableRefMat');
+
   readonly columnsField = computed<string[]>(() => {
     const actionHeader = ['id'];
-    console.log({ aa: this.columnsConfig() });
-    console.log({ vvv: actionHeader });
     return this.columnsConfig()
       .map((col) => col.field)
       .concat(this.actionsConfig().length > 0 ? actionHeader : []);
   });
 
+  readonly columnPerPercent = computed(() => 100 / this.columnsField().length);
   readonly actionFullConfig = computed<TableActionsConfig[]>(() =>
     this.actionsConfig().map(
       (valueAction): TableActionsConfig => TABLE_ACTIONS_FULL_CONFIG_MAP[valueAction],
@@ -71,9 +78,9 @@ export class SkyTable<T> implements AfterViewInit {
 
   readonly pageIndex = signal(0);
 
-  getColumnWidth = (grow?: number) => {
-    const percentPerCol = 100 / this.columnsField().length;
-    const colWidth = (percentPerCol * (grow ?? 1)).toFixed(1);
+  getColumnWidth = (grow?: number): string => {
+    const colWidth = (this.columnPerPercent() * (grow ?? 1)).toFixed(1);
+
     return `w-[${colWidth}%] max-w-[${colWidth}%]`;
   };
 
