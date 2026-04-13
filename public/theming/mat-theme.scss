@@ -73,6 +73,7 @@ body {
     @include mat.theme((
       color: (
         primary: mat.$violet-palette,
+        error: mat.$red-palette,
       ),
       typography: (
         plain-family: Roboto,
@@ -89,6 +90,7 @@ body {
     @include mat.theme((
       color: (
         primary: mat.$azure-palette,
+        error: mat.$red-palette,
       ),
       typography: (
         plain-family: Roboto,
@@ -105,6 +107,7 @@ body {
     @include mat.theme((
       color: (
         primary: mat.$rose-palette,
+        error: mat.$red-palette,
       ),
       typography: (
         plain-family: Roboto,

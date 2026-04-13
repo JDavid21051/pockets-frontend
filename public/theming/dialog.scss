@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+
+div.cdk-overlay-pane.mode__sidebar {
+  @include mat.dialog-overrides((
+    container-shape: 12px 0 0 12px
+  ));
+}
+
+
+.mat-mdc-dialog-container .mat-mdc-dialog-title {
+  font-family: roboto, 'sans-serif' !important;
+}

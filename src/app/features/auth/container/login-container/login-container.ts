@@ -26,7 +26,6 @@ interface LoginFormControls {
     SpinnerDirective,
   ],
   templateUrl: './login-container.html',
-  styleUrl: './login-container.css',
 })
 export class LoginContainer {
   private readonly builder = inject(NonNullableFormBuilder);

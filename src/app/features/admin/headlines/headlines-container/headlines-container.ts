@@ -1,4 +1,5 @@
 import type { OnInit } from '@angular/core';
+import { model, signal } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -12,6 +13,8 @@ import { StandardModuleHeader } from '@/shared/ui/modules/standard-header/standa
 import type { RxMethod } from '@ngrx/signals/rxjs-interop';
 import type { SkyTableActionsType } from '@/domain/types/uix/table.type';
 import { DOCUMENT_TYPE_MAP } from '@/infra/const/headlines/headlines-map.const';
+import { MatDialog } from '@angular/material/dialog';
+import { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -46,7 +49,34 @@ export class HeadlinesContainer implements OnInit {
   readonly dataTable = this.store.dataTableSource;
   readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;
 
+  readonly animal = signal('');
+  readonly name = model('');
+  readonly dialog = inject(MatDialog);
+
   ngOnInit() {
     this.getHeadlines();
+  }
+
+  clickOpenCreateForm(): void {
+    const dialogRef = this.dialog.open(HeadlinesFormContainer, {
+      data: { name: this.name(), animal: this.animal() },
+      position: {
+        right: '0px',
+        top: '0px',
+      },
+      height: '100svh',
+      width: '380px',
+      panelClass: 'mode__sidebar',
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.animal.set(result);
+      }
+    });
   }
 }

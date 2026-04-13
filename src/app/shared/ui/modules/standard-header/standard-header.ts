@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,8 +16,13 @@ import { MatButtonModule } from '@angular/material/button';
         <h3>{{ headerTitle() | translate }}</h3>
       </span>
       <div class="flex items-center gap-2">
-        <button matButton="elevated" class="max-h-8">
-          <span class="font-medium! text-sm!">{{ 'actionItem' | translate }}</span>
+        <button
+          type="button"
+          (click)="clickPrimaryAction.emit()"
+          matButton="elevated"
+          class="max-h-8 uppercase border!"
+        >
+          <span class="font-medium! text-sm!">{{ textPrimaryAction() | translate }}</span>
         </button>
       </div>
     </header>
@@ -27,4 +32,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class StandardModuleHeader {
   readonly headerTitle = input.required<string>();
   readonly icon = input<string>();
+  readonly textPrimaryAction = input<string>('');
+  readonly clickPrimaryAction = output();
 }
