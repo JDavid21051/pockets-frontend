@@ -7,5 +7,5 @@
  * IDE:          WebStorm
  */
 
-export type SkyColumnType = 'text' | 'pill' | 'icon';
+export type SkyColumnType = 'text' | 'pill' | 'icon' | 'mapNumber';
 export type SkyTableActionsType = 'update' | 'delete' | 'updateStatus' | 'detail';

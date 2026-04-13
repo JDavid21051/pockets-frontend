@@ -7,4 +7,8 @@
  * IDE:          WebStorm
  */
 
-export const calculateThree = (valueIn: number, total: number) => (total / valueIn) * 100;
+export const ruleOfThree = (partialValue: number, total: number): number => {
+  const quotient = partialValue / total;
+
+  return quotient * 100;
+};

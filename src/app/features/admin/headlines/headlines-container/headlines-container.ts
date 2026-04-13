@@ -11,6 +11,7 @@ import { HeadlinesStore } from '@/application/store/headlines.store';
 import { StandardModuleHeader } from '@/shared/ui/modules/standard-header/standard-header';
 import type { RxMethod } from '@ngrx/signals/rxjs-interop';
 import type { SkyTableActionsType } from '@/domain/types/uix/table.type';
+import { DOCUMENT_TYPE_MAP } from '@/infra/const/headlines/headlines-map.const';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -30,7 +31,13 @@ export class HeadlinesContainer implements OnInit {
   private readonly store = inject(HeadlinesStore);
   protected columnsConfig: SkyColumnsConfig[] = [
     { field: 'headlines_name', header: 'shared.text.name', type: 'text', grow: 2 },
-    { field: 'document_type', header: 'shared.text.type', type: 'text', grow: 0.5 },
+    {
+      field: 'document_type',
+      header: 'shared.text.type',
+      type: 'mapNumber',
+      grow: 0.5,
+      mapValues: DOCUMENT_TYPE_MAP,
+    },
     { field: 'headlines_document', header: 'headline.fields.document', type: 'text' },
   ];
 
