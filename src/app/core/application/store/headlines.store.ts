@@ -7,24 +7,14 @@
  * IDE:          WebStorm
  */
 
-import type {
-  HeadlinesModelList,
-  HeadlinesStateModel,
-} from '@/domain/models/headlines/headlines.model';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
 import { SnackBarService } from '@/infra/service/app-snack-bar.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { HeadlinesRepository } from '@/infra/repository/modules/headlines.repository';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
-import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
-
-const initHeadlinesState: HeadlinesStateModel = {
-  listLoading: false,
-  dataList: [],
-  dataTableSource: new MatTableDataSource<HeadlinesModelList>([]),
-};
+import { initHeadlinesState } from '@/infra/const/headlines/initial-headlines-state.const';
 
 export const HeadlinesStore = signalStore(
   { providedIn: 'root' },
