@@ -3,7 +3,21 @@
   "headline": {
     "title": "Headlines",
     "fields": {
-      "document": "Dcoumento"
+      "name": {
+        "label": "Nombre ",
+        "placeholder": "Ingrese el nombre del titular",
+        "error": "Error, ingrese el nombre"
+      },
+      "document": {
+        "label": "Documento",
+        "placeholder": "Ingrese el documento del titular",
+        "error": "Error, ingrese el documento"
+      },
+      "documentType": {
+        "label": "Tipo de documento",
+        "placeholder": "Seleccione el tipo de documento",
+        "error": "Error, seleccione el tipo de documento"
+      }
     },
     "msm": {
       "listedSuccess": "Titulares cargados con éxito."

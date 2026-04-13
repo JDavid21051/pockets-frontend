@@ -41,7 +41,7 @@ export class HeadlinesContainer implements OnInit {
       grow: 0.5,
       mapValues: DOCUMENT_TYPE_MAP,
     },
-    { field: 'headlines_document', header: 'headline.fields.document', type: 'text' },
+    { field: 'headlines_document', header: 'headline.fields.document.label', type: 'text' },
   ];
 
   protected actionTable: SkyTableActionsType[] = ['update'];

@@ -34,6 +34,9 @@ export class IconRegisterService {
     ['delete', 'icons/delete.svg'],
     ['edit', 'icons/edit.svg'],
     ['cached', 'icons/cached.svg'],
+    ['id_card', 'icons/id_card.svg'],
+    ['tag', 'icons/tag.svg'],
+    ['badge', 'icons/badge.svg'],
   ];
 
   register(): void {

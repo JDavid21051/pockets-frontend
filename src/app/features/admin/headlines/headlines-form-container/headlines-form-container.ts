@@ -13,6 +13,8 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { HeadlinesFormFactory } from '@/infra/functions/headlines-form.factory';
 import { MatSelectModule } from '@angular/material/select';
+import { DOCUMENT_TYPE_LIST } from '@/infra/const/headlines/headlines-map.const';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface DialogData {
   animal: string;
@@ -30,6 +32,7 @@ export interface DialogData {
     MatIcon,
     ReactiveFormsModule,
     MatSelectModule,
+    TranslatePipe,
   ],
   templateUrl: './headlines-form-container.html',
   styleUrl: './headlines-form-container.css',
@@ -39,6 +42,7 @@ export interface DialogData {
   },
 })
 export class HeadlinesFormContainer {
+  protected readonly DOCUMENT_TYPE_LIST = DOCUMENT_TYPE_LIST;
   readonly dialogRef = inject(MatDialogRef<HeadlinesFormContainer>);
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   readonly animal = model(this.data.animal);
@@ -46,5 +50,14 @@ export class HeadlinesFormContainer {
 
   onClickClose(): void {
     this.dialogRef.close();
+  }
+
+  onSubmitForm(): void {
+    if (!this.headlineForm.valid) {
+      this.headlineForm.markAllAsTouched();
+      return;
+    }
+    const { name, document, documentType } = this.headlineForm.getRawValue();
+    console.log({ name, document, documentType });
   }
 }

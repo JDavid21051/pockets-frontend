@@ -5,36 +5,46 @@
   </button>
 </header>
 <mat-dialog-content class="flex flex-1">
-  <form [formGroup]="headlineForm" class="flex gap-4 flex-col">
+  <form [formGroup]="headlineForm" class="flex py-2 gap-3 flex-col" id="headlines_form" (ngSubmit)="onSubmitForm()">
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" placeholder="Ingrese el nombre del titular" required />
-      <mat-icon matSuffix svgIcon="person" />
-      <mat-error> Error, ingrese el nombre </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Tipo de documento</mat-label>
-      <mat-select formControlName="documentType" required>
-        <mat-option>-- None --</mat-option>
-        <mat-option value="option">Option</mat-option>
-      </mat-select>
-      <mat-icon matSuffix svgIcon="person" />
-      <mat-error> Error, seleccione el tipo de documento </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Documento</mat-label>
+      <mat-label>{{ 'headline.fields.name.label' | translate }}</mat-label>
       <input
         matInput
-        formControlName="document"
-        placeholder="Ingrese el documento del titular"
+        [placeholder]="'headline.fields.name.placeholder' | translate"
+        formControlName="name"
         required
       />
-      <mat-icon matSuffix svgIcon="person" />
-      <mat-error> Error, ingrese el documento </mat-error>
+      <mat-icon matPrefix svgIcon="person" />
+      <mat-error> {{ 'headline.fields.name.error' | translate }} </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>{{ 'headline.fields.documentType.label' | translate }}</mat-label>
+      <mat-select
+        [placeholder]="'headline.fields.documentType.placeholder' | translate"
+        formControlName="documentType"
+        required
+      >
+        @for (item of DOCUMENT_TYPE_LIST; track item.id) {
+          <mat-option [value]="item">{{ item.name | translate }}</mat-option>
+        }
+      </mat-select>
+      <mat-icon matPrefix svgIcon="id_card" />
+      <mat-error> {{ 'headline.fields.documentType.error' | translate }} </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>{{ 'headline.fields.document.label' | translate }}</mat-label>
+      <input
+        matInput
+        [placeholder]="'headline.fields.document.placeholder' | translate"
+        formControlName="document"
+        required
+      />
+      <mat-icon matPrefix svgIcon="id_card" />
+      <mat-error> {{ 'headline.fields.document.error' | translate }} </mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions class="mt-auto! mb-0!">
   <button matButton color="error" type="button" (click)="onClickClose()">Cancelar</button>
-  <button matButton color="warn" type="submit">Crear</button>
+  <button matButton color="warn" form="headlines_form" type="submit">Crear</button>
 </mat-dialog-actions>
