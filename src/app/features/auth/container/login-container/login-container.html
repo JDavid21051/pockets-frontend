@@ -7,8 +7,17 @@
     <h3>Inicio de sesión</h3>
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>Contraseña</mat-label>
-      <input matInput formControlName="token" placeholder="Ingrese la contraseña" required />
-      <mat-icon matSuffix svgIcon="lock" />
+      <mat-icon matPrefix svgIcon="lock" />
+      <input
+        matInput
+        [type]="fieldType()"
+        formControlName="token"
+        placeholder="Ingrese la contraseña"
+        required
+      />
+      <button matIconButton matSuffix type="button" (click)="onToggleInputType()">
+        <mat-icon [svgIcon]="fieldIcon()" />
+      </button>
       <mat-error> Error, ingrese la contraseña </mat-error>
     </mat-form-field>
     <button matButton="outlined" class="uppercase" color="primary" type="submit">Ingresar</button>

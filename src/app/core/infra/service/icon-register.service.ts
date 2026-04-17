@@ -37,6 +37,7 @@ export class IconRegisterService {
     ['id_card', 'icons/id_card.svg'],
     ['tag', 'icons/tag.svg'],
     ['badge', 'icons/badge.svg'],
+    ['lock', 'icons/lock.svg'],
   ];
 
   register(): void {
