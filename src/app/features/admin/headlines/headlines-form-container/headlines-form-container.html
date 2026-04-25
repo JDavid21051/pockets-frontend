@@ -1,11 +1,16 @@
-<header class="flex px-4 border-b border-neutral-400 min-h-14 h-14 justify-between items-center">
-  <h2 mat-dialog-title class="p-0! flex! items-center">Crear titular</h2>
-  <button matIconButton type="button" (click)="onClickClose()">
+<header class="flex px-6 border-b border-neutral-400 min-h-14 h-14 justify-between items-center">
+  <h3 mat-dialog-title class="p-0! flex! items-center">Crear titular</h3>
+  <button matIconButton class="flex!" type="button" (click)="onClickClose()">
     <mat-icon svgIcon="close" />
   </button>
 </header>
 <mat-dialog-content class="flex flex-1">
-  <form [formGroup]="headlineForm" class="flex py-2 gap-3 flex-col" id="headlines_form" (ngSubmit)="onSubmitForm()">
+  <form
+    [formGroup]="headlineForm"
+    class="flex py-2 gap-3 flex-col"
+    id="headlines_form"
+    (ngSubmit)="onSubmitForm()"
+  >
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>{{ 'headline.fields.name.label' | translate }}</mat-label>
       <input
@@ -44,7 +49,7 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions class="mt-auto! mb-0!">
-  <button matButton color="error" type="button" (click)="onClickClose()">Cancelar</button>
-  <button matButton color="warn" form="headlines_form" type="submit">Crear</button>
+<mat-dialog-actions class="mt-auto! mb-0! border-t! border-neutral-400!">
+  <button mat-button color="secondary" type="button" (click)="onClickClose()">Cancelar</button>
+  <button mat-raised-button form="headlines_form" type="submit">Crear</button>
 </mat-dialog-actions>

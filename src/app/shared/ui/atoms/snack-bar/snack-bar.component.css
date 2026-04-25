@@ -10,7 +10,7 @@
 }
 
 .krih_snack_bar_icon {
-  background: var(--mat-app-background-color, var(--mat-app-background, transparent));
+  background: transparent;
 
   & .material-symbols-outlined,
   & mat-icon {

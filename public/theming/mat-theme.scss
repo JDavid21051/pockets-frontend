@@ -1,5 +1,44 @@
 @use '@angular/material' as mat;
 
+@include mat.core();
+
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: 'Google Sans, Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
+    bold-weight: 900,
+    medium-weight: 700,
+    regular-weight: 500,
+  ),
+));
+
+$violet_mode: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$violet-palette,
+    tertiary: mat.$red-palette,
+  ),
+));
+
+$azure_mode: mat.define-theme((
+  color: (
+    primary: mat.$azure-palette,
+    tertiary: mat.$red-palette,
+  ),
+));
+
+$rose_mode: mat.define-theme((
+  color: (
+    primary: mat.$rose-palette,
+    tertiary: mat.$red-palette,
+  ),
+));
+
 html {
   height: 100%;
   margin: 0;
@@ -30,30 +69,35 @@ html {
     font-size: 0.875rem;
   }
 
-
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$cyan-palette,
-      error: mat.$red-palette,
-      neutral-variant: "#627c7b"
-    ),
-    typography: (
-      plain-family: Roboto,
-      brand-family: Open Sans,
-      bold-weight: 900,
-      medium-weight: 700,
-      regular-weight: 500,
-    ),
-    density: 0,
-  ));
+  @include mat.all-component-typographies($light-theme);
+  @include mat.all-component-densities($light-theme);
   @include mat.system-classes();
+
+  & > body.light-theme {
+    @include mat.all-component-colors($light-theme);
+
+    .mat-tertiary {
+      @include mat.button-color($light-theme, $color-variant: tertiary);
+    }
+
+    .mat-secondary {
+      @include mat.button-color($light-theme, $color-variant: secondary);
+    }
+
+    .mat-error {
+      @include mat.button-color($light-theme, $color-variant: error);
+    }
+  }
 }
 
 :root {
   --sidebar-width-expanded: 280px;
   --sidebar-width-collapsed: 60px;
+  // material
+  --mat-sys-corner-extra-small: 4px;
+  --mat-sys-corner-small: 8px;
 }
+
 
 @media (width <= 1007px) {
   :root {
@@ -70,54 +114,15 @@ body {
   height: 100%;
 
   &.violet_mode {
-    @include mat.theme((
-      color: (
-        primary: mat.$violet-palette,
-        error: mat.$red-palette,
-      ),
-      typography: (
-        plain-family: Roboto,
-        brand-family: Open Sans,
-        bold-weight: 900,
-        medium-weight: 500,
-        regular-weight: 300,
-      ),
-      density: 0,
-    ));
+    @include mat.all-component-colors($violet_mode);
   }
 
   &.azure_mode {
-    @include mat.theme((
-      color: (
-        primary: mat.$azure-palette,
-        error: mat.$red-palette,
-      ),
-      typography: (
-        plain-family: Roboto,
-        brand-family: Open Sans,
-        bold-weight: 900,
-        medium-weight: 500,
-        regular-weight: 300,
-      ),
-      density: 0,
-    ));
+    @include mat.all-component-colors($azure_mode);
   }
 
   &.rose_mode {
-    @include mat.theme((
-      color: (
-        primary: mat.$rose-palette,
-        error: mat.$red-palette,
-      ),
-      typography: (
-        plain-family: Roboto,
-        brand-family: Open Sans,
-        bold-weight: 900,
-        medium-weight: 500,
-        regular-weight: 300,
-      ),
-      density: 0,
-    ));
+    @include mat.all-component-colors($rose_mode);
   }
 
 }

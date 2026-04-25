@@ -20,9 +20,12 @@ export interface DialogData {
   animal: string;
   name: string;
 }
+
 @Component({
   selector: 'krih-headlines-form-container',
   imports: [
+    TranslatePipe,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -30,9 +33,7 @@ export interface DialogData {
     MatDialogContent,
     MatDialogActions,
     MatIcon,
-    ReactiveFormsModule,
     MatSelectModule,
-    TranslatePipe,
   ],
   templateUrl: './headlines-form-container.html',
   styleUrl: './headlines-form-container.css',

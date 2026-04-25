@@ -117,16 +117,3 @@
     transform: rotate(-90deg);
   }
 }
-
-/*
-!* Target view transition pseudo-elements *!
-::view-transition-old(count),
-::view-transition-new(count) {
-  animation-duration: 200ms;
-  animation-name: -ua-view-transition-fade-in, rotate-in;
-}
-
-::view-transition-old(count) {
-  animation-name: -ua-view-transition-fade-out, rotate-out;
-}
-*/
