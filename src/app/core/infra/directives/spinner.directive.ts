@@ -36,9 +36,9 @@ export class SpinnerDirective {
    * Spinner status color
    * `basic`, `primary`, `info`, `success`, `warning`, `danger`, `control`.
    */
-  spinnerStatus = input<StandardStatusType>('basic');
+  spinnerStatus = input<StandardStatusType>('secondary');
   /**
-   * Spinner size. Possible values: `tiny`, `small`, `medium` (default), `large`, `giant`
+   * Spinner size. Possible values: `xs`, `sm`, `md`, `lg`, `xl`
    */
   spinnerSize = input<StandardSizeType>('md');
 
@@ -83,8 +83,11 @@ export class SpinnerDirective {
 
   setInstanceInputs(instance: LoadingComponent): void {
     instance.message.set(this.spinnerMessage());
-    if (typeof this.spinnerStatus !== 'undefined')
+    if (typeof this.spinnerStatus !== 'undefined') {
       instance.status.set(this.spinnerStatus() as AppStatusCoreEnum);
-    if (typeof this.spinnerSize !== 'undefined') instance.size.set(this.spinnerSize());
+    }
+    if (typeof this.spinnerSize !== 'undefined') {
+      instance.size.set(this.spinnerSize());
+    }
   }
 }

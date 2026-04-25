@@ -19,7 +19,7 @@ export const UI_SNACK_ICON: Record<AppStatusCoreEnum, string> = {
   [AppStatusCoreEnum.extra]: 'notifications',
   [AppStatusCoreEnum.primary]: 'notifications',
   [AppStatusCoreEnum.secondary]: 'notifications',
-  [AppStatusCoreEnum.ternary]: 'notifications',
+  [AppStatusCoreEnum.tertiary]: 'notifications',
 };
 
 export const UI_SNACK_CSS_CLASS: Record<AppStatusCoreEnum, string> = {
@@ -32,5 +32,5 @@ export const UI_SNACK_CSS_CLASS: Record<AppStatusCoreEnum, string> = {
   [AppStatusCoreEnum.extra]: 'snack_extra',
   [AppStatusCoreEnum.primary]: 'snack_primary',
   [AppStatusCoreEnum.secondary]: 'snack_secondary',
-  [AppStatusCoreEnum.ternary]: 'snack_ternary',
+  [AppStatusCoreEnum.tertiary]: 'snack_ternary',
 };

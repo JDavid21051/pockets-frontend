@@ -14,7 +14,7 @@ export enum AppStatusCoreEnum {
   error = 'error',
   primary = 'primary',
   secondary = 'secondary',
-  ternary = 'ternary',
+  tertiary = 'tertiary',
   info = 'info',
   basic = 'basic',
   extra = 'extra',

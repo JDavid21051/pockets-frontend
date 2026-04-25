@@ -16,5 +16,5 @@ export type StandardStatusType =
   | 'info'
   | 'extra'
   | 'secondary'
-  | 'ternary';
+  | 'tertiary';
 export type StandardOrCustomStatus = StandardStatusType | string;

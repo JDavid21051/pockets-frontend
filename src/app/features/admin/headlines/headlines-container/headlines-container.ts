@@ -15,6 +15,7 @@ import type { SkyTableActionsType } from '@/domain/types/uix/table.type';
 import { DOCUMENT_TYPE_MAP } from '@/infra/const/headlines/headlines-map.const';
 import { MatDialog } from '@angular/material/dialog';
 import { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
+import { SpinnerDirective } from '@/infra/directives/spinner.directive';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -24,11 +25,11 @@ import { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-for
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    SkyTable,
     StandardModuleHeader,
+    SpinnerDirective,
+    SkyTable,
   ],
   templateUrl: './headlines-container.html',
-  styleUrl: './headlines-container.css',
 })
 export class HeadlinesContainer implements OnInit {
   private readonly store = inject(HeadlinesStore);
@@ -48,6 +49,7 @@ export class HeadlinesContainer implements OnInit {
 
   readonly dataTable = this.store.dataTableSource;
   readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;
+  readonly loading = this.store.listLoading;
 
   readonly animal = signal('');
   readonly name = model('');

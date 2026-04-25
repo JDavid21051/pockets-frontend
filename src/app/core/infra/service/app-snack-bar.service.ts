@@ -88,6 +88,6 @@ export class SnackBarService {
   }
 
   showTernary(message: string, param: Partial<SnackBarParamsModel> = {}): void {
-    this.showSnackByStatus(message, param, AppStatusCoreEnum.ternary);
+    this.showSnackByStatus(message, param, AppStatusCoreEnum.tertiary);
   }
 }
