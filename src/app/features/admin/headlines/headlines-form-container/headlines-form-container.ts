@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +13,8 @@ import { MatIcon } from '@angular/material/icon';
 import { HeadlinesFormFactory } from '@/infra/functions/headlines-form.factory';
 import { MatSelectModule } from '@angular/material/select';
 import { DOCUMENT_TYPE_LIST } from '@/infra/const/headlines/headlines-map.const';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TextField } from '@/shared/ui/modules/text-field/text-field';
+import { SimpleSelect } from '@/shared/ui/modules/simple-select/simple-select';
 
 export interface DialogData {
   animal: string;
@@ -24,16 +24,14 @@ export interface DialogData {
 @Component({
   selector: 'krih-headlines-form-container',
   imports: [
-    TranslatePipe,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
     MatDialogContent,
     MatDialogActions,
     MatIcon,
-    MatSelectModule,
     MatDialogTitle,
+    TextField,
+    SimpleSelect,
   ],
   templateUrl: './headlines-form-container.html',
   styleUrl: './headlines-form-container.css',

@@ -11,42 +11,27 @@
     id="headlines_form"
     (ngSubmit)="onSubmitForm()"
   >
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>{{ 'headline.fields.name.label' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'headline.fields.name.placeholder' | translate"
-        formControlName="name"
-        required
-      />
-      <mat-icon matPrefix svgIcon="person" />
-      <mat-error> {{ 'headline.fields.name.error' | translate }} </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>{{ 'headline.fields.documentType.label' | translate }}</mat-label>
-      <mat-select
-        [placeholder]="'headline.fields.documentType.placeholder' | translate"
-        formControlName="documentType"
-        required
-      >
-        @for (item of DOCUMENT_TYPE_LIST; track item.id) {
-          <mat-option [value]="item">{{ item.name | translate }}</mat-option>
-        }
-      </mat-select>
-      <mat-icon matPrefix svgIcon="id_card" />
-      <mat-error> {{ 'headline.fields.documentType.error' | translate }} </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="w-full">
-      <mat-label>{{ 'headline.fields.document.label' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'headline.fields.document.placeholder' | translate"
-        formControlName="document"
-        required
-      />
-      <mat-icon matPrefix svgIcon="id_card" />
-      <mat-error> {{ 'headline.fields.document.error' | translate }} </mat-error>
-    </mat-form-field>
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="headlineForm.controls.name"
+      label="headline.fields.name.label"
+      placeholder="headline.fields.name.placeholder"
+    />
+    <krih-simple-select
+      keyName="name"
+      keyValue="id"
+      prefixIcon="id_card"
+      [controlRef]="headlineForm.controls.documentType"
+      [options]="DOCUMENT_TYPE_LIST"
+      label="headline.fields.documentType.label"
+      placeholder="headline.fields.documentType.placeholder"
+    />
+    <krih-text-field
+      prefixIcon="id_card"
+      [controlRef]="headlineForm.controls.document"
+      label="headline.fields.document.label"
+      placeholder="headline.fields.document.placeholder"
+    />
   </form>
 </mat-dialog-content>
 <mat-dialog-actions class="mt-auto! mb-0! border-t! border-neutral-400!">

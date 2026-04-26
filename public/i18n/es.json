@@ -27,7 +27,12 @@
     "text": {
       "login": "Iniciar sesión",
       "name": "Nombre",
-      "type": "Tipo"
+      "type": "Tipo",
+      "errors": {
+        "minlength": "La información ingresada en este campo debe contener al menos {{valueToShow}} caracteres.",
+        "maxlength": "La información ingresada en este campo debe contener menos de {{valueToShow}} caracteres.",
+        "required": "La información de este campo es obligatoria."
+      }
     },
     "maps": {
       "ti": "Tarjeta de identidad",

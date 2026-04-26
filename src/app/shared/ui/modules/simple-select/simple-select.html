@@ -1,0 +1,32 @@
+<mat-form-field appearance="outline" class="w-full">
+  @if (visibleLabel()) {
+    <mat-label [class]="cn(labelClass(), 'text-sm')">
+      {{ label() | translate }}
+    </mat-label>
+  }
+  @if (prefixIcon()) {
+    <mat-icon matPrefix [svgIcon]="prefixIcon()" />
+  }
+  <mat-select
+    [class]="selectClass()"
+    [formControl]="controlRef()"
+    [id]="idRef()"
+    [multiple]="false"
+    [placeholder]="placeholder() | translate"
+    (openedChange)="openedChange.emit($event)"
+    (selectionChange)="selectionChange.emit($event)"
+  >
+    @for (item of options(); track keyValue() ? item[keyValue()] : item) {
+      <mat-option [value]="item">
+        {{ item[keyName()] | translate }}
+      </mat-option>
+    }
+  </mat-select>
+  <krih-form-field-error
+    matError
+    [controlRef]="controlRef()"
+    [errorsVisible]="errorsVisible()"
+    [errors]="errorsMessage()"
+    [groupErrors]="errorsGroupMessage()"
+  />
+</mat-form-field>
