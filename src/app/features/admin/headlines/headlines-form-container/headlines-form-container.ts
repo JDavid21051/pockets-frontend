@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -11,7 +10,6 @@ import {
 } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { HeadlinesFormFactory } from '@/infra/functions/headlines-form.factory';
-import { MatSelectModule } from '@angular/material/select';
 import { DOCUMENT_TYPE_LIST } from '@/infra/const/headlines/headlines-map.const';
 import { TextField } from '@/shared/ui/modules/text-field/text-field';
 import { SimpleSelect } from '@/shared/ui/modules/simple-select/simple-select';
