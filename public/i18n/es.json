@@ -20,7 +20,8 @@
       }
     },
     "msm": {
-      "listedSuccess": "Titulares cargados con éxito."
+      "listedSuccess": "Titulares cargados con éxito.",
+      "createSuccess": "Titular creado exitosamente."
     }
   },
   "shared": {

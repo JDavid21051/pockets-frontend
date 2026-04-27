@@ -1,3 +1,4 @@
+import type { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +14,7 @@ import { HeadlinesFormFactory } from '@/infra/functions/headlines-form.factory';
 import { DOCUMENT_TYPE_LIST } from '@/infra/const/headlines/headlines-map.const';
 import { TextField } from '@/shared/ui/modules/text-field/text-field';
 import { SimpleSelect } from '@/shared/ui/modules/simple-select/simple-select';
+import { HeadlinesStore } from '@/application/store/headlines.store';
 
 export interface DialogData {
   animal: string;
@@ -38,15 +40,26 @@ export interface DialogData {
     class: 'flex! flex-col h-full',
   },
 })
-export class HeadlinesFormContainer {
+export class HeadlinesFormContainer implements OnInit {
+  // injects
+  private readonly store = inject(HeadlinesStore);
+  private readonly dialogRef = inject<MatDialogRef<HeadlinesFormContainer, boolean>>(
+    MatDialogRef<HeadlinesFormContainer, boolean>,
+  );
+
   protected readonly DOCUMENT_TYPE_LIST = DOCUMENT_TYPE_LIST;
-  readonly dialogRef = inject(MatDialogRef<HeadlinesFormContainer>);
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  // inputs, outputs
   readonly animal = model(this.data.animal);
+  // states
   readonly headlineForm = HeadlinesFormFactory();
 
+  ngOnInit(): void {
+    this.store.setDialogRef(this.dialogRef);
+  }
+
   onClickClose(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   onSubmitForm(): void {
@@ -54,7 +67,27 @@ export class HeadlinesFormContainer {
       this.headlineForm.markAllAsTouched();
       return;
     }
-    const { name, document, documentType } = this.headlineForm.getRawValue();
-    console.log({ name, document, documentType });
+    const { name, document: documentNumber, documentType } = this.headlineForm.getRawValue();
+
+    if (!documentType) {
+      this.headlineForm.markAllAsTouched();
+      return;
+    }
+
+    const document_type = Number(documentType.id);
+    const headlines_document = Number(documentNumber);
+
+    console.log({ name, document_type, documentType });
+
+    if (isNaN(document_type) || isNaN(headlines_document)) {
+      this.headlineForm.markAllAsTouched();
+      return;
+    }
+
+    this.store.createHeadline({
+      headlines_name: name,
+      document_type,
+      headlines_document: String(headlines_document),
+    });
   }
 }

@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export const initHeadlinesState: HeadlinesStateModel = {
   listLoading: false,
+  dialogRef: null,
   dataList: [],
   dataTableSource: new MatTableDataSource<HeadlinesModelList>([]),
 };

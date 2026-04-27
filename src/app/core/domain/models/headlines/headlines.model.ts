@@ -9,6 +9,8 @@
 
 import type { UUID } from '@/domain/types/types';
 import type { MatTableDataSource } from '@angular/material/table';
+import type { MatDialogRef } from '@angular/material/dialog';
+import type { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
 
 export interface HeadlinesModelList {
   id: UUID;
@@ -22,7 +24,7 @@ export interface HeadlinesModelList {
 export interface CreateHeadlinesDto {
   headlines_name: string;
   headlines_document: string;
-  document_type: string;
+  document_type: number;
 }
 
 export interface UpdateHeadlinesDto extends CreateHeadlinesDto {
@@ -31,6 +33,7 @@ export interface UpdateHeadlinesDto extends CreateHeadlinesDto {
 
 export interface HeadlinesStateModel {
   listLoading: boolean;
+  dialogRef: MatDialogRef<HeadlinesFormContainer, boolean> | null;
   dataList: HeadlinesModelList[];
   dataTableSource: MatTableDataSource<HeadlinesModelList>;
 }
