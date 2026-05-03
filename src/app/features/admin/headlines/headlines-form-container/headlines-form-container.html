@@ -1,5 +1,11 @@
 <header class="flex px-6 border-b border-neutral-400 min-h-14 h-14 justify-between items-center">
-  <h3 mat-dialog-title class="p-0! flex! items-center">Crear titular</h3>
+  <h3 mat-dialog-title class="p-0! flex! items-center">
+    @if (editing()) {
+      Actualizar titular
+    } @else {
+      Crear titular
+    }
+  </h3>
   <button matIconButton class="flex!" type="button" (click)="onClickClose()">
     <mat-icon svgIcon="close" />
   </button>
@@ -36,5 +42,11 @@
 </mat-dialog-content>
 <mat-dialog-actions class="mt-auto! mb-0! border-t! border-neutral-400!">
   <button mat-button color="secondary" type="button" (click)="onClickClose()">Cancelar</button>
-  <button mat-raised-button form="headlines_form" type="submit">Crear</button>
+  <button mat-raised-button form="headlines_form" type="submit">
+    @if (editing()) {
+      Actualizar
+    } @else {
+      Crear
+    }
+  </button>
 </mat-dialog-actions>

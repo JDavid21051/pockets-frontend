@@ -15,7 +15,10 @@ import { HeadlinesRepository } from '@/infra/repository/modules/headlines.reposi
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
 import { TranslateService } from '@ngx-translate/core';
 import { initHeadlinesState } from '@/infra/const/headlines/initial-headlines-state.const';
-import type { CreateHeadlinesDto } from '@/domain/models/headlines/headlines.model';
+import type {
+  CreateHeadlinesDto,
+  UpdateHeadlinesDto,
+} from '@/domain/models/headlines/headlines.model';
 import { switchMap } from 'rxjs';
 import type { MatDialogRef } from '@angular/material/dialog';
 import type { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
@@ -34,6 +37,24 @@ export const HeadlinesStore = signalStore(
         patchState(store, { dialogRef: param });
       }
       const getHeadlines = rxMethod<void>(() => {
+        patchState(store, { listLoading: true });
+        return headlinesRepository.list().pipe(
+          handleRxResponse(
+            (response) => {
+              console.log({ response });
+              snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
+              store.dataTableSource().data = [...response];
+              patchState(store, { listLoading: false, dialogRef: null, dataList: response });
+            },
+            (error): void => {
+              snackService.showError(String(error.error.message));
+              patchState(store, { listLoading: false });
+            },
+          ),
+        );
+      });
+
+      const getHeadlineData = rxMethod<string>(() => {
         patchState(store, { listLoading: true });
         return headlinesRepository.list().pipe(
           handleRxResponse(
@@ -84,9 +105,44 @@ export const HeadlinesStore = signalStore(
         ),
       );
 
+      const updateHeadline = rxMethod<UpdateHeadlinesDto>(($) =>
+        $.pipe(
+          switchMap((params) => {
+            patchState(store, { listLoading: true });
+            return headlinesRepository.update(params).pipe(
+              handleRxResponse(
+                (createResponse) => {
+                  console.log({ createResponse });
+
+                  const dialogRef = store.dialogRef();
+                  if (dialogRef) {
+                    const newList = store.dataTableSource().data.concat([createResponse]);
+
+                    store.dataTableSource().data = [...newList];
+                    patchState(store, {
+                      listLoading: false,
+                      dataList: newList,
+                    });
+                    snackService.showSuccess(translate.instant('headline.msm.updateSuccess'));
+
+                    dialogRef.close(true);
+                    getHeadlines();
+                  }
+                },
+                (error) => {
+                  snackService.showError(String(error.error.message));
+                  patchState(store, { listLoading: false });
+                },
+              ),
+            );
+          }),
+        ),
+      );
+
       return {
         getHeadlines,
         createHeadline,
+        updateHeadline,
         setDialogRef,
       };
     },

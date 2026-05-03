@@ -60,4 +60,9 @@ export interface TableActionsConfig {
   label: string;
   icon: string;
 }
+
+export type TableRowActionsResponse<T> = TableActionsConfig & {
+  data: T;
+};
+
 export type TableActionsFullConfig = Record<SkyTableActionsType, TableActionsConfig>;

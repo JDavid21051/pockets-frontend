@@ -17,7 +17,11 @@ import type { PageEvent } from '@angular/material/paginator';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { TranslatePipe } from '@ngx-translate/core';
-import type { SkyColumnsConfig, TableActionsConfig } from '@/domain/models/uix/sky-table.model';
+import type {
+  SkyColumnsConfig,
+  TableActionsConfig,
+  TableRowActionsResponse,
+} from '@/domain/models/uix/sky-table.model';
 import { DESKTOP_MAX_ROWS } from '@/infra/const/app-utils.const';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,8 +60,7 @@ export class SkyTable<T> implements AfterViewInit {
   readonly actionIcon = input('more_vert');
   readonly actionColWidth = input(60);
   readonly actionsConfig = input<SkyTableActionsType[]>([]);
-  readonly clickAction = output();
-
+  readonly clickAction = output<TableRowActionsResponse<T>>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   readonly matTableRef = viewChild('tableRefMat', { read: ElementRef });
@@ -136,9 +139,8 @@ export class SkyTable<T> implements AfterViewInit {
     console.log({ data });
   }
 
-  onClickActionItem(item: boolean): void {
-    console.log({ item });
-    this.clickAction.emit();
+  onClickActionItem(item: TableRowActionsResponse<T>): void {
+    this.clickAction.emit(item);
   }
 
   onChangePaginatorPage(e: PageEvent) {

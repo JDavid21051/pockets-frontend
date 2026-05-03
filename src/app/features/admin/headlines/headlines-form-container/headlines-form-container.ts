@@ -15,10 +15,12 @@ import { DOCUMENT_TYPE_LIST } from '@/infra/const/headlines/headlines-map.const'
 import { TextField } from '@/shared/ui/modules/text-field/text-field';
 import { SimpleSelect } from '@/shared/ui/modules/simple-select/simple-select';
 import { HeadlinesStore } from '@/application/store/headlines.store';
+import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
+import { NO_FIND_INDEX } from '@/infra/const/app-utils.const';
 
-export interface DialogData {
-  animal: string;
-  name: string;
+export interface HeadlinesFormDialogData {
+  readonly data: HeadlinesModelList;
+  readonly editing: boolean;
 }
 
 @Component({
@@ -48,14 +50,33 @@ export class HeadlinesFormContainer implements OnInit {
   );
 
   protected readonly DOCUMENT_TYPE_LIST = DOCUMENT_TYPE_LIST;
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly dialogData = inject<HeadlinesFormDialogData>(MAT_DIALOG_DATA);
   // inputs, outputs
-  readonly animal = model(this.data.animal);
+  readonly data = model(this.dialogData.data);
+  readonly editing = model(this.dialogData.editing);
   // states
   readonly headlineForm = HeadlinesFormFactory();
 
+  private setDefaultFormValues(): void {
+    if (!this.editing()) return;
+
+    this.headlineForm.patchValue({
+      name: this.data().headlines_name,
+      document: this.data().headlines_document,
+    });
+    const documentTypeSelected = DOCUMENT_TYPE_LIST.findIndex(
+      (value) => value.id === this.data().document_type,
+    );
+    if (documentTypeSelected > NO_FIND_INDEX) {
+      this.headlineForm.patchValue({
+        documentType: DOCUMENT_TYPE_LIST[documentTypeSelected],
+      });
+    }
+  }
+
   ngOnInit(): void {
     this.store.setDialogRef(this.dialogRef);
+    this.setDefaultFormValues();
   }
 
   onClickClose(): void {
@@ -81,6 +102,17 @@ export class HeadlinesFormContainer implements OnInit {
 
     if (isNaN(document_type) || isNaN(headlines_document)) {
       this.headlineForm.markAllAsTouched();
+      return;
+    }
+
+    if (this.editing()) {
+      this.store.updateHeadline({
+        id: this.data().id,
+        headlines_name: name,
+        document_type,
+        headlines_document: String(headlines_document),
+      });
+
       return;
     }
 

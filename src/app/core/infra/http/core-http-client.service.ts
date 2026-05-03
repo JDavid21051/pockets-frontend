@@ -9,11 +9,10 @@
 
 import { inject, Injectable } from '@angular/core';
 import type { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
-import { map } from 'rxjs';
-import { lastValueFrom } from 'rxjs';
+import { async } from 'rxjs';
+import { map, lastValueFrom } from 'rxjs';
 import type {
   ApiRequestOptions,
   ApiResponse,
@@ -21,10 +20,18 @@ import type {
 } from '@/domain/models/app/api-core.models';
 import { ApiExceptionCore } from '@/infra/class/api-exception.class';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
+import { isNullish } from '@/infra/const/is-nullish.const';
 
-/**
- * Class to encapsulate original HttpClient and incorporate facilities to invoke it.
- */
+type HttpBodyContentModel = object | Record<string, unknown> | string;
+type HttpUrlParamsModel = Record<string, string> | string | URLSearchParams;
+
+interface HttpVerbParamsModel {
+  endpoint: string;
+  urlParams?: string;
+  body: HttpBodyContentModel;
+  options?: ApiRequestOptions;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -61,6 +68,15 @@ export class CoreHttpClientService {
     throw ApiExceptionCore.createError(response);
   }
 
+  private serializeToURL(url: string, urlParams?: string): string {
+    if (isNullish(urlParams)) {
+      return url;
+    }
+    const newUrl = `${url.endsWith('/') ? url : `${url}/`}`;
+    return `${newUrl}${urlParams}/`;
+    // return `${url.endsWith('/') ? url : `url\`}${urlParams.toString()}`;
+  }
+
   get<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
     const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
     if (!headers) {
@@ -71,7 +87,7 @@ export class CoreHttpClientService {
       .pipe(map((data) => this.mapResponse<T>(data)));
   }
 
-  post<T>(endpoint: string, body?: object, options?: ApiRequestOptions) {
+  post<TResponse>(endpoint: string, body?: object, options?: ApiRequestOptions) {
     const url = this.getUrl(endpoint);
     const optionsRef: ApiRequestOptions = {
       ...options,
@@ -81,24 +97,42 @@ export class CoreHttpClientService {
       optionsRef.headers = this.getHttpHeaders();
     }
     return this.httpClient
-      .post<ApiResponse<T>>(url, body, optionsRef)
-      .pipe(map((data) => this.mapResponse<T>(data)));
+      .post<ApiResponse<TResponse>>(url, body, optionsRef)
+      .pipe(map((data) => this.mapResponse<TResponse>(data)));
   }
 
-  put(endpoint: string, body?: object, headers?: HttpHeaders): Observable<HttpResponse<object>> {
-    const url = this.getUrl(endpoint);
+  put<TResponse>(params: HttpVerbParamsModel) {
+    const { endpoint, urlParams, body, options } = params;
+    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const optionsRef: ApiRequestOptions = {
+      ...options,
+    };
+    const headers = optionsRef.headers;
     if (!headers) {
-      headers = this.getHttpHeaders();
+      optionsRef.headers = this.getHttpHeaders();
     }
-    return this.httpClient.put<HttpResponse<object>>(url, body, { headers: headers });
+    const fullEndpoint = this.serializeToURL(url, urlParams);
+
+    return this.httpClient
+      .put<ApiResponse<TResponse>>(fullEndpoint, body, optionsRef)
+      .pipe(map((data) => this.mapResponse<TResponse>(data)));
   }
 
-  patch(endpoint: string, body?: object, headers?: HttpHeaders): Observable<HttpResponse<object>> {
-    const url = this.getUrl(endpoint);
+  patch<TResponse>(params: HttpVerbParamsModel) {
+    const { endpoint, urlParams, body, options } = params;
+    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const optionsRef: ApiRequestOptions = {
+      ...options,
+    };
+    const headers = optionsRef.headers;
     if (!headers) {
-      headers = this.getHttpHeaders();
+      optionsRef.headers = this.getHttpHeaders();
     }
-    return this.httpClient.patch<HttpResponse<object>>(url, body, { headers: headers });
+    const fullEndpoint = this.serializeToURL(url, urlParams);
+
+    return this.httpClient
+      .patch<ApiResponse<TResponse>>(fullEndpoint, body, optionsRef)
+      .pipe(map((data) => this.mapResponse<TResponse>(data)));
   }
 
   async asyncGet<T>(endpoint: string, headers?: HttpHeaders): Promise<ApiResponseModel<T>> {

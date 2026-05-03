@@ -1,7 +1,8 @@
-<div spinnerSize="lg" [krihSpinner]="loading()" class="flex flex-col p-5">
+<div spinnerSize="lg" [krihSpinner]="loading()" class="flex flex-col py-5">
   <krih-standard-header
     headerTitle="headline.title"
     textPrimaryAction="Crear"
+    class="px-5 sticky top-4 bg-[var(--mat-sys-surface)]"
     icon="person"
     (clickPrimaryAction)="clickOpenCreateForm()"
   />
@@ -9,5 +10,7 @@
     [actionsConfig]="actionTable"
     [columnsConfig]="columnsConfig"
     [dataSource]="dataTable()"
+    class="px-5"
+    (clickAction)="onClickTableAction($event)"
   />
 </div>

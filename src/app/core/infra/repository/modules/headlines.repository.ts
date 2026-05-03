@@ -14,8 +14,8 @@ import { CoreHttpClientService } from '@/infra/http/core-http-client.service';
 import type {
   CreateHeadlinesDto,
   HeadlinesModelList,
+  UpdateHeadlinesDto,
 } from '@/domain/models/headlines/headlines.model';
-import { of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class HeadlinesRepository implements HeadlinesPort {
@@ -30,7 +30,11 @@ export class HeadlinesRepository implements HeadlinesPort {
     return this.http.post<HeadlinesModelList>(this.urls.base + this.urls.create, params);
   }
 
-  update() {
-    return of<HeadlinesModelList>({} as HeadlinesModelList);
+  update(params: UpdateHeadlinesDto) {
+    return this.http.patch<HeadlinesModelList>({
+      endpoint: this.urls.base + this.urls.update,
+      body: params,
+      urlParams: params.id,
+    });
   }
 }

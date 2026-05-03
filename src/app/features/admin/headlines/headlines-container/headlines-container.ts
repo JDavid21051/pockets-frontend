@@ -1,4 +1,5 @@
 import type { OnInit } from '@angular/core';
+import { DestroyRef } from '@angular/core';
 import { model, signal } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
@@ -7,7 +8,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SkyTable } from '@/shared/ui/organisms/sky-table/sky-table';
-import type { SkyColumnsConfig } from '@/domain/models/uix/sky-table.model';
+import type {
+  SkyColumnsConfig,
+  TableRowActionsResponse,
+} from '@/domain/models/uix/sky-table.model';
 import { HeadlinesStore } from '@/application/store/headlines.store';
 import { StandardModuleHeader } from '@/shared/ui/modules/standard-header/standard-header';
 import type { RxMethod } from '@ngrx/signals/rxjs-interop';
@@ -16,6 +20,8 @@ import { DOCUMENT_TYPE_MAP } from '@/infra/const/headlines/headlines-map.const';
 import { MatDialog } from '@angular/material/dialog';
 import { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
 import { SpinnerDirective } from '@/infra/directives/spinner.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -32,6 +38,7 @@ import { SpinnerDirective } from '@/infra/directives/spinner.directive';
   templateUrl: './headlines-container.html',
 })
 export class HeadlinesContainer implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
   private readonly store = inject(HeadlinesStore);
   protected columnsConfig: SkyColumnsConfig[] = [
     { field: 'headlines_name', header: 'shared.text.name', type: 'text', grow: 2 },
@@ -51,17 +58,14 @@ export class HeadlinesContainer implements OnInit {
   readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;
   readonly loading = this.store.listLoading;
 
-  readonly animal = signal('');
-  readonly name = model('');
   readonly dialog = inject(MatDialog);
 
-  ngOnInit() {
-    this.getHeadlines();
-  }
-
-  clickOpenCreateForm(): void {
+  private openUpdateForm(data: HeadlinesModelList) {
     const dialogRef = this.dialog.open(HeadlinesFormContainer, {
-      data: { name: this.name(), animal: this.animal() },
+      data: {
+        data,
+        editing: true,
+      },
       position: {
         right: '0px',
         top: '0px',
@@ -74,11 +78,56 @@ export class HeadlinesContainer implements OnInit {
       disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal.set(result);
-      }
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (result) => {
+          console.log('The dialog was closed after update');
+          if (result !== undefined) {
+            console.log(result);
+          }
+        },
+      });
+  }
+
+  ngOnInit() {
+    this.getHeadlines();
+  }
+
+  clickOpenCreateForm(): void {
+    const dialogRef = this.dialog.open(HeadlinesFormContainer, {
+      data: {
+        editing: false,
+      },
+      position: {
+        right: '0px',
+        top: '0px',
+      },
+      height: '100svh',
+      width: '380px',
+      panelClass: 'mode__sidebar',
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      disableClose: true,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (result) => {
+          console.log('The dialog was closed');
+          if (result !== undefined) {
+            console.log(result);
+          }
+        },
+      });
+  }
+
+  onClickTableAction(event: TableRowActionsResponse<HeadlinesModelList>): void {
+    console.log(event);
+    console.log(event.data);
+    this.openUpdateForm(event.data);
   }
 }

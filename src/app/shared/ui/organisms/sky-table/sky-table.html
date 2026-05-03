@@ -53,7 +53,19 @@
                 #menu="matMenu"
               >
                 @for (actionItem of actionFullConfig(); track actionItem.type) {
-                  <button mat-menu-item class="max-h-8">
+                  <button
+                    mat-menu-item
+                    class="max-h-8"
+                    type="button"
+                    (click)="
+                      onClickActionItem({
+                        type: actionItem.type,
+                        label: actionItem.label,
+                        icon: actionItem.icon,
+                        data: row,
+                      })
+                    "
+                  >
                     <mat-icon [svgIcon]="actionItem.icon" />
                     <span class="font-medium! text-sm!">{{ actionItem.label | translate }}</span>
                   </button>

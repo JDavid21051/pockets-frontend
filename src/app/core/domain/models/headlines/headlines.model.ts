@@ -28,11 +28,12 @@ export interface CreateHeadlinesDto {
 }
 
 export interface UpdateHeadlinesDto extends CreateHeadlinesDto {
-  id: string;
+  id: UUID;
 }
 
 export interface HeadlinesStateModel {
   listLoading: boolean;
+  headlineSelected: HeadlinesModelList[];
   dialogRef: MatDialogRef<HeadlinesFormContainer, boolean> | null;
   dataList: HeadlinesModelList[];
   dataTableSource: MatTableDataSource<HeadlinesModelList>;
