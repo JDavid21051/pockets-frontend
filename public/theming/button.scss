@@ -19,6 +19,18 @@
 
 button {
   &.mdc-button {
+    &:not(.variant-semi-rectangle):not(.variant-semi-round) {
+      border-radius: 4px;
+    }
+
+    &.variant-semi-rectangle {
+      border-radius: 4px;
+    }
+
+    &.variant-semi-round {
+      border-radius: 20px;
+    }
+
     border-radius: 4px;
 
     &.uppercase .mdc-button__label {

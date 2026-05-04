@@ -22,10 +22,6 @@ import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken'
 import { isNullish } from '@/infra/const/is-nullish.const';
 
 type HttpBodyContentModel = object | Record<string, unknown> | string;
-type HttpUrlParamsModel = Record<string, string> | string | URLSearchParams;
-
-const algo: HttpUrlParamsModel = undefined;
-console.log(algo);
 
 interface HttpVerbParamsModel {
   endpoint: string;
@@ -134,6 +130,23 @@ export class CoreHttpClientService {
 
     return this.httpClient
       .patch<ApiResponse<TResponse>>(fullEndpoint, body, optionsRef)
+      .pipe(map((data) => this.mapResponse<TResponse>(data)));
+  }
+
+  delete<TResponse>(params: HttpVerbParamsModel) {
+    const { endpoint, urlParams, options } = params;
+    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const optionsRef: ApiRequestOptions = {
+      ...options,
+    };
+    const headers = optionsRef.headers;
+    if (!headers) {
+      optionsRef.headers = this.getHttpHeaders();
+    }
+    const fullEndpoint = this.serializeToURL(url, urlParams);
+
+    return this.httpClient
+      .delete<ApiResponse<TResponse>>(fullEndpoint, optionsRef)
       .pipe(map((data) => this.mapResponse<TResponse>(data)));
   }
 

@@ -20,6 +20,7 @@ export interface ApiUrlHeadlinesModel extends ApiUrlBaseModel {
   readonly list: string;
   readonly create: string;
   readonly update: string;
+  readonly delete: string;
 }
 export interface ApiUrlServiceModel {
   readonly auth: ApiUrlAuthModel;

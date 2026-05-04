@@ -121,11 +121,39 @@ export const HeadlinesStore = signalStore(
         ),
       );
 
+      const deleteHeadline = rxMethod<string>(($) =>
+        $.pipe(
+          switchMap((headlineId) => {
+            patchState(store, { listLoading: true });
+            return headlinesRepository.remove(headlineId).pipe(
+              handleRxResponse(
+                (createResponse) => {
+                  console.log({ createResponse });
+                  if (createResponse) {
+                    snackService.showSuccess(translate.instant('headline.msm.updateSuccess'));
+                    patchState(store, {
+                      listLoading: false,
+                    });
+
+                    return;
+                  }
+                },
+                (error) => {
+                  snackService.showError(String(error.error.message));
+                  patchState(store, { listLoading: false });
+                },
+              ),
+            );
+          }),
+        ),
+      );
+
       return {
         getHeadlines,
         createHeadline,
         updateHeadline,
         setDialogRef,
+        deleteHeadline,
       };
     },
   ),

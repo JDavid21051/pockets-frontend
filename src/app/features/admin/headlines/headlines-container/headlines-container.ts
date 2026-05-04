@@ -21,6 +21,7 @@ import { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-for
 import { SpinnerDirective } from '@/infra/directives/spinner.directive';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
+import { CardConfirm } from '@/shared/ui/modules/card-confirm/card-confirm';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -51,7 +52,7 @@ export class HeadlinesContainer implements OnInit {
     { field: 'headlines_document', header: 'headline.fields.document.label', type: 'text' },
   ];
 
-  protected actionTable: SkyTableActionsType[] = ['update'];
+  protected actionTable: SkyTableActionsType[] = ['update', 'delete'];
 
   readonly dataTable = this.store.dataTableSource;
   readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;
@@ -59,7 +60,30 @@ export class HeadlinesContainer implements OnInit {
 
   readonly dialog = inject(MatDialog);
 
-  private openUpdateForm(data: HeadlinesModelList) {
+  private confirmDelete(id: string): void {
+    const dialogRef = this.dialog.open<CardConfirm, void, boolean>(CardConfirm, {
+      height: 'fit-content',
+      maxWidth: '420px',
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      disableClose: true,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (result) => {
+          console.log('The dialog was closed after update');
+          if (!result) return;
+
+          console.log(result);
+          this.store.deleteHeadline(id);
+        },
+      });
+  }
+
+  private openUpdateForm(data: HeadlinesModelList): void {
     const dialogRef = this.dialog.open(HeadlinesFormContainer, {
       data: {
         data,
@@ -90,7 +114,7 @@ export class HeadlinesContainer implements OnInit {
       });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getHeadlines();
   }
 
@@ -127,6 +151,14 @@ export class HeadlinesContainer implements OnInit {
   onClickTableAction(event: TableRowActionsResponse<HeadlinesModelList>): void {
     console.log(event);
     console.log(event.data);
-    this.openUpdateForm(event.data);
+
+    if (event.type === 'update') {
+      this.openUpdateForm(event.data);
+
+      return;
+    }
+    if (event.type === 'delete') {
+      this.confirmDelete(event.data.id);
+    }
   }
 }

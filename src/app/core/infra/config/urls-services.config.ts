@@ -22,5 +22,6 @@ export const URL_SERVICES: ApiUrlServiceModel = {
     list: 'list/',
     create: 'create/',
     update: 'update/',
+    delete: 'delete/',
   },
 } as const;

@@ -1,0 +1,27 @@
+<mat-dialog-content class="flex! flex-col space-y-3 flex-1">
+  <h4>¿Deseas eliminar este titular?</h4>
+  <span>
+    Este titutular tiene cuentas, subscripciónes y un historial con fa actividad tiene fases y/o
+    evaluaciones asociadas. ¿Deseas eliminarla? Esta acción no se puede deshacer.
+  </span>
+</mat-dialog-content>
+<mat-dialog-actions class="mt-auto! mb-0!">
+  <button
+    mat-button
+    class="variant-semi-round"
+    color="secondary"
+    type="button"
+    (click)="onClickClose()"
+  >
+    Cancelar
+  </button>
+  <button
+    matButton="outlined"
+    class="variant-semi-round border-error-700!"
+    color="error"
+    type="button"
+    (click)="onClickClose(true)"
+  >
+    Eliminar
+  </button>
+</mat-dialog-actions>

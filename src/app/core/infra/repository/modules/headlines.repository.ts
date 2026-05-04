@@ -16,6 +16,7 @@ import type {
   HeadlinesModelList,
   UpdateHeadlinesDto,
 } from '@/domain/models/headlines/headlines.model';
+import type { UUID } from '@/domain/types/types';
 
 @Injectable({ providedIn: 'root' })
 export class HeadlinesRepository implements HeadlinesPort {
@@ -35,6 +36,14 @@ export class HeadlinesRepository implements HeadlinesPort {
       endpoint: this.urls.base + this.urls.update,
       body: params,
       urlParams: params.id,
+    });
+  }
+
+  remove(headlineId: UUID) {
+    return this.http.delete<boolean>({
+      endpoint: this.urls.base + this.urls.delete,
+      urlParams: headlineId,
+      body: {},
     });
   }
 }
