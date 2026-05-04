@@ -21,7 +21,8 @@
     },
     "msm": {
       "listedSuccess": "Titulares cargados con éxito.",
-      "createSuccess": "Titular creado exitosamente."
+      "createSuccess": "Titular creado exitosamente.",
+      "updateSuccess": "Titular actualizado exitosamente."
     }
   },
   "shared": {
@@ -33,7 +34,9 @@
         "minlength": "La información ingresada en este campo debe contener al menos {{valueToShow}} caracteres.",
         "maxlength": "La información ingresada en este campo debe contener menos de {{valueToShow}} caracteres.",
         "required": "La información de este campo es obligatoria."
-      }
+      },
+      "confirmationDescription": "Si sales ahora, perderás todos los cambios no guardados. ¿Deseas continuar?",
+      "confirmationTitle": "¿Estás seguro de salir?"
     },
     "maps": {
       "ti": "Tarjeta de identidad",

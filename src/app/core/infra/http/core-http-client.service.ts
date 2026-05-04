@@ -11,7 +11,6 @@ import { inject, Injectable } from '@angular/core';
 import type { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
-import { async } from 'rxjs';
 import { map, lastValueFrom } from 'rxjs';
 import type {
   ApiRequestOptions,
@@ -24,6 +23,9 @@ import { isNullish } from '@/infra/const/is-nullish.const';
 
 type HttpBodyContentModel = object | Record<string, unknown> | string;
 type HttpUrlParamsModel = Record<string, string> | string | URLSearchParams;
+
+const algo: HttpUrlParamsModel = undefined;
+console.log(algo);
 
 interface HttpVerbParamsModel {
   endpoint: string;

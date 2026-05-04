@@ -54,24 +54,6 @@ export const HeadlinesStore = signalStore(
         );
       });
 
-      const getHeadlineData = rxMethod<string>(() => {
-        patchState(store, { listLoading: true });
-        return headlinesRepository.list().pipe(
-          handleRxResponse(
-            (response) => {
-              console.log({ response });
-              snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
-              store.dataTableSource().data = [...response];
-              patchState(store, { listLoading: false, dialogRef: null, dataList: response });
-            },
-            (error): void => {
-              snackService.showError(String(error.error.message));
-              patchState(store, { listLoading: false });
-            },
-          ),
-        );
-      });
-
       const createHeadline = rxMethod<CreateHeadlinesDto>(($) =>
         $.pipe(
           switchMap((params) => {

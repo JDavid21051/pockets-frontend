@@ -1,6 +1,5 @@
 import type { OnInit } from '@angular/core';
 import { DestroyRef } from '@angular/core';
-import { model, signal } from '@angular/core';
 import { Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';

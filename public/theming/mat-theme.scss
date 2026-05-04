@@ -72,6 +72,8 @@ html {
   @include mat.all-component-typographies($light-theme);
   @include mat.all-component-densities($light-theme);
   @include mat.system-classes();
+  --mat-sys-surface: #faf9fd;
+
 
   & > body.light-theme {
     @include mat.all-component-colors($light-theme);
@@ -87,6 +89,7 @@ html {
     .mat-error {
       @include mat.button-color($light-theme, $color-variant: error);
     }
+
   }
 }
 
