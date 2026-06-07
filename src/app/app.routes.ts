@@ -1,6 +1,5 @@
 import type { Routes } from '@angular/router';
 import { validSessionGuard } from '@/infra/guards/valid-session.guard';
-import { ADMIN_ROUTES } from '@/infra/routes/admin.routes';
 
 export const routes: Routes = [
   {
