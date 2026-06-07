@@ -11,6 +11,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { AUTH_STORAGE_KEY } from '@/infra/itoken/auth-storage-key.itoken';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 import { authInterceptor } from '@/infra/interceptor/auth.interceptor';
+import { environment } from '@/environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,7 +33,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: KRIH_MODULES_CONFIG_TOKEN,
       useValue: {
-        baseEndpoint: 'https://invoices-api-theta.vercel.app/api/',
+        baseEndpoint: environment.apiUrl,
         tokenKeyword: 'JWT',
       },
     },

@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadComponent: () => import('./features/admin/admin-container'),
-    loadChildren: () => ADMIN_ROUTES,
+    loadChildren: () => import('@/infra/routes/admin.routes').then((r) => r.ADMIN_ROUTES),
     canActivate: [validSessionGuard],
   },
   {

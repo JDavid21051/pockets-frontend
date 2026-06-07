@@ -78,7 +78,8 @@ export const HeadlinesStore = signalStore(
                   }
                 },
                 (error) => {
-                  snackService.showError(String(error.error.message));
+                  console.log(error);
+                  snackService.showError(String(error.message ?? error));
                   patchState(store, { listLoading: false });
                 },
               ),
@@ -93,12 +94,12 @@ export const HeadlinesStore = signalStore(
             patchState(store, { listLoading: true });
             return headlinesRepository.update(params).pipe(
               handleRxResponse(
-                (createResponse) => {
-                  console.log({ createResponse });
+                (updateResponse) => {
+                  console.log({ updateResponse });
 
                   const dialogRef = store.dialogRef();
                   if (dialogRef) {
-                    const newList = store.dataTableSource().data.concat([createResponse]);
+                    const newList = store.dataTableSource().data.concat([updateResponse]);
 
                     store.dataTableSource().data = [...newList];
                     patchState(store, {
@@ -127,18 +128,20 @@ export const HeadlinesStore = signalStore(
             patchState(store, { listLoading: true });
             return headlinesRepository.remove(headlineId).pipe(
               handleRxResponse(
-                (createResponse) => {
-                  console.log({ createResponse });
-                  if (createResponse) {
-                    snackService.showSuccess(translate.instant('headline.msm.updateSuccess'));
+                (deleteResponse) => {
+                  console.log({ deleteResponse });
+                  if (!deleteResponse) {
                     patchState(store, {
                       listLoading: false,
                     });
 
                     return;
                   }
+                  snackService.showSuccess(translate.instant('headline.msm.deleteSuccess'));
+                  getHeadlines();
                 },
                 (error) => {
+                  console.log({ error });
                   snackService.showError(String(error.error.message));
                   patchState(store, { listLoading: false });
                 },

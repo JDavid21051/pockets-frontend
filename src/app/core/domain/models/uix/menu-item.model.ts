@@ -160,7 +160,6 @@ export interface MenuItemModel {
   linkClass?: string;
   /**
    * Developer-defined state that can be passed to DangerousAny navigation.
-   * @see {TooltipOptionsModel}
    */
   state?: Record<string, DangerousAny>;
   /**

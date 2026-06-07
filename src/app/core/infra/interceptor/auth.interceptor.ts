@@ -46,7 +46,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         return next(reqCloned).pipe(
           catchError((err: unknown) => {
             console.log({ catchErrorRefreshing: err });
-            return EMPTY;
+            throw new Error(String((err as Record<string, string>)['error'] ?? err));
           }),
         );
       }),

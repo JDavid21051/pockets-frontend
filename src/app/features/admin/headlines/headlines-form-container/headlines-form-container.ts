@@ -23,6 +23,7 @@ export interface HeadlinesFormDialogData {
   readonly editing: boolean;
 }
 
+//TODO: synchronize id document types in creation and edition
 @Component({
   selector: 'krih-headlines-form-container',
   imports: [
@@ -36,7 +37,6 @@ export interface HeadlinesFormDialogData {
     SimpleSelect,
   ],
   templateUrl: './headlines-form-container.html',
-  styleUrl: './headlines-form-container.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'flex! flex-col h-full',

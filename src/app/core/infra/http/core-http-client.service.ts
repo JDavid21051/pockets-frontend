@@ -76,7 +76,8 @@ export class CoreHttpClientService {
   }
 
   get<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
-    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const url = this.getUrl(endpoint);
+
     if (!headers) {
       headers = this.getHttpHeaders();
     }
@@ -101,7 +102,8 @@ export class CoreHttpClientService {
 
   put<TResponse>(params: HttpVerbParamsModel) {
     const { endpoint, urlParams, body, options } = params;
-    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const url = this.getUrl(endpoint);
+
     const optionsRef: ApiRequestOptions = {
       ...options,
     };
@@ -118,7 +120,8 @@ export class CoreHttpClientService {
 
   patch<TResponse>(params: HttpVerbParamsModel) {
     const { endpoint, urlParams, body, options } = params;
-    const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
+    const url = this.getUrl(endpoint);
+
     const optionsRef: ApiRequestOptions = {
       ...options,
     };

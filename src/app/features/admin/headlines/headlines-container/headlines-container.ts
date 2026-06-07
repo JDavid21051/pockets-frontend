@@ -75,9 +75,10 @@ export class HeadlinesContainer implements OnInit {
       .subscribe({
         next: (result) => {
           console.log('The dialog was closed after update');
+          console.log(result);
+
           if (!result) return;
 
-          console.log(result);
           this.store.deleteHeadline(id);
         },
       });
