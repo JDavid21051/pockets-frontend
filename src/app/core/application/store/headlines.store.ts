@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { initHeadlinesState } from '@/infra/const/headlines/initial-headlines-state.const';
 import type {
   CreateHeadlinesDto,
+  StoreHeadlineDeleteDto,
   UpdateHeadlinesDto,
 } from '@/domain/models/headlines/headlines.model';
 import { switchMap } from 'rxjs';
@@ -36,20 +37,24 @@ export const HeadlinesStore = signalStore(
       function setDialogRef(param: MatDialogRef<HeadlinesFormContainer, boolean> | null): void {
         patchState(store, { dialogRef: param });
       }
-      const getHeadlines = rxMethod<void>(() => {
+      const getHeadlines = rxMethod<void>(($) => {
         patchState(store, { listLoading: true });
-        return headlinesRepository.list().pipe(
-          handleRxResponse(
-            (response) => {
-              console.log({ response });
-              snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
-              store.dataTableSource().data = [...response];
-              patchState(store, { listLoading: false, dialogRef: null, dataList: response });
-            },
-            (error): void => {
-              snackService.showError(String(error.error.message));
-              patchState(store, { listLoading: false });
-            },
+        return $.pipe(
+          switchMap(() =>
+            headlinesRepository.list().pipe(
+              handleRxResponse(
+                (response) => {
+                  console.log({ response });
+                  snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
+                  store.dataTableSource().data = [...response];
+                  patchState(store, { listLoading: false, dialogRef: null, dataList: response });
+                },
+                (error): void => {
+                  snackService.showError(String(error.error.message));
+                  patchState(store, { listLoading: false });
+                },
+              ),
+            ),
           ),
         );
       });

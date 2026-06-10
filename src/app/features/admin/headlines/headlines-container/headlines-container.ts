@@ -62,7 +62,10 @@ export class HeadlinesContainer implements OnInit {
   readonly dialog = inject(MatDialog);
 
   private confirmDelete(id: string): void {
-    const dialogRef = this.dialog.open<CardConfirm, void, boolean>(CardConfirm, {
+    const dialogRef = this.dialog.open(CardConfirm, {
+      data: {
+        msm: 'headline.msm.confirmDelete',
+      },
       height: 'fit-content',
       maxWidth: STANDARD_SIDEBAR_WIDTH,
       hasBackdrop: true,
@@ -75,9 +78,6 @@ export class HeadlinesContainer implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (result) => {
-          console.log('The dialog was closed after update');
-          console.log(result);
-
           if (!result) return;
 
           this.store.deleteHeadline(id);
@@ -86,7 +86,7 @@ export class HeadlinesContainer implements OnInit {
   }
 
   private openUpdateForm(data: HeadlinesModelList): void {
-    const dialogRef = this.dialog.open(HeadlinesFormContainer, {
+    this.dialog.open(HeadlinesFormContainer, {
       data: {
         data,
         editing: true,
@@ -102,18 +102,6 @@ export class HeadlinesContainer implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
-
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (result) => {
-          console.log('The dialog was closed after update');
-          if (result !== undefined) {
-            console.log(result);
-          }
-        },
-      });
   }
 
   ngOnInit(): void {
@@ -121,7 +109,7 @@ export class HeadlinesContainer implements OnInit {
   }
 
   clickOpenCreateForm(): void {
-    const dialogRef = this.dialog.open(HeadlinesFormContainer, {
+    this.dialog.open(HeadlinesFormContainer, {
       data: {
         editing: false,
       },
@@ -136,24 +124,9 @@ export class HeadlinesContainer implements OnInit {
       closeOnNavigation: true,
       disableClose: true,
     });
-
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (result) => {
-          console.log('The dialog was closed');
-          if (result !== undefined) {
-            console.log(result);
-          }
-        },
-      });
   }
 
   onClickTableAction(event: TableRowActionsResponse<HeadlinesModelList>): void {
-    console.log(event);
-    console.log(event.data);
-
     if (event.type === 'update') {
       this.openUpdateForm(event.data);
 

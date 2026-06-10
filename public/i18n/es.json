@@ -19,6 +19,7 @@
       }
     },
     "msm": {
+      "confirmDelete": "Este titutular puede tener cuentas, subscripciónes y/o un historial asociado.</br> ¿Deseas eliminarlo?</br> Esta acción no se puede deshacer.",
       "listedSuccess": "Titulares cargados con éxito.",
       "createSuccess": "Titular creado exitosamente.",
       "updateSuccess": "Titular actualizado exitosamente.",
@@ -39,6 +40,9 @@
       "viewDetail": "Ver detalle",
       "create": "Crear",
       "changeStatus": "Cambiar de estado",
+      "confirmYes": "Si, confirmar",
+      "confirmNo": "No, cancelar",
+      "confirmTitle": "Confirmación",
       "errors": {
         "minlength": "La información ingresada en este campo debe contener al menos {{valueToShow}} caracteres.",
         "maxlength": "La información ingresada en este campo debe contener menos de {{valueToShow}} caracteres.",

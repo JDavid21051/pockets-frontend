@@ -38,3 +38,8 @@ export interface HeadlinesStateModel {
   dataList: HeadlinesModelList[];
   dataTableSource: MatTableDataSource<HeadlinesModelList>;
 }
+
+export interface StoreHeadlineDeleteDto {
+  id: string;
+  successFn: () => void;
+}
