@@ -77,7 +77,7 @@
       }
       <tr *matHeaderRowDef="columnsField()" mat-header-row></tr>
       <tr
-        *matRowDef="let row; columns: columnsField()"
+        *matRowDef="let _row; columns: columnsField()"
         mat-row
         class="h-12! hover:[&>.mat-mdc-cell]:bg-neutral-300! even:bg-neutral-100!"
       ></tr>
