@@ -4,7 +4,6 @@
     "title": "Headlines",
     "fields": {
       "name": {
-        "label": "Nombre ",
         "placeholder": "Ingrese el nombre del titular",
         "error": "Error, ingrese el nombre"
       },
@@ -31,6 +30,12 @@
       "login": "Iniciar sesión",
       "name": "Nombre",
       "type": "Tipo",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "update": "Actualizar",
+      "viewDetail": "Ver detalle",
+      "create": "Crear",
+      "changeStatus": "Cambiar de estado",
       "errors": {
         "minlength": "La información ingresada en este campo debe contener al menos {{valueToShow}} caracteres.",
         "maxlength": "La información ingresada en este campo debe contener menos de {{valueToShow}} caracteres.",

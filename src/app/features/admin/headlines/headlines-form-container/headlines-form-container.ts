@@ -17,6 +17,7 @@ import { SimpleSelect } from '@/shared/ui/modules/simple-select/simple-select';
 import { HeadlinesStore } from '@/application/store/headlines.store';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
 import { NO_FIND_INDEX } from '@/infra/const/app-utils.const';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface HeadlinesFormDialogData {
   readonly data: HeadlinesModelList;
@@ -35,6 +36,7 @@ export interface HeadlinesFormDialogData {
     MatDialogTitle,
     TextField,
     SimpleSelect,
+    TranslatePipe,
   ],
   templateUrl: './headlines-form-container.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

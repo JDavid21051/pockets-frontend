@@ -102,7 +102,23 @@
   --color-extra-800: #4d6c08;
   --color-extra-900: #415b0c;
   --color-extra-950: #213300;
+}
 
+@layer base {
+  body.violet_mode,
+  body.rose_mode {
+    --color-neutral-50: #000000;
+    --color-neutral-100: #1a1a1a;
+    --color-neutral-200: #292929;
+    --color-neutral-300: #434343;
+    --color-neutral-400: #575757;
+    --color-neutral-500: #767676;
+    --color-neutral-600: #a5a5a5;
+    --color-neutral-700: #d6d6d6;
+    --color-neutral-800: #e6e6e6;
+    --color-neutral-900: #f5f5f5;
+    --color-neutral-950: #fafafa;
+  }
 }
 
 /* Define keyframe animations */

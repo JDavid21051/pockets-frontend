@@ -13,21 +13,21 @@ export const TABLE_ACTIONS_FULL_CONFIG_MAP: TableActionsFullConfig = {
   delete: {
     type: 'delete',
     icon: 'delete',
-    label: 'Eliminar',
+    label: 'shared.text.delete',
   },
   update: {
     type: 'update',
     icon: 'edit',
-    label: 'Actualizar',
+    label: 'shared.text.update',
   },
   detail: {
     type: 'detail',
-    icon: 'edit',
-    label: 'Actualizar',
+    icon: 'visibility',
+    label: 'shared.text.viewDetail',
   },
   updateStatus: {
     type: 'updateStatus',
     icon: 'cached',
-    label: 'Cambiar de estado',
+    label: 'shared.text.changeStatus',
   },
 };

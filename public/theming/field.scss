@@ -1,3 +1,3 @@
-.mat-mdc-form-field-subscript-wrapper {
-  
+.mdc-text-field--outlined.mdc-text-field--invalid:not(.mdc-text-field--disabled) mat-icon {
+  color: var(--mat-form-field-outlined-error-caret-color, var(--mat-sys-error))
 }

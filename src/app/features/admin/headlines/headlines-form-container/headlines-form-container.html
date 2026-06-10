@@ -20,7 +20,7 @@
     <krih-text-field
       prefixIcon="person"
       [controlRef]="headlineForm.controls.name"
-      label="headline.fields.name.label"
+      label="shared.text.name"
       placeholder="headline.fields.name.placeholder"
     />
     <krih-simple-select
@@ -41,12 +41,14 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions class="mt-auto! mb-0! border-t! border-neutral-400!">
-  <button mat-button color="secondary" type="button" (click)="onClickClose()">Cancelar</button>
+  <button mat-button color="secondary" type="button" (click)="onClickClose()">
+    {{ 'shared.text.cancel' | translate }}
+  </button>
   <button mat-raised-button form="headlines_form" type="submit">
     @if (editing()) {
-      Actualizar
+      {{ 'shared.text.update' | translate }}
     } @else {
-      Crear
+      {{ 'shared.text.create' | translate }}
     }
   </button>
 </mat-dialog-actions>
