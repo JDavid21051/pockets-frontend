@@ -1,8 +1,8 @@
 @if (!isResponsive()) {
   <div
-    [class.left-10]="!sidebarOpen()"
-    [class.left-65]="sidebarOpen()"
-    class="absolute max-w-8 max-h-8 top-2 z-10 rounded-lg"
+    [class]="
+      cn('absolute max-w-8 max-h-8 top-2 z-10 rounded-lg', sidebarOpen() ? 'left-65' : 'left-10')
+    "
   >
     <button
       matButton

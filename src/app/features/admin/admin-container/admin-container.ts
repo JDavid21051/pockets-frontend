@@ -13,6 +13,7 @@ import { ResponsiveControlService } from '@/infra/service/responsive-control.ser
 import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
 import { PanelMainMenu } from '@/shared/ui/modules/panel-main-menu/panel-main-menu';
 import { RouterOutlet } from '@angular/router';
+import { cn } from '@/infra/parsers/css-class-name';
 
 @Component({
   selector: 'krih-admin-container',
@@ -33,6 +34,7 @@ export class AdminContainer {
   private readonly responsiveService: ResponsiveControlService = inject(ResponsiveControlService);
   protected readonly menuItems = APP_MENU_MODULES;
   protected readonly isResponsive = this.responsiveService.isResponsive;
+  protected readonly cn = cn;
   readonly sidebarOpen = signal(false);
 
   onToggleSidebar(): void {

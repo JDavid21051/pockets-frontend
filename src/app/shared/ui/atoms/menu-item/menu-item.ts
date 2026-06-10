@@ -4,14 +4,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { cn } from '@/infra/parsers/css-class-name';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'krih-menu-item',
-  imports: [MatIconModule, TranslatePipe, RouterLink, RouterLinkActive],
+  imports: [MatIconModule, TranslatePipe, RouterLink, RouterLinkActive, MatTooltip],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
     <button
+      [matTooltip]="dataItem().tooltip | translate"
       [routerLink]="dataItem().routerLink"
       routerLinkActive="border-1 bg-secondary-900/10 border-neutral-300"
       [class]="

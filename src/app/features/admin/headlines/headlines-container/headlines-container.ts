@@ -22,6 +22,7 @@ import { SpinnerDirective } from '@/infra/directives/spinner.directive';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
 import { CardConfirm } from '@/shared/ui/modules/card-confirm/card-confirm';
+import { STANDARD_SIDEBAR_WIDTH } from '@/infra/const/app-utils.const';
 
 @Component({
   selector: 'krih-headlines-container',
@@ -63,7 +64,7 @@ export class HeadlinesContainer implements OnInit {
   private confirmDelete(id: string): void {
     const dialogRef = this.dialog.open<CardConfirm, void, boolean>(CardConfirm, {
       height: 'fit-content',
-      maxWidth: '420px',
+      maxWidth: STANDARD_SIDEBAR_WIDTH,
       hasBackdrop: true,
       closeOnNavigation: true,
       disableClose: true,

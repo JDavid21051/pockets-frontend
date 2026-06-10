@@ -16,3 +16,5 @@ export const DESKTOP_MAX_ROWS = 50;
 export const MOBILE_MAX_ROWS = 10;
 
 export const NO_FIND_INDEX = -1;
+
+export const STANDARD_SIDEBAR_WIDTH = '420px';

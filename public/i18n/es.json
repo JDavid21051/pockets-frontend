@@ -27,6 +27,9 @@
   },
   "shared": {
     "text": {
+      "dashboard": "Panel",
+      "headlines": "Titulares",
+      "accounts": "Cuentas",
       "login": "Iniciar sesión",
       "name": "Nombre",
       "type": "Tipo",

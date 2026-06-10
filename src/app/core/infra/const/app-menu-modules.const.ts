@@ -12,19 +12,22 @@ import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 export const APP_MENU_MODULES: MenuItemModel[] = [
   {
     id: crypto.randomUUID(),
-    label: 'Dashboard',
+    label: 'shared.text.dashboard',
+    tooltip: 'shared.text.dashboard',
     iconStart: 'dashboard',
     routerLink: '/admin/dashboard',
   },
   {
     id: crypto.randomUUID(),
-    label: 'Titulares',
+    label: 'shared.text.headlines',
+    tooltip: 'shared.text.headlines',
     iconStart: 'person',
     routerLink: '/admin/headlines',
   },
   {
     id: crypto.randomUUID(),
-    label: 'Cuentas',
+    label: 'shared.text.accounts',
+    tooltip: 'shared.text.accounts',
     iconStart: 'account_balance',
     routerLink: '/admin/accounts',
   },
