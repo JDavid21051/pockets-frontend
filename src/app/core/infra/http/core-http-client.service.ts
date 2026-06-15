@@ -88,7 +88,11 @@ export class CoreHttpClientService {
     return this.httpClient.get<ApiResponse<T>>(url, { headers: headers }).pipe(this.mapResponse());
   }
 
-  post<TResponse>(endpoint: string, body?: object, options?: ApiRequestOptions) {
+  post<TResponse>(
+    endpoint: string,
+    body?: object,
+    options?: ApiRequestOptions,
+  ): Observable<TResponse> {
     const url = this.getUrl(endpoint);
     const optionsRef: ApiRequestOptions = {
       ...options,
@@ -102,7 +106,7 @@ export class CoreHttpClientService {
       .pipe(this.mapResponse());
   }
 
-  put<TResponse>(params: HttpVerbParamsModel) {
+  put<TResponse>(params: HttpVerbParamsModel): Observable<TResponse> {
     const { endpoint, urlParams, body, options } = params;
     const url = this.getUrl(endpoint);
 
@@ -120,7 +124,7 @@ export class CoreHttpClientService {
       .pipe(this.mapResponse());
   }
 
-  patch<TResponse>(params: HttpVerbParamsModel) {
+  patch<TResponse>(params: HttpVerbParamsModel): Observable<TResponse> {
     const { endpoint, urlParams, body, options } = params;
     const url = this.getUrl(endpoint);
 
@@ -138,7 +142,7 @@ export class CoreHttpClientService {
       .pipe(this.mapResponse());
   }
 
-  delete<TResponse>(params: HttpVerbParamsModel) {
+  delete<TResponse>(params: HttpVerbParamsModel): Observable<TResponse> {
     const { endpoint, urlParams, options } = params;
     const url = this.validateUrl(this.getBaseEndpoint() + endpoint);
     const optionsRef: ApiRequestOptions = {
