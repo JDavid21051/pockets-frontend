@@ -12,7 +12,7 @@ import { inject } from '@angular/core';
 import { IsAccessTokenExpiredUseCase } from '@/application/use-cases/auth/is-access-token-expired.use-case';
 import { IsRefreshTokenExpiredUseCase } from '@/application/use-cases/auth/is-refresh-token-expired.use-case';
 import { AuthStoreService } from '@/infra/service/auth-store.service';
-import { catchError, EMPTY, filter, first, switchMap } from 'rxjs';
+import { EMPTY, filter, first, switchMap } from 'rxjs';
 import { AUTH_REQUEST_CONTEXT } from '@/infra/http/context-tokens/auth-request.context-token';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 
@@ -43,12 +43,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       switchMap(() => {
         const reqCloned = req.clone({ setHeaders: { Authorization: addTokenPrefix(accessToken) } });
 
-        return next(reqCloned).pipe(
-          catchError((err: unknown) => {
-            console.log({ catchErrorRefreshing: err });
-            throw new Error(String((err as Record<string, string>)['error'] ?? err));
-          }),
-        );
+        return next(reqCloned);
       }),
     );
   }

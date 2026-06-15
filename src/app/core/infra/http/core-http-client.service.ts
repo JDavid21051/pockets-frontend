@@ -11,7 +11,7 @@ import { inject, Injectable } from '@angular/core';
 import type { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import type { Observable } from 'rxjs';
-import { map, lastValueFrom } from 'rxjs';
+import { map, pipe, catchError, lastValueFrom } from 'rxjs';
 import type {
   ApiRequestOptions,
   ApiResponse,
@@ -49,21 +49,26 @@ export class CoreHttpClientService {
   }
 
   private validateUrl(url: string): string {
-    url = url.endsWith('/') ? url : `${url}/`;
-    return url;
+    return url.endsWith('/') ? url : `${url}/`;
   }
 
   private getBaseEndpoint(): string {
     return this.validateUrl(this.moduleConfig.baseEndpoint);
   }
 
-  private mapResponse<T>(response: ApiResponse<T>): T {
-    console.log(response);
-    if (response.success) {
-      if (typeof response.data === 'string') return JSON.parse(response.data);
-      return response.data;
-    }
-    throw ApiExceptionCore.createError(response);
+  private mapResponse<T>() {
+    return pipe(
+      map((dataResponse: ApiResponse<T>) => {
+        if (dataResponse.success) {
+          if (typeof dataResponse.data === 'string') return JSON.parse(dataResponse.data);
+          return dataResponse.data;
+        }
+        return ApiExceptionCore.createError(dataResponse);
+      }),
+      catchError((errorResponse) => {
+        throw ApiExceptionCore.createError(errorResponse);
+      }),
+    );
   }
 
   private serializeToURL(url: string, urlParams?: string): string {
@@ -72,7 +77,6 @@ export class CoreHttpClientService {
     }
     const newUrl = `${url.endsWith('/') ? url : `${url}/`}`;
     return `${newUrl}${urlParams}/`;
-    // return `${url.endsWith('/') ? url : `url\`}${urlParams.toString()}`;
   }
 
   get<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
@@ -81,9 +85,7 @@ export class CoreHttpClientService {
     if (!headers) {
       headers = this.getHttpHeaders();
     }
-    return this.httpClient
-      .get<ApiResponse<T>>(url, { headers: headers })
-      .pipe(map((data) => this.mapResponse<T>(data)));
+    return this.httpClient.get<ApiResponse<T>>(url, { headers: headers }).pipe(this.mapResponse());
   }
 
   post<TResponse>(endpoint: string, body?: object, options?: ApiRequestOptions) {
@@ -97,7 +99,7 @@ export class CoreHttpClientService {
     }
     return this.httpClient
       .post<ApiResponse<TResponse>>(url, body, optionsRef)
-      .pipe(map((data) => this.mapResponse<TResponse>(data)));
+      .pipe(this.mapResponse());
   }
 
   put<TResponse>(params: HttpVerbParamsModel) {
@@ -115,7 +117,7 @@ export class CoreHttpClientService {
 
     return this.httpClient
       .put<ApiResponse<TResponse>>(fullEndpoint, body, optionsRef)
-      .pipe(map((data) => this.mapResponse<TResponse>(data)));
+      .pipe(this.mapResponse());
   }
 
   patch<TResponse>(params: HttpVerbParamsModel) {
@@ -133,7 +135,7 @@ export class CoreHttpClientService {
 
     return this.httpClient
       .patch<ApiResponse<TResponse>>(fullEndpoint, body, optionsRef)
-      .pipe(map((data) => this.mapResponse<TResponse>(data)));
+      .pipe(this.mapResponse());
   }
 
   delete<TResponse>(params: HttpVerbParamsModel) {
@@ -150,7 +152,7 @@ export class CoreHttpClientService {
 
     return this.httpClient
       .delete<ApiResponse<TResponse>>(fullEndpoint, optionsRef)
-      .pipe(map((data) => this.mapResponse<TResponse>(data)));
+      .pipe(this.mapResponse());
   }
 
   async asyncGet<T>(endpoint: string, headers?: HttpHeaders): Promise<ApiResponseModel<T>> {

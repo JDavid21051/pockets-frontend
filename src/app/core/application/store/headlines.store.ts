@@ -17,7 +17,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { initHeadlinesState } from '@/infra/const/headlines/initial-headlines-state.const';
 import type {
   CreateHeadlinesDto,
-  StoreHeadlineDeleteDto,
   UpdateHeadlinesDto,
 } from '@/domain/models/headlines/headlines.model';
 import { switchMap } from 'rxjs';
