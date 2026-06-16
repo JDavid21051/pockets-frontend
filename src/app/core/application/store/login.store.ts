@@ -51,7 +51,7 @@ export const LoginStore = signalStore(
                   patchState(store, { loading: false });
                 },
                 (error): void => {
-                  snackService.showError(String(error.error.message));
+                  snackService.showError(String(error.message ?? error));
                   patchState(store, { loading: false });
                 },
               ),

@@ -22,11 +22,11 @@ export const UI_SNACK_ICON: Record<AppStatusCoreEnum, string> = {
   [AppStatusCoreEnum.tertiary]: 'notifications',
 };
 
-export const UI_SNACK_CSS_CLASS: Record<AppStatusCoreEnum, string> = {
+export const UI_SNACK_CSS_CLASS: Record<AppStatusCoreEnum, string | string[]> = {
   [AppStatusCoreEnum.success]: 'snack_success',
   [AppStatusCoreEnum.alert]: 'snack_alert',
   [AppStatusCoreEnum.warning]: 'snack_warning',
-  [AppStatusCoreEnum.error]: 'snack_error',
+  [AppStatusCoreEnum.error]: ['snack_error'],
   [AppStatusCoreEnum.info]: 'snack_info',
   [AppStatusCoreEnum.basic]: 'snack_basic',
   [AppStatusCoreEnum.extra]: 'snack_extra',

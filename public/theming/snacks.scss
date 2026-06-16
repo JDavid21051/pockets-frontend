@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+
+:root {
+  @include mat.snack-bar-overrides((
+    container-shape: '6px',
+  ));
+}
+
+.snack_error {
+  & > .mat-mdc-snackbar-surface {
+    --mat-snack-bar-container-color: var(--color-error-600);
+    border: 2px solid var(--color-error-700)
+  }
+}
+
+.snack_success {
+  & > .mat-mdc-snackbar-surface {
+    --mat-snack-bar-container-color: var(--color-success-600);
+    border: 2px solid var(--color-success-700)
+
+  }
+}

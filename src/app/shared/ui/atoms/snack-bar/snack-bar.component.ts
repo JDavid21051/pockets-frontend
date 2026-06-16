@@ -19,7 +19,7 @@ import { cn } from '@/infra/parsers/css-class-name';
       [class]="cn('flex flex-col justify-start snack_text my-auto', snackCssClass)"
     >
       @if (snackData.title) {
-        <h6 class="krih_snack_title text-base!">{{ snackData.title }}</h6>
+        <h6 class="krih_snack_title font-medium text-base!">{{ snackData.title }}</h6>
       }
       <p class="krih_snack_msm" matSnackBarLabel>
         {{ snackData.message }}
