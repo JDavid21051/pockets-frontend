@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
         @if (icon()) {
           <mat-icon class="size-7!" [svgIcon]="icon()!" />
         }
-        <h3>{{ headerTitle() | translate }}</h3>
+        <h3 class="font-medium">{{ headerTitle() | translate }}</h3>
       </span>
       <div class="flex items-center gap-2">
         <button
