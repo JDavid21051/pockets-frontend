@@ -1,4 +1,5 @@
 import type { OnInit } from '@angular/core';
+import { computed } from '@angular/core';
 import { ChangeDetectionStrategy, Component, inject, model } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,6 +57,10 @@ export class HeadlinesFormContainer implements OnInit {
   // inputs, outputs
   readonly data = model(this.dialogData.data);
   readonly editing = model(this.dialogData.editing);
+  readonly formTitle = computed(() =>
+    this.editing() ? 'headline.title.edit' : 'headline.title.create',
+  );
+
   // states
   readonly headlineForm = HeadlinesFormFactory();
 

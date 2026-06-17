@@ -1,7 +1,11 @@
 {
   "app": {},
   "headline": {
-    "title": "Headlines",
+    "title": {
+      "list": "Headlines",
+      "create": "Crear titular",
+      "edit": "Actualizar titular"
+    },
     "fields": {
       "name": {
         "placeholder": "Ingrese el nombre del titular",
