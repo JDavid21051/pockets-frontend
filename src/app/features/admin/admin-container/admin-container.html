@@ -22,7 +22,7 @@
     <mat-drawer
       [class.collapsed]="!sidebarOpen()"
       [class.expanded]="sidebarOpen()"
-      class="border relative border-neutral-300 pt-6 rounded-xs"
+      class="border relative border-neutral-300 pt-6 rounded-xs [&>.mat-drawer-inner-container]:flex [&>.mat-drawer-inner-container]:flex-col"
       mode="push"
       opened
     >
@@ -30,6 +30,25 @@
         [menuItems]="menuItems"
         [minView]="isResponsive() ? false : !sidebarOpen()"
       />
+      <div class="flex justify-center mt-auto mb-0 px-3 py-2">
+        <button
+          [matMenuTriggerFor]="menu"
+          class="cursor-pointer min-h-10 w-full grid place-items-center rounded-md hover:bg-secondary-900/20"
+          type="button"
+        >
+          <mat-icon svgIcon="settings" />
+        </button>
+        <mat-menu
+          xPosition="before"
+          yPosition="above"
+          class="[&>.mat-mdc-menu-content]:py-0!"
+          #menu="matMenu"
+        >
+          <button mat-menu-item class="max-h-8 min-w-36" type="button">
+            <span class="font-medium! text-sm!">{{ 'actionItem.label' | translate }}</span>
+          </button>
+        </mat-menu>
+      </div>
     </mat-drawer>
   }
   <mat-drawer-content

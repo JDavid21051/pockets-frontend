@@ -14,6 +14,8 @@ import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
 import { PanelMainMenu } from '@/shared/ui/modules/panel-main-menu/panel-main-menu';
 import { RouterOutlet } from '@angular/router';
 import { cn } from '@/infra/parsers/css-class-name';
+import { MatMenu, MatMenuItem, MatMenuModule } from '@angular/material/menu';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'krih-admin-container',
@@ -24,6 +26,11 @@ import { cn } from '@/infra/parsers/css-class-name';
     MatToolbarModule,
     PanelMainMenu,
     RouterOutlet,
+    MatMenu,
+    MatMenuItem,
+    TranslatePipe,
+    MatButtonModule,
+    MatMenuModule,
   ],
   templateUrl: './admin-container.html',
   styleUrl: './admin-container.css',

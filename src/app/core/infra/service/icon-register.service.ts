@@ -39,6 +39,7 @@ export class IconRegisterService {
     ['badge', 'icons/badge.svg'],
     ['lock', 'icons/lock.svg'],
     ['progress_activity', 'icons/progress_activity.svg'],
+    ['settings', 'icons/settings.svg'],
   ];
 
   register(): void {
