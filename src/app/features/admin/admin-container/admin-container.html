@@ -26,9 +26,10 @@
       mode="push"
       opened
     >
-      <krih-panel-main-menu
+      <krih-main-sidebar class="flex flex-col h-full" />
+      <!--      <krih-panel-main-menu
         [menuItems]="menuItems"
-        [minView]="isResponsive() ? false : !sidebarOpen()"
+        [compact]="isResponsive() ? false : !sidebarOpen()"
       />
       <div class="flex justify-center mt-auto mb-0 px-3 py-2">
         <button
@@ -39,16 +40,40 @@
           <mat-icon svgIcon="settings" />
         </button>
         <mat-menu
-          xPosition="before"
+          xPosition="after"
           yPosition="above"
           class="[&>.mat-mdc-menu-content]:py-0!"
           #menu="matMenu"
         >
-          <button mat-menu-item class="max-h-8 min-w-36" type="button">
-            <span class="font-medium! text-sm!">{{ 'actionItem.label' | translate }}</span>
+          <button
+            class="min-w-36 flex flex-col! gap-3 p-3"
+            type="button"
+            (click)="$event.stopPropagation()"
+          >
+            <span class="flex justify-items-start gap-3 items-center">
+              <mat-icon svgIcon="g_translate" />
+              <span class="font-medium! text-sm">{{ 'Idioma' | translate }}</span>
+            </span>
+            <div class="flex flex-row gap-1">
+              @for (langItem of languagesList(); track langItem) {
+                <button
+                  [class]="
+                    cn(
+                      'flex border bg rounded-sm cursor-pointer py-1 justify-center flex-1 text-sm text-center',
+                      langSelected() === langItem
+                        ? 'bg-success-200 border-success-500 hover:bg-success-300'
+                        : 'border-neutral-300 hover:bg-neutral-100'
+                    )
+                  "
+                  (click)="onClickChangeLanguage(langItem)"
+                >
+                  {{ langItem }}
+                </button>
+              }
+            </div>
           </button>
         </mat-menu>
-      </div>
+      </div>-->
     </mat-drawer>
   }
   <mat-drawer-content

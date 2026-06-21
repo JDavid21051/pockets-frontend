@@ -1,21 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ResponsiveControlService } from '@/infra/service/responsive-control.service';
-import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
-import { PanelMainMenu } from '@/shared/ui/modules/panel-main-menu/panel-main-menu';
+import { ResponsiveControlService } from '@/infra/services/responsive-control.service';
 import { RouterOutlet } from '@angular/router';
 import { cn } from '@/infra/parsers/css-class-name';
-import { MatMenu, MatMenuItem, MatMenuModule } from '@angular/material/menu';
-import { TranslatePipe } from '@ngx-translate/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MainSidebarController } from '@/infra/services/main-sidebar-control.service';
+import { MainSidebar } from '@/features/main/main-sidebar/main-sidebar';
 
 @Component({
   selector: 'krih-admin-container',
@@ -24,28 +18,23 @@ import { TranslatePipe } from '@ngx-translate/core';
     MatIconModule,
     MatSidenavModule,
     MatToolbarModule,
-    PanelMainMenu,
-    RouterOutlet,
-    MatMenu,
-    MatMenuItem,
-    TranslatePipe,
-    MatButtonModule,
     MatMenuModule,
+    MatButtonToggleModule,
+    MainSidebar,
+    RouterOutlet,
   ],
   templateUrl: './admin-container.html',
   styleUrl: './admin-container.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminContainer {
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly responsiveService: ResponsiveControlService = inject(ResponsiveControlService);
-  protected readonly menuItems = APP_MENU_MODULES;
+  private readonly sidebarController: MainSidebarController = inject(MainSidebarController);
   protected readonly isResponsive = this.responsiveService.isResponsive;
   protected readonly cn = cn;
-  readonly sidebarOpen = signal(false);
+  readonly sidebarOpen = this.sidebarController.state;
 
   onToggleSidebar(): void {
-    this.sidebarOpen.set(!this.sidebarOpen());
-    this.cdr.detectChanges();
+    this.sidebarController.toggleState();
   }
 }

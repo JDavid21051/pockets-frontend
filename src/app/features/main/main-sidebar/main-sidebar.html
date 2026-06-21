@@ -1,0 +1,46 @@
+<krih-panel-main-menu [compact]="isResponsive() ? false : !sidebarOpen()" [menuItems]="menuItems" />
+<div class="flex justify-center mt-auto mb-0 px-3 py-2">
+  <button
+    [matMenuTriggerFor]="menu"
+    class="cursor-pointer min-h-10 w-full grid place-items-center rounded-md hover:bg-secondary-900/20"
+    type="button"
+  >
+    <mat-icon svgIcon="settings" />
+  </button>
+  <mat-menu
+    xPosition="after"
+    yPosition="above"
+    class="[&>.mat-mdc-menu-content]:py-0!"
+    #menu="matMenu"
+  >
+    <button
+      class="min-w-64 flex flex-col! gap-3 p-3"
+      type="button"
+      (click)="$event.stopPropagation()"
+    >
+      <span class="flex justify-items-start gap-3 items-center">
+        <mat-icon svgIcon="g_translate" />
+        <span class="font-medium! text-sm">{{ 'settings.language.tittle' | translate }}</span>
+      </span>
+      <div class="flex flex-row gap-1">
+        @for (langItem of languagesList; track langItem.key) {
+          <button
+            [class]="
+              cn(
+                'flex border bg rounded-sm cursor-pointer py-1 justify-center flex-1 text-sm text-center',
+                langSelected() === langItem.key
+                  ? 'bg-success-200 border-success-500 hover:bg-success-300'
+                  : 'border-neutral-300 hover:bg-neutral-100'
+              )
+            "
+            [matTooltip]="langItem.tooltip | translate"
+            type="button"
+            (click)="onClickChangeLanguage(langItem.key)"
+          >
+            {{ langItem.label | translate }}
+          </button>
+        }
+      </div>
+    </button>
+  </mat-menu>
+</div>
