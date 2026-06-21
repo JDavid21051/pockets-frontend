@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 import { AllowedLanguagesEnum } from '@/domain/enums/allowed-languages.enum';
 import { MainSidebarController } from '@/infra/services/main-sidebar-control.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ResponsiveControlService } from '@/infra/services/responsive-control.service';
 import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
 import { APP_MENU_LANG } from '@/infra/const/app-menu-lang.const';
@@ -21,6 +21,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 export class MainSidebar {
   private readonly responsiveService: ResponsiveControlService = inject(ResponsiveControlService);
   private readonly sidebarController: MainSidebarController = inject(MainSidebarController);
+  private readonly translate: TranslateService = inject(TranslateService);
   protected readonly menuItems = APP_MENU_MODULES;
   protected readonly isResponsive = this.responsiveService.isResponsive;
   protected readonly cn = cn;
@@ -29,6 +30,7 @@ export class MainSidebar {
   readonly languagesList = APP_MENU_LANG;
 
   onClickChangeLanguage(selected: AllowedLanguagesEnum) {
+    this.translate.use(selected);
     this.langSelected.set(selected);
   }
 }

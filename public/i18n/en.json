@@ -1,1 +1,78 @@
-{}
+{
+  "app": {},
+  "headline": {
+    "title": {
+      "list": "Headlines",
+      "create": "Create headline",
+      "edit": "Update headline"
+    },
+    "fields": {
+      "name": {
+        "placeholder": "Enter the headline name",
+        "error": "Error, enter the name"
+      },
+      "document": {
+        "label": "Document",
+        "placeholder": "Enter the holder's document",
+        "error": "Error, enter the document"
+      },
+      "documentType": {
+        "label": "Document type",
+        "placeholder": "Select the document type",
+        "error": "Error, select the document type"
+      }
+    },
+    "msm": {
+      "confirmDelete": "This holder may have accounts, subscriptions and/or an associated history.</br> Do you want to delete it?</br> This action cannot be undone.",
+      "listedSuccess": "Holders loaded successfully.",
+      "createSuccess": "Holder created successfully.",
+      "updateSuccess": "Holder updated successfully.",
+      "deleteSuccess": "Holder deleted successfully."
+    }
+  },
+  "settings": {
+    "language": {
+      "tittle": "Language",
+      "es": {
+        "name": "Spanish",
+        "tooltip": "Switch language to Spanish"
+      },
+      "en": {
+        "name": "English",
+        "tooltip": "Switch language to English"
+      }
+    }
+  },
+  "shared": {
+    "text": {
+      "dashboard": "Dashboard",
+      "headlines": "Holders",
+      "accounts": "Accounts",
+      "login": "Log in",
+      "name": "Name",
+      "type": "Type",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "update": "Update",
+      "viewDetail": "View details",
+      "create": "Create",
+      "changeStatus": "Change status",
+      "confirmYes": "Yes, confirm",
+      "confirmNo": "No, cancel",
+      "confirmTitle": "Confirmation",
+      "errors": {
+        "minlength": "The information entered in this field must contain at least {{valueToShow}} characters.",
+        "maxlength": "The information entered in this field must contain less than {{valueToShow}} characters.",
+        "required": "The information in this field is required."
+      },
+      "confirmationDescription": "If you leave now, you will lose all unsaved changes. Do you want to continue?",
+      "confirmationTitle": "Are you sure you want to leave?"
+    },
+    "maps": {
+      "ti": "Identity card",
+      "cc": "Citizenship card",
+      "ce": "Foreigner ID",
+      "pt": "Passport"
+    }
+  }
+}

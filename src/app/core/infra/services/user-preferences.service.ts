@@ -1,7 +1,7 @@
 /*
  * Project:      pockets-frontend
  * Developed by: Juan David Pelaez Cumbe
- * Date:         6/20/2026
+ * Date:         6/21/2026
  * Module name:  main-sidebar-control.service.ts
  * File name:    main-sidebar-control.service
  * IDE:          WebStorm
@@ -12,7 +12,7 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class MainSidebarController {
+export class UserPreferencesService {
   readonly #sidebarOpen = signal(false);
   readonly #blockState = signal(false);
   readonly state = this.#sidebarOpen.asReadonly();
