@@ -30,6 +30,19 @@
       "deleteSuccess": "Titular eliminado exitosamente."
     }
   },
+  "settings": {
+    "language": {
+      "tittle": "Idioma",
+      "es": {
+        "name": "Español",
+        "tooltip": "Cambiar idioma al español"
+      },
+      "en": {
+        "name": "Ingles",
+        "tooltip": "Cambiar idioma al ingles"
+      }
+    }
+  },
   "shared": {
     "text": {
       "dashboard": "Panel",

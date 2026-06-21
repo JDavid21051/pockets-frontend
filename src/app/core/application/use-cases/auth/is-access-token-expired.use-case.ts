@@ -9,7 +9,7 @@
 
 import { inject, Injectable } from '@angular/core';
 import type { BoolUseCasesPort } from '@/application/ports/app/standard-use-cases.port';
-import { AuthStoreService } from '@/infra/service/auth-store.service';
+import { AuthStoreService } from '@/infra/services/auth-store.service';
 import { isNullish } from '@/infra/const/is-nullish.const';
 
 @Injectable({ providedIn: 'root' })

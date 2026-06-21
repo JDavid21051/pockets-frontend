@@ -13,12 +13,12 @@ import { INITIAL_AUTH_STATE } from '@/infra/const/auth/initial-auth-state.const'
 import { UserRoleEnum } from '@/domain/enums/app/user-role.enum';
 import type { AuthStateModel } from '@/domain/models/auth/auth.model';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AuthStorageService } from '@/infra/service/auth-storage.service';
+import { AuthStorageService } from '@/infra/services/auth-storage.service';
 import type { LoginResponse } from '@/domain/models/auth/login.model';
 import { AuthRepository } from '@/infra/repository/auth.repository';
 import { handleResponse } from '@/infra/parsers/handle-rx-response';
 import { Router } from '@angular/router';
-import { SnackBarService } from '@/infra/service/app-snack-bar.service';
+import { SnackBarService } from '@/infra/services/app-snack-bar.service';
 
 @Injectable({
   providedIn: 'root',

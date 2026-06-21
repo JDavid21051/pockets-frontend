@@ -9,7 +9,7 @@
 
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { SnackBarService } from '@/infra/service/app-snack-bar.service';
+import { SnackBarService } from '@/infra/services/app-snack-bar.service';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { HeadlinesRepository } from '@/infra/repository/modules/headlines.repository';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';

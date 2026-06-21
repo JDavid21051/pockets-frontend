@@ -8,7 +8,7 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import { AuthStoreService } from '@/infra/service/auth-store.service';
+import { AuthStoreService } from '@/infra/services/auth-store.service';
 import type { BoolUseCasesPort } from '@/application/ports/app/standard-use-cases.port';
 
 @Injectable({ providedIn: 'root' })

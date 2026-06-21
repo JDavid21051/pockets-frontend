@@ -11,7 +11,7 @@ import type { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { IsAccessTokenExpiredUseCase } from '@/application/use-cases/auth/is-access-token-expired.use-case';
 import { IsRefreshTokenExpiredUseCase } from '@/application/use-cases/auth/is-refresh-token-expired.use-case';
-import { AuthStoreService } from '@/infra/service/auth-store.service';
+import { AuthStoreService } from '@/infra/services/auth-store.service';
 import { EMPTY, filter, first, switchMap } from 'rxjs';
 import { AUTH_REQUEST_CONTEXT } from '@/infra/http/context-tokens/auth-request.context-token';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';

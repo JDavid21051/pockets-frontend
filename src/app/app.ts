@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { IconRegisterService } from '@/infra/service/icon-register.service';
+import { IconRegisterService } from '@/infra/services/icon-register.service';
 @Component({
   selector: 'krih-root',
   imports: [RouterOutlet],

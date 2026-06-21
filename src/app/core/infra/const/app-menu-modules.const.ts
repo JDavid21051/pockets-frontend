@@ -11,21 +11,21 @@ import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 
 export const APP_MENU_MODULES: MenuItemModel[] = [
   {
-    id: crypto.randomUUID(),
+    id: '0',
     label: 'shared.text.dashboard',
     tooltip: 'shared.text.dashboard',
     iconStart: 'dashboard',
     routerLink: '/admin/dashboard',
   },
   {
-    id: crypto.randomUUID(),
+    id: '1',
     label: 'shared.text.headlines',
     tooltip: 'shared.text.headlines',
     iconStart: 'person',
     routerLink: '/admin/headlines',
   },
   {
-    id: crypto.randomUUID(),
+    id: '2',
     label: 'shared.text.accounts',
     tooltip: 'shared.text.accounts',
     iconStart: 'account_balance',

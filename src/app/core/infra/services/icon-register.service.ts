@@ -40,6 +40,7 @@ export class IconRegisterService {
     ['lock', 'icons/lock.svg'],
     ['progress_activity', 'icons/progress_activity.svg'],
     ['settings', 'icons/settings.svg'],
+    ['g_translate', 'icons/g_translate.svg'],
   ];
 
   register(): void {

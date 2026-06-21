@@ -13,8 +13,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
 import type { LoginDto, LoginStateModel } from '@/domain/models/auth/login.model';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
-import { SnackBarService } from '@/infra/service/app-snack-bar.service';
-import { AuthStoreService } from '@/infra/service/auth-store.service';
+import { SnackBarService } from '@/infra/services/app-snack-bar.service';
+import { AuthStoreService } from '@/infra/services/auth-store.service';
 import { Router } from '@angular/router';
 
 const initLoginState: LoginStateModel = {

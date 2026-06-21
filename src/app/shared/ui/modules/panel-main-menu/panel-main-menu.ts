@@ -8,7 +8,7 @@ import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
   template: `
     <div class="flex flex-col gap-1 px-3 py-2">
       @for (item of menuItems(); track item.id) {
-        <krih-menu-item [dataItem]="item" [minView]="minView()" />
+        <krih-menu-item [dataItem]="item" [minView]="compact()" />
       }
     </div>
   `,
@@ -17,5 +17,5 @@ import type { MenuItemModel } from '@/domain/models/uix/menu-item.model';
 })
 export class PanelMainMenu {
   readonly menuItems = input.required<MenuItemModel[]>();
-  readonly minView = input(false);
+  readonly compact = input(false);
 }
