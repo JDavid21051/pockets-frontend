@@ -25,9 +25,10 @@ $violet_mode: mat.define-theme((
   ),
 ));
 
-$azure_mode: mat.define-theme((
+$magenta_mode: mat.define-theme((
   color: (
-    primary: mat.$azure-palette,
+    theme-type: dark,
+    primary: mat.$magenta-palette,
     tertiary: mat.$red-palette,
   ),
 ));
@@ -72,10 +73,10 @@ html {
   @include mat.all-component-typographies($light-theme);
   @include mat.all-component-densities($light-theme);
   @include mat.system-classes();
-  --mat-sys-surface: #faf9fd;
 
 
-  & > body.light-theme {
+  & > body.light_theme {
+    --mat-sys-surface: #faf9fd;
     @include mat.all-component-colors($light-theme);
 
     .mat-tertiary {
@@ -112,7 +113,7 @@ html {
 }
 
 body {
-  background-color: var(--mat-sys-surface);
+  background-color: var(--mat-app-background-color);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
   margin: 0;
@@ -122,8 +123,8 @@ body {
     @include mat.all-component-colors($violet_mode);
   }
 
-  &.azure_mode {
-    @include mat.all-component-colors($azure_mode);
+  &.magenta_mode {
+    @include mat.all-component-colors($magenta_mode);
   }
 
   &.rose_mode {

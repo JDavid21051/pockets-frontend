@@ -41,6 +41,9 @@
         "name": "Ingles",
         "tooltip": "Cambiar idioma al ingles"
       }
+    },
+    "theme": {
+      "title": "Tema"
     }
   },
   "shared": {
