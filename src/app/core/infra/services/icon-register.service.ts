@@ -41,6 +41,7 @@ export class IconRegisterService {
     ['progress_activity', 'icons/progress_activity.svg'],
     ['settings', 'icons/settings.svg'],
     ['g_translate', 'icons/g_translate.svg'],
+    ['palette', 'icons/palette.svg'],
   ];
 
   register(): void {
