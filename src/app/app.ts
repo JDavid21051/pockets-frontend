@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { IconRegisterService } from '@/infra/services/icon-register.service';
+import { AppThemeService } from '@/infra/services/app-theme.service';
 @Component({
   selector: 'krih-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
-  private readonly iconRegistry = inject(IconRegisterService);
+  private readonly iconRegistry: IconRegisterService = inject(IconRegisterService);
+  private readonly themeService: AppThemeService = inject(AppThemeService);
   constructor() {
     this.iconRegistry.register();
+    this.themeService.setTheme(this.themeService.currentTheme());
   }
 }
