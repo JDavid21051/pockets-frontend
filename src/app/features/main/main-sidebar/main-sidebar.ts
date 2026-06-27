@@ -7,10 +7,11 @@ import { MainSidebarController } from '@/infra/services/main-sidebar-control.ser
 import { ResponsiveControlService } from '@/infra/services/responsive-control.service';
 import { APP_MENU_MODULES } from '@/infra/const/app-menu-modules.const';
 import { MainLanguageControl } from '@/features/main/main-language-control/main-language-control';
+import { ThemeControl } from '@/features/main/theme-control/theme-control';
 
 @Component({
   selector: 'krih-main-sidebar',
-  imports: [PanelMainMenu, MatMenuModule, MatIcon, MainLanguageControl],
+  imports: [PanelMainMenu, MatMenuModule, MatIcon, MainLanguageControl, ThemeControl],
   templateUrl: './main-sidebar.html',
   styleUrl: './main-sidebar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,5 +22,5 @@ export class MainSidebar {
   protected readonly menuItems = APP_MENU_MODULES;
   protected readonly isResponsive = this.responsiveService.isResponsive;
   protected readonly cn = cn;
-  readonly sidebarOpen = this.sidebarController.state;
+  protected readonly sidebarOpen = this.sidebarController.state;
 }

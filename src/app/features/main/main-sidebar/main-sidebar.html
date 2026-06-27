@@ -10,7 +10,7 @@
   <mat-menu
     xPosition="after"
     yPosition="above"
-    class="[&>.mat-mdc-menu-content]:py-0!"
+    class="[&>.mat-mdc-menu-content]:py-0! border border-neutral-400"
     #menu="matMenu"
   >
     <button
@@ -19,6 +19,8 @@
       (click)="$event.stopPropagation()"
     >
       <krih-main-language-control class="flex flex-col gap-3 px-3" />
+      <hr class="text-neutral-400" />
+      <krih-theme-control class="flex flex-col gap-3 px-3" />
     </button>
   </mat-menu>
 </div>
