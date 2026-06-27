@@ -106,7 +106,7 @@
   }
 
   body.violet_mode,
-  body.rose_mode {
+  body.cyan_mode {
     --color-neutral-50: #000000;
     --color-neutral-100: #1a1a1a;
     --color-neutral-200: #292929;

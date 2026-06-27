@@ -12,6 +12,8 @@ import { AUTH_STORAGE_KEY } from '@/infra/itoken/auth-storage-key.itoken';
 import { KRIH_MODULES_CONFIG_TOKEN } from '@/infra/itoken/modules-config.itoken';
 import { authInterceptor } from '@/infra/interceptor/auth.interceptor';
 import { environment } from '@/environments/environment';
+import { THEME_CONFIG_STORAGE } from '@/infra/itoken/theme-config-storage-key.itoken';
+import { AllowedThemeEnum } from '@/domain/enums/allowed-theme.enum';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,6 +42,14 @@ export const appConfig: ApplicationConfig = {
     {
       provide: AUTH_STORAGE_KEY,
       useValue: 'auth_app_data',
+    },
+    {
+      provide: THEME_CONFIG_STORAGE,
+      useValue: {
+        storage: 'theme_app_data',
+        default: AllowedThemeEnum.lightBase,
+        darkFallback: AllowedThemeEnum.darkViolet,
+      },
     },
   ],
 };

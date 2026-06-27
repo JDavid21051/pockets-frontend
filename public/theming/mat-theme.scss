@@ -25,16 +25,17 @@ $violet_mode: mat.define-theme((
   ),
 ));
 
-$magenta_mode: mat.define-theme((
+$cyan_mode: mat.define-theme((
   color: (
     theme-type: dark,
-    primary: mat.$magenta-palette,
+    primary: mat.$cyan-palette,
     tertiary: mat.$red-palette,
   ),
 ));
 
 $rose_mode: mat.define-theme((
   color: (
+    theme-type: light,
     primary: mat.$rose-palette,
     tertiary: mat.$red-palette,
   ),
@@ -75,8 +76,9 @@ html {
   @include mat.system-classes();
 
 
-  & > body.light_theme {
+  & > body.light_mode {
     --mat-sys-surface: #faf9fd;
+    @include mat.system-level-colors($light-theme);
     @include mat.all-component-colors($light-theme);
 
     .mat-tertiary {
@@ -102,6 +104,11 @@ html {
   // material
   --mat-sys-corner-extra-small: 4px;
   --mat-sys-corner-small: 8px;
+
+  --sys-light-blue: #005cbb;
+  --sys-dark-violet: #d5baff;
+  --sys-light-rose: #ba005c;
+  --sys-dark-cyan: #00dddd;
 }
 
 
@@ -120,14 +127,17 @@ body {
   height: 100%;
 
   &.violet_mode {
+    @include mat.system-level-colors($violet_mode);
     @include mat.all-component-colors($violet_mode);
   }
 
-  &.magenta_mode {
-    @include mat.all-component-colors($magenta_mode);
+  &.cyan_mode {
+    @include mat.system-level-colors($cyan_mode);
+    @include mat.all-component-colors($cyan_mode);
   }
 
   &.rose_mode {
+    @include mat.system-level-colors($rose_mode);
     @include mat.all-component-colors($rose_mode);
   }
 
