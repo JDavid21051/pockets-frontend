@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { SpinnerDirective } from '@/infra/directives/spinner.directive';
+import { TranslatePipe } from '@ngx-translate/core';
 
 interface LoginFormControls {
   token: FormControl<string>;
@@ -25,6 +26,7 @@ interface LoginFormControls {
     MatButton,
     SpinnerDirective,
     MatIconButton,
+    TranslatePipe,
   ],
   templateUrl: './login-container.html',
 })

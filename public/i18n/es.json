@@ -30,6 +30,14 @@
       "deleteSuccess": "Titular eliminado exitosamente."
     }
   },
+  "login": {
+    "title": "Inicio de sesión",
+    "pw": {
+      "placeholder": "Ingrese su contraseña",
+      "label": "Contraseña",
+      "error": "Error, ingrese la contraseña"
+    }
+  },
   "settings": {
     "language": {
       "tittle": "Idioma",
@@ -51,14 +59,14 @@
       "dashboard": "Panel",
       "headlines": "Titulares",
       "accounts": "Cuentas",
-      "login": "Iniciar sesión",
-      "name": "Nombre",
-      "type": "Tipo",
+      "getInto": "Ingresar",
+      "create": "Crear",
       "cancel": "Cancelar",
       "delete": "Eliminar",
       "update": "Actualizar",
+      "name": "Nombre",
+      "type": "Tipo",
       "viewDetail": "Ver detalle",
-      "create": "Crear",
       "changeStatus": "Cambiar de estado",
       "confirmYes": "Si, confirmar",
       "confirmNo": "No, cancelar",

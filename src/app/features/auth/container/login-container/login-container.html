@@ -4,22 +4,24 @@
     class="md:max-w-80 md:w-80 max-w-full flex gap-3 flex-col w-full"
     (ngSubmit)="onSubmitForm()"
   >
-    <h3>Inicio de sesión</h3>
+    <h3 class="text-neutral-900">{{ 'login.title' | translate }}</h3>
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Contraseña</mat-label>
+      <mat-label>{{ 'login.pw.label' | translate }}</mat-label>
       <mat-icon matPrefix svgIcon="lock" />
       <input
         matInput
+        [placeholder]="'login.pw.placeholder' | translate"
         [type]="fieldType()"
         formControlName="token"
-        placeholder="Ingrese la contraseña"
         required
       />
       <button matIconButton matSuffix type="button" (click)="onToggleInputType()">
         <mat-icon [svgIcon]="fieldIcon()" />
       </button>
-      <mat-error> Error, ingrese la contraseña </mat-error>
+      <mat-error> {{ 'login.pw.error' | translate }} </mat-error>
     </mat-form-field>
-    <button matButton="outlined" class="uppercase" color="primary" type="submit">Ingresar</button>
+    <button matButton="outlined" class="uppercase" color="primary" type="submit">
+      {{ 'shared.text.getInto' | translate }}
+    </button>
   </form>
 </div>
