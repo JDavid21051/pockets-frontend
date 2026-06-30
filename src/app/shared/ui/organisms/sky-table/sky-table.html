@@ -23,7 +23,11 @@
           >
             {{ colItem.header | translate }}
           </th>
-          <td *matCellDef="let row" mat-cell [class]="cn(getColumnWidth(colItem.grow))">
+          <td
+            *matCellDef="let row"
+            mat-cell
+            [class]="cn(getColumnWidth(colItem.grow), colItem.cssClass)"
+          >
             <krih-sky-table-column className="" [colConfig]="colItem" [rowData]="row" class="" />
           </td>
         </ng-container>
