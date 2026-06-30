@@ -17,6 +17,7 @@ export interface SkyColumnsBaseConfig {
   readonly header: string;
   readonly type: SkyColumnType;
   readonly grow?: number;
+  readonly cssClass?: string;
   readonly sortable?: boolean;
   readonly clearSort?: boolean;
   readonly startSort?: SortDirection;
@@ -28,9 +29,15 @@ export interface SkyTextColumnsConfig extends SkyColumnsBaseConfig {
   readonly prefix?: string;
   readonly suffix?: string;
 }
+
 export interface SkyPillColumnsConfig extends SkyColumnsBaseConfig {
   readonly type: 'pill';
 }
+
+export interface SkyActivePillColumnsConfig extends SkyColumnsBaseConfig {
+  readonly type: 'activePill';
+}
+
 export interface SkyIconColumnsConfig extends SkyColumnsBaseConfig {
   readonly type: 'icon';
   readonly icon: string;
@@ -53,6 +60,7 @@ export type SkyColumnsConfig =
   | SkyTextColumnsConfig
   | SkyMapNumberColumnsConfig
   | SkyPillColumnsConfig
+  | SkyActivePillColumnsConfig
   | SkyIconColumnsConfig;
 
 export interface TableActionsConfig {

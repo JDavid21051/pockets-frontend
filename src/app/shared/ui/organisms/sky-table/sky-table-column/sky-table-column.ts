@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import type {
+  SkyActivePillColumnsConfig,
   SkyColumnsConfig,
   SkyIconColumnsConfig,
   SkyMapNumberColumnsConfig,
@@ -7,6 +8,7 @@ import type {
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
+import { cn } from '@/infra/parsers/css-class-name';
 
 @Component({
   selector: 'krih-sky-table-column',
@@ -25,6 +27,18 @@ import { MatTooltip } from '@angular/material/tooltip';
         [matTooltip]="iconConfig().tooltip"
         [matTooltipPosition]="iconConfig().tooltipPosition"
       />
+    } @else if (isActivePillCol()) {
+      <span
+        [class]="
+          cn(
+            'w-fit px-4 py-1 rounded-2xl border',
+            activePillConfig().cssClass,
+            cellContentBooleanCSSClass()
+          )
+        "
+      >
+        {{ cellContentBooleanText() | translate }}
+      </span>
     } @else if (isMapNumberCol()) {
       <span class="truncate block">
         {{ cellContentMapNumber() | translate }}
@@ -39,18 +53,33 @@ import { MatTooltip } from '@angular/material/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkyTableColumn {
+  protected readonly cn = cn;
   readonly colConfig = input.required<SkyColumnsConfig>();
   readonly rowData = input.required<Record<string, unknown>>();
   readonly className = input<string>('');
-
   readonly cellContentText = computed(() => {
     const rowData = this.rowData();
 
     return rowData[this.colConfig().field];
   });
 
+  readonly cellContentBooleanText = computed(() =>
+    this.cellContentText() ? 'shared.text.status.active' : 'shared.text.status.inactive',
+  );
+
+  readonly cellContentBooleanCSSClass = computed(() =>
+    this.cellContentText()
+      ? 'bg-success-400 border-success-950 text-success-950'
+      : 'bg-neutral-500 border-neutral-200 text-neutral-200',
+  );
+
   readonly isTextCol = computed(() => this.colConfig().type === 'text');
   readonly isPillCol = computed(() => this.colConfig().type === 'pill');
+  readonly isActivePillCol = computed(() => this.colConfig().type === 'activePill');
+  readonly activePillConfig = computed<SkyActivePillColumnsConfig>(
+    () => this.colConfig() as SkyActivePillColumnsConfig,
+  );
+
   readonly isIconCol = computed(() => this.colConfig().type === 'icon');
   readonly iconConfig = computed<SkyIconColumnsConfig>(
     () => this.colConfig() as SkyIconColumnsConfig,
