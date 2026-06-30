@@ -25,4 +25,5 @@ export interface ApiUrlHeadlinesModel extends ApiUrlBaseModel {
 export interface ApiUrlServiceModel {
   readonly auth: ApiUrlAuthModel;
   readonly headlines: ApiUrlHeadlinesModel;
+  readonly accounts: ApiUrlHeadlinesModel;
 }
