@@ -8,8 +8,8 @@
  */
 
 import type { Observable } from 'rxjs';
-import type { AccountListModel } from '@/domain/models/accounts/accounts.model';
+import type { AccountsListModel } from '@/domain/models/accounts/accounts.model';
 
 export interface AccountsPort {
-  readonly list: () => Observable<AccountListModel[]>;
+  readonly list: () => Observable<AccountsListModel[]>;
 }
