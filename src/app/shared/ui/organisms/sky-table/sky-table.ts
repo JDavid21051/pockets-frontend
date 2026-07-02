@@ -108,14 +108,6 @@ export class SkyTable<T> implements AfterViewInit {
       .concat(this.actionsConfig().length > 0 ? actionHeader : []);
   });
 
-  readonly columnPerPercent = computed(() => {
-    const availableWidth = 100 - this.actionColPercent();
-
-    console.log({ availableWidth });
-
-    return availableWidth / this.columnsField().length;
-  });
-
   readonly actionFullConfig = computed<TableActionsConfig[]>(() =>
     this.actionsConfig().map(
       (valueAction): TableActionsConfig => TABLE_ACTIONS_FULL_CONFIG_MAP[valueAction],
@@ -123,17 +115,6 @@ export class SkyTable<T> implements AfterViewInit {
   );
 
   readonly pageIndex = signal(0);
-
-  readonly getActionColumnWidth = computed(
-    () => `w-[${this.actionColWidth()}px] max-w-[${this.actionColWidth()}px]`,
-  );
-
-  getColumnWidth = (grow?: number): string => {
-    const growthFactor = grow ?? 1;
-    const colWidth = (this.columnPerPercent() * growthFactor).toFixed(1);
-
-    return `w-[${colWidth}%] max-w-[${colWidth}%]`;
-  };
 
   ngAfterViewInit() {
     this.dataSource().paginator = this.paginator;

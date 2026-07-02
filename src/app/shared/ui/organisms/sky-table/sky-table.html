@@ -17,7 +17,6 @@
             *matHeaderCellDef
             mat-header-cell
             mat-sort-header
-            [class]="getColumnWidth(colItem.grow)"
             [disableClear]="true"
             [disabled]="colItem.field === 'id'"
             [style.max-width]="columnWidths().get(colItem.field)"
@@ -41,11 +40,18 @@
               *matHeaderCellDef
               mat-header-cell
               mat-sort-header
-              [class]="cn(getActionColumnWidth())"
               [disableClear]="true"
               [disabled]="true"
+              [style.max-width]="`${actionColPercent()}%`"
+              [style.width]="`${actionColPercent()}%`"
             ></th>
-            <td *matCellDef="let row" mat-cell [class]="cn(getActionColumnWidth(), 'text-center!')">
+            <td
+              *matCellDef="let row"
+              mat-cell
+              [style.max-width]="`${actionColPercent()}%`"
+              [style.width]="`${actionColPercent()}%`"
+              class="text-center!"
+            >
               <button
                 matIconButton
                 [matMenuTriggerFor]="menu"
