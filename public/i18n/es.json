@@ -1,5 +1,41 @@
 {
   "app": {},
+  "account": {
+    "title": {
+      "create": "Crear cuenta",
+      "edit": "Actualizar cuenta"
+    },
+    "fields": {
+      "accountNumber": {
+        "placeholder": "Ingrese el numero de la cuenta",
+        "error": "Error, ingrese el numero de la cuenta"
+      },
+      "accountType": {
+        "label": "Tipo de cuenta",
+        "placeholder": "Seleccione el tipo de cuenta",
+        "error": "Error, seleccione el tipo de cuenta"
+      },
+      "currency": {
+        "label": "Tipo de moneda",
+        "header": "Moneda",
+        "placeholder": "Seleccione el tipo de moneda",
+        "error": "Error, seleccione el tipo de moneda"
+      },
+      "balance": {
+        "label": "Balance",
+        "placeholder": "Ingrese el balance de la cuenta",
+        "error": "Error, ingrese el balance de la cuenta"
+      },
+      "location": {
+        "label": "Ubicación",
+        "placeholder": "Ingrese la ubicación de la cuenta",
+        "error": "Error, ingrese la ubicación de la cuenta"
+      }
+    },
+    "msm": {
+      "listedSuccess": "Cuentas cargadas con éxito."
+    }
+  },
   "headline": {
     "title": {
       "list": "Titulares",
@@ -66,6 +102,11 @@
       "update": "Actualizar",
       "name": "Nombre",
       "type": "Tipo",
+      "status": {
+        "title": "Estado",
+        "active": "Activo",
+        "inactive": "Inactivo"
+      },
       "viewDetail": "Ver detalle",
       "changeStatus": "Cambiar de estado",
       "confirmYes": "Si, confirmar",
