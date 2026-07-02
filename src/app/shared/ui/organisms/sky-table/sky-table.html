@@ -20,13 +20,17 @@
             [class]="getColumnWidth(colItem.grow)"
             [disableClear]="true"
             [disabled]="colItem.field === 'id'"
+            [style.max-width]="columnWidths().get(colItem.field)"
+            [style.width]="columnWidths().get(colItem.field)"
           >
             {{ colItem.header | translate }}
           </th>
           <td
             *matCellDef="let row"
             mat-cell
-            [class]="cn(getColumnWidth(colItem.grow), colItem.cssClass)"
+            [class]="cn(colItem.cssClass)"
+            [style.max-width]="columnWidths().get(colItem.field)"
+            [style.width]="columnWidths().get(colItem.field)"
           >
             <krih-sky-table-column className="" [colConfig]="colItem" [rowData]="row" class="" />
           </td>

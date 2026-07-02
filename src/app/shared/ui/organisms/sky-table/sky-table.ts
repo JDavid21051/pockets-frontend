@@ -73,6 +73,25 @@ export class SkyTable<T> implements AfterViewInit {
     return tableRef.nativeElement.clientWidth;
   });
 
+  readonly columnWidths = computed<Map<string, string>>(() => {
+    const columns = this.columnsConfig();
+    const map = new Map<string, string>();
+
+    if (!columns.length) return map;
+
+    const totalGrow = columns.reduce((acc, column) => acc + (column.grow ?? 1), 0);
+
+    if (totalGrow <= 0) return map;
+
+    for (const column of columns) {
+      const grow = column.grow ?? 1;
+      const percentage = (grow / totalGrow) * 100;
+      map.set(column.field, `${percentage.toFixed(4)}%`);
+    }
+
+    return map;
+  });
+
   readonly actionColPercent = computed<number>(() => {
     const tableHeaderWidth = this.tableHeaderWidth();
     if (isNullish(tableHeaderWidth)) return 0;
@@ -90,8 +109,6 @@ export class SkyTable<T> implements AfterViewInit {
   });
 
   readonly columnPerPercent = computed(() => {
-    console.log({ actionColPercent: this.actionColPercent() });
-
     const availableWidth = 100 - this.actionColPercent();
 
     console.log({ availableWidth });
