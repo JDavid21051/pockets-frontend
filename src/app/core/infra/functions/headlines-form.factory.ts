@@ -8,16 +8,10 @@
  */
 
 import { inject } from '@angular/core';
-import type { FormControl, FormGroup } from '@angular/forms';
+import type { FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NonNullableFormBuilder } from '@angular/forms';
-import type { SummaryListModel } from '@/domain/models/app/summary-list.model';
-
-export interface HeadlinesFormControls {
-  name: FormControl<string>;
-  document: FormControl<string>;
-  documentType: FormControl<SummaryListModel<number> | null>;
-}
+import type { HeadlinesFormControls } from '@/domain/models/headlines/headlines.model';
 
 export const HeadlinesFormFactory = (): FormGroup<HeadlinesFormControls> => {
   const build = inject(NonNullableFormBuilder);
