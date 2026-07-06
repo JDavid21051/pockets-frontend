@@ -4,6 +4,7 @@
     textPrimaryAction="shared.text.create"
     class="px-5 sticky top-0 z-1 bg-[var(--mat-sidenav-content-background-color)] pt-4"
     icon="account_balance"
+    (clickPrimaryAction)="clickOpenCreateForm()"
   />
   <krih-sky-table
     [actionsConfig]="actionTable"

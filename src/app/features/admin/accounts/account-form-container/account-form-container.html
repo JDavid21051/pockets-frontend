@@ -1,0 +1,77 @@
+<header class="flex px-6 border-b border-neutral-400 min-h-14 h-14 justify-between items-center">
+  <h3 mat-dialog-title class="p-0! flex! items-center">
+    {{ formTitle() | translate }}
+  </h3>
+  <button matIconButton class="flex!" type="button" (click)="onClickClose()">
+    <mat-icon svgIcon="close" />
+  </button>
+</header>
+<mat-dialog-content class="flex! max-h-[unset]! flex-col flex-1">
+  <form
+    [formGroup]="accountForm"
+    class="flex py-2 gap-3 flex-col"
+    id="headlines_form"
+    (ngSubmit)="onSubmitForm()"
+  >
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="accountForm.controls.accountNumber"
+      label="account.fields.accountNumber.label"
+      placeholder="account.fields.accountNumber.placeholder"
+    />
+    <krih-simple-select
+      keyName="name"
+      keyValue="id"
+      prefixIcon="id_card"
+      [controlRef]="accountForm.controls.type"
+      [options]="accountTypeList"
+      label="account.fields.accountType.label"
+      placeholder="account.fields.accountType.placeholder"
+    />
+    <krih-simple-select
+      keyName="name"
+      keyValue="id"
+      prefixIcon="id_card"
+      [controlRef]="accountForm.controls.currency"
+      [options]="accountTypeList"
+      label="account.fields.currency.label"
+      placeholder="account.fields.currency.placeholder"
+    />
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="accountForm.controls.balance"
+      label="account.fields.balance.label"
+      placeholder="account.fields.balance.placeholder"
+    />
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="accountForm.controls.bankName"
+      label="account.fields.bankName.label"
+      placeholder="account.fields.bankName.placeholder"
+    />
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="accountForm.controls.bankLocation"
+      label="account.fields.bankLocation.label"
+      placeholder="account.fields.bankLocation.placeholder"
+    />
+    <krih-text-field
+      prefixIcon="person"
+      [controlRef]="accountForm.controls.tae"
+      label="account.fields.tae.label"
+      placeholder="account.fields.tae.placeholder"
+    />
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="mt-auto! mb-0! border-t! border-neutral-400!">
+  <button mat-button color="secondary" type="button" (click)="onClickClose()">
+    {{ 'shared.text.cancel' | translate }}
+  </button>
+  <button mat-raised-button form="headlines_form" type="submit">
+    @if (editing()) {
+      {{ 'shared.text.update' | translate }}
+    } @else {
+      {{ 'shared.text.create' | translate }}
+    }
+  </button>
+</mat-dialog-actions>

@@ -10,6 +10,8 @@ import {
   ACCOUNT_CURRENCY_SYMBOL_MAP,
   ACCOUNT_TYPE_MAP,
 } from '@/infra/const/account/accounts-map.const';
+import { MatDialog } from '@angular/material/dialog';
+import { AccountFormContainer } from '@/features/admin/accounts/account-form-container/account-form-container';
 
 @Component({
   selector: 'krih-account-container',
@@ -19,7 +21,6 @@ import {
 })
 export class AccountContainer implements OnInit {
   private readonly store = inject(AccountsStore);
-
   protected columnsConfig: SkyColumnsConfig[] = [
     { field: 'bank', header: 'shared.text.name', type: 'text', grow: 2 },
     { field: 'status', header: 'shared.text.status.title', type: 'activePill', grow: 1 },
@@ -43,11 +44,30 @@ export class AccountContainer implements OnInit {
   ];
 
   protected actionTable: SkyTableActionsType[] = ['update', 'delete'];
+  readonly dialog = inject(MatDialog);
   readonly dataTable = this.store.dataTableSource;
   readonly getAccounts = this.store.getAccounts;
   readonly loading = this.store.listLoading;
 
   ngOnInit(): void {
     this.getAccounts();
+  }
+
+  clickOpenCreateForm(): void {
+    this.dialog.open(AccountFormContainer, {
+      data: {
+        editing: false,
+      },
+      position: {
+        right: '0px',
+        top: '0px',
+      },
+      height: '100svh',
+      width: '380px',
+      panelClass: 'mode__sidebar',
+      hasBackdrop: true,
+      closeOnNavigation: true,
+      disableClose: true,
+    });
   }
 }

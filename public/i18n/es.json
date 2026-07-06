@@ -7,6 +7,7 @@
     },
     "fields": {
       "accountNumber": {
+        "label": "Numero de cuenta",
         "placeholder": "Ingrese el numero de la cuenta",
         "error": "Error, ingrese el numero de la cuenta"
       },
@@ -30,7 +31,31 @@
         "label": "Ubicación",
         "placeholder": "Ingrese la ubicación de la cuenta",
         "error": "Error, ingrese la ubicación de la cuenta"
+      },
+      "bankName": {
+        "label": "Nombre del banco",
+        "placeholder": "Ingrese el nombre del banco",
+        "error": "Error, ingrese el nombre del banco"
+      },
+      "bankLocation": {
+        "label": "Ubicación del banco",
+        "placeholder": "Ingrese la ubicación del banco",
+        "error": "Error, ingrese la ubicación del banco"
+      },
+      "tae": {
+        "label": "TAE",
+        "placeholder": "Ingrese el TAE de la cuenta",
+        "error": "Error, ingrese el TAE de la cuenta"
       }
+    },
+    "type": {
+      "credit": "Credito",
+      "current": "Corriente",
+      "saving": "Ahorro"
+    },
+    "currency": {
+      "usd": "Dolar",
+      "cop": "Peso Colombiano"
     },
     "msm": {
       "listedSuccess": "Cuentas cargadas con éxito."
