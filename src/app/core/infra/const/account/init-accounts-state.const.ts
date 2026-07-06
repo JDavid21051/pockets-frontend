@@ -16,5 +16,6 @@ import { MatTableDataSource } from '@angular/material/table';
 export const initAccountsStateConst: AccountsStoreStateModel = {
   listLoading: true,
   accounts: [],
+  dialogRef: null,
   dataTableSource: new MatTableDataSource<AccountsListModel>([]),
 };

@@ -16,6 +16,8 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
 import { AccountsRepository } from '@/infra/repository/modules/accounts.repository';
+import type { MatDialogRef } from '@angular/material/dialog';
+import type { AccountFormContainer } from '@/features/admin/accounts/account-form-container/account-form-container';
 
 export const AccountsStore = signalStore(
   { providedIn: 'root' },
@@ -47,9 +49,12 @@ export const AccountsStore = signalStore(
           ),
         );
       });
-
+      function setDialogRef(param: MatDialogRef<AccountFormContainer, boolean> | null): void {
+        patchState(store, { dialogRef: param });
+      }
       return {
         getAccounts,
+        setDialogRef,
       };
     },
   ),
