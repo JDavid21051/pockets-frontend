@@ -9,6 +9,12 @@
 
 import type { MatTableDataSource } from '@angular/material/table';
 import type { UUID } from '@/domain/types/types';
+import type { FormControl } from '@angular/forms';
+import type { SummaryListModel } from '@/domain/models/app/summary-list.model';
+import type { HeadlinesModelList } from '@/domain/models/headlines/headlines.model';
+import type { AccountCurrencyEnum, AccountTypeEnum } from '@/domain/enums/accounts/accounts.enums';
+import type { MatDialogRef } from '@angular/material/dialog';
+import type { AccountFormContainer } from '@/features/admin/accounts/account-form-container/account-form-container';
 
 export interface AccountsListModel {
   id: UUID;
@@ -23,7 +29,21 @@ export interface AccountsListModel {
 export interface AccountsStoreStateModel {
   listLoading: boolean;
   accounts: AccountsListModel[];
+  dialogRef: MatDialogRef<AccountFormContainer, boolean> | null;
   dataTableSource: MatTableDataSource<AccountsListModel>;
+}
+
+export interface AccountsFormControls {
+  accountNumber: FormControl<string>;
+  type: FormControl<SummaryListModel<AccountTypeEnum> | null>;
+  bankName: FormControl<string>;
+  bankLocation: FormControl<string>;
+  enabled: FormControl<boolean>;
+  balance: FormControl<number>;
+  currency: FormControl<SummaryListModel<AccountCurrencyEnum> | null>;
+  tae: FormControl<number>;
+  openAt: FormControl<string>;
+  headline: FormControl<HeadlinesModelList | null>;
 }
 
 /**

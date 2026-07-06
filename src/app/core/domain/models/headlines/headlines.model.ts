@@ -11,6 +11,8 @@ import type { UUID } from '@/domain/types/types';
 import type { MatTableDataSource } from '@angular/material/table';
 import type { MatDialogRef } from '@angular/material/dialog';
 import type { HeadlinesFormContainer } from '@/features/admin/headlines/headlines-form-container/headlines-form-container';
+import type { FormControl } from '@angular/forms';
+import type { SummaryListModel } from '@/domain/models/app/summary-list.model';
 
 export interface HeadlinesModelList {
   id: UUID;
@@ -37,4 +39,10 @@ export interface HeadlinesStateModel {
   dialogRef: MatDialogRef<HeadlinesFormContainer, boolean> | null;
   dataList: HeadlinesModelList[];
   dataTableSource: MatTableDataSource<HeadlinesModelList>;
+}
+
+export interface HeadlinesFormControls {
+  name: FormControl<string>;
+  document: FormControl<string>;
+  documentType: FormControl<SummaryListModel<number> | null>;
 }
