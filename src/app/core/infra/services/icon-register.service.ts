@@ -42,6 +42,8 @@ export class IconRegisterService {
     ['settings', 'icons/settings.svg'],
     ['g_translate', 'icons/g_translate.svg'],
     ['palette', 'icons/palette.svg'],
+    ['percent', 'icons/percent.svg'],
+    ['currency_yuan', 'icons/currency_yuan.svg'],
   ];
 
   register(): void {
