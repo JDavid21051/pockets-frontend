@@ -8,8 +8,13 @@
  */
 
 import type { Observable } from 'rxjs';
-import type { AccountsListModel } from '@/domain/models/accounts/accounts.model';
+import type {
+  AccountCreateDto,
+  AccountCreateResponse,
+  AccountsListModel,
+} from '@/domain/models/accounts/accounts.model';
 
 export interface AccountsPort {
   readonly list: () => Observable<AccountsListModel[]>;
+  readonly create: (dto: AccountCreateDto) => Observable<AccountCreateResponse>;
 }

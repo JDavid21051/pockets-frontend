@@ -33,17 +33,60 @@ export interface AccountsStoreStateModel {
   dataTableSource: MatTableDataSource<AccountsListModel>;
 }
 
+export interface AccountCreateDto {
+  accountNumber: string;
+  accountType: AccountTypeEnum;
+  accountBankName: string;
+  accountBankLocation: string;
+  enabled: boolean;
+  balance: number;
+  currency: AccountCurrencyEnum;
+  tea: number;
+  openAt: string;
+  headlineId: UUID;
+}
+
+export interface AccountCreateResponse {
+  id: UUID;
+  status: boolean;
+  account_type: number;
+  bank: string;
+  balance: string;
+  currency: AccountCurrencyEnum;
+  account_location: string;
+  /**
+   "account_number": "31231232122",
+   "open_at": "2026-06-29T00:00:00.000Z",
+   "tea": "9.00",
+   "headline_id": "d9693214-a9f7-4445-89b1-c2d34606632d",
+   "created_at": "2026-07-06T08:33:38.000Z"
+   */
+}
+
 export interface AccountsFormControls {
   accountNumber: FormControl<string>;
   type: FormControl<SummaryListModel<AccountTypeEnum> | null>;
   bankName: FormControl<string>;
   bankLocation: FormControl<string>;
   enabled: FormControl<boolean>;
-  balance: FormControl<number>;
+  balance: FormControl<string>;
   currency: FormControl<SummaryListModel<AccountCurrencyEnum> | null>;
-  tae: FormControl<number>;
+  tae: FormControl<string>;
   openAt: FormControl<string>;
   headline: FormControl<HeadlinesModelList | null>;
+}
+
+export interface AccountsFormControlsValues {
+  accountNumber: string;
+  type: SummaryListModel<AccountTypeEnum> | null;
+  bankName: string;
+  bankLocation: string;
+  enabled: boolean;
+  balance: string;
+  currency: SummaryListModel<AccountCurrencyEnum> | null;
+  tae: string;
+  openAt: string;
+  headline: HeadlinesModelList | null;
 }
 
 /**
