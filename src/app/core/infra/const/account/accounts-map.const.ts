@@ -27,7 +27,7 @@ export const ACCOUNT_TYPE_LIST: SummaryListModel<AccountTypeEnum>[] = Object.key
 });
 
 export const ACCOUNT_CURRENCY_SYMBOL_MAP: Record<AccountCurrencyEnum, string> = {
-  [AccountCurrencyEnum.USD]: '$',
+  [AccountCurrencyEnum.USD]: 'USD',
   [AccountCurrencyEnum.COP]: ' COP',
 };
 
@@ -35,3 +35,14 @@ export const ACCOUNT_CURRENCY_NAME_MAP: Record<AccountCurrencyEnum, string> = {
   [AccountCurrencyEnum.USD]: 'account.currency.usd',
   [AccountCurrencyEnum.COP]: 'account.currency.cop',
 };
+
+export const ACCOUNT_CURRENCY_TYPE: SummaryListModel<AccountCurrencyEnum>[] = Object.keys(
+  ACCOUNT_CURRENCY_NAME_MAP,
+).map((valueItem): SummaryListModel<AccountCurrencyEnum> => {
+  const itemKey = valueItem as unknown as AccountCurrencyEnum;
+
+  return {
+    id: itemKey,
+    name: ACCOUNT_CURRENCY_NAME_MAP[itemKey],
+  };
+});

@@ -52,7 +52,6 @@ export class TextField {
   //  readonly size = input<NbComponentSize>('small');
   // input
   readonly idRef = input('');
-  // readonly status = input<NbComponentOrCustomStatus>('basic');
   readonly placeholder = input('Ingrese su nombre');
   readonly type = input<string>('text');
   readonly min = input<number>();

@@ -20,6 +20,10 @@ export const minlength: MsmErrorFn = () => 'shared.text.errors.minlength';
 
 export const maxlength: MsmErrorFn = () => 'shared.text.errors.maxlength';
 
+export const max: MsmErrorFn = () => 'shared.text.errors.maxlength';
+
+export const min: MsmErrorFn = () => 'shared.text.errors.minlength';
+
 export const required: MsmErrorFn = () => 'shared.text.errors.required';
 
 export const pattern: MsmErrorFn = () => 'shared.text.errors.validations.basic.pattern';
@@ -30,6 +34,8 @@ export const BasicMessagesError: MsmErrorsType = {
   maxlength,
   required,
   pattern,
+  max,
+  min,
 };
 
-export const errorsWithParams: string[] = ['minlength', 'maxlength'];
+export const errorsWithParams: string[] = ['minlength', 'maxlength', 'max', 'min'];
