@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, input, ViewEncapsulation } from '@angular/core';
 import type { MsmErrorsType } from '@/domain/types/app/msm-error-fn.type';
 import type { AbstractControl, ValidationErrors } from '@angular/forms';
 import { BasicMessagesError, errorsWithParams } from '@/infra/const/basic-messages-error.const';
@@ -16,7 +16,6 @@ import { TranslatePipe } from '@ngx-translate/core';
       }
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldError {
@@ -26,7 +25,8 @@ export class FormFieldError {
   readonly errors = input<MsmErrorsType | null>(null);
 
   get needsParams(): boolean {
-    return errorsWithParams.includes(this.getErrorKey());
+    const keyValue = this.getErrorKey();
+    return errorsWithParams.includes(keyValue);
   }
 
   private getErrorKey(): string {
