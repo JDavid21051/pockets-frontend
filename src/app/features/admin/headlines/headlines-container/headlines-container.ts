@@ -56,7 +56,7 @@ export class HeadlinesContainer implements OnInit {
   protected actionTable: SkyTableActionsType[] = ['update', 'delete'];
 
   readonly dataTable = this.store.dataTableSource;
-  readonly getHeadlines: RxMethod<void> = this.store.getHeadlines;
+  readonly getHeadlines: RxMethod<boolean> = this.store.getHeadlines;
   readonly loading = this.store.listLoading;
 
   readonly dialog = inject(MatDialog);
@@ -105,7 +105,7 @@ export class HeadlinesContainer implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHeadlines();
+    this.getHeadlines(true);
   }
 
   clickOpenCreateForm(): void {
