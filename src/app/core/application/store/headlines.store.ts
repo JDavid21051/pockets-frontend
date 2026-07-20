@@ -36,15 +36,17 @@ export const HeadlinesStore = signalStore(
       function setDialogRef(param: MatDialogRef<HeadlinesFormContainer, boolean> | null): void {
         patchState(store, { dialogRef: param });
       }
-      const getHeadlines = rxMethod<void>(($) => {
+      const getHeadlines = rxMethod<boolean>(($) => {
         patchState(store, { listLoading: true });
         return $.pipe(
-          switchMap(() =>
+          switchMap((params: boolean) =>
             headlinesRepository.list().pipe(
               handleRxResponse(
                 (response) => {
                   console.log({ response });
-                  snackService.showSuccess(translate.instant('headline.msm.listedSuccess'));
+                  if (params) {
+                    snackService.showSuccess(translate.instant('headline.msm.listedSuccess'))
+                  }
                   store.dataTableSource().data = [...response];
                   patchState(store, { listLoading: false, dialogRef: null, dataList: response });
                 },
@@ -113,7 +115,7 @@ export const HeadlinesStore = signalStore(
                     snackService.showSuccess(translate.instant('headline.msm.updateSuccess'));
 
                     dialogRef.close(true);
-                    getHeadlines();
+                    getHeadlines(true);
                   }
                 },
                 (error) => {
@@ -142,7 +144,7 @@ export const HeadlinesStore = signalStore(
                     return;
                   }
                   snackService.showSuccess(translate.instant('headline.msm.deleteSuccess'));
-                  getHeadlines();
+                  getHeadlines(true);
                 },
                 (error) => {
                   console.log({ error });
