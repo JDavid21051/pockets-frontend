@@ -6,6 +6,7 @@
  * File name:    accounts.enums
  * IDE:          WebStorm
  */
+
 export enum AccountTypeEnum {
   Savings,
   Current,

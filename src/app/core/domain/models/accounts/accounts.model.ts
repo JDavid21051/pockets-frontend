@@ -71,7 +71,7 @@ export interface AccountsFormControls {
   enabled: FormControl<boolean>;
   balance: FormControl<string>;
   currency: FormControl<SummaryListModel<AccountCurrencyEnum> | null>;
-  tae: FormControl<string>;
+  tea: FormControl<string>;
   openAt: FormControl<string>;
   headline: FormControl<HeadlinesModelList | null>;
 }
@@ -84,7 +84,7 @@ export interface AccountsFormControlsValues {
   enabled: boolean;
   balance: string;
   currency: SummaryListModel<AccountCurrencyEnum> | null;
-  tae: string;
+  tea: string;
   openAt: string;
   headline: HeadlinesModelList | null;
 }

@@ -14,6 +14,10 @@ import { type FormGroup, NonNullableFormBuilder, Validators } from '@angular/for
 export const AccountFormFactory = (): FormGroup<AccountsFormControls> => {
   const build = inject(NonNullableFormBuilder);
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayFormat = today.toISOString();
+
   return build.group<AccountsFormControls>({
     accountNumber: build.control('', [
       Validators.required,
@@ -35,7 +39,7 @@ export const AccountFormFactory = (): FormGroup<AccountsFormControls> => {
       Validators.maxLength(200),
     ]),
     enabled: build.control(true, [Validators.required]),
-    tae: build.control('', [Validators.required, Validators.max(100)]),
-    openAt: build.control('2026-06-29', [Validators.required]),
+    tea: build.control('', [Validators.required, Validators.max(100)]),
+    openAt: build.control(todayFormat, [Validators.required]),
   });
 };
