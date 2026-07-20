@@ -23,7 +23,7 @@ export const AccountFormFactory = (): FormGroup<AccountsFormControls> => {
     type: build.control(null, [Validators.required]),
     currency: build.control(null, [Validators.required]),
     headline: build.control(null, [Validators.required]),
-    balance: build.control(0, [Validators.required, Validators.min(1)]),
+    balance: build.control('0', [Validators.required, Validators.minLength(1)]),
     bankLocation: build.control('', [
       Validators.required,
       Validators.minLength(3),
@@ -35,7 +35,7 @@ export const AccountFormFactory = (): FormGroup<AccountsFormControls> => {
       Validators.maxLength(200),
     ]),
     enabled: build.control(true, [Validators.required]),
-    tae: build.control(0, [Validators.required, Validators.max(100)]),
-    openAt: build.control('', [Validators.required]),
+    tae: build.control('', [Validators.required, Validators.max(100)]),
+    openAt: build.control('2026-06-29', [Validators.required]),
   });
 };
