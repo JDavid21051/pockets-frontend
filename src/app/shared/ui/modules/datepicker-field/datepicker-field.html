@@ -1,0 +1,39 @@
+<mat-form-field appearance="outline" class="w-full">
+    @if (visibleLabel()) {
+      <mat-label [class]="cn(labelClass(), 'text-sm')">
+        {{ label() | translate }}
+      </mat-label>
+    }
+  <input
+    matInput
+    [disabled]="disabled()"
+    [formControl]="controlRef()"
+    [id]="idRef()"
+    [matDatepicker]="picker"
+    [placeholder]="placeholder() | translate"
+    [readonly]="readonly()"
+    [required]="required() && controlRequired()"
+    (dateChange)="changeInput.emit($event)"
+    (dateInput)="changeInput.emit($event)">
+<!--
+  <mat-hint>MM/DD/YYYY</mat-hint>
+-->
+  @if (prefixIcon()) {
+    <mat-datepicker-toggle matIconPrefix [disabled]="disabled()" [for]="picker" >
+        <mat-icon matDatepickerToggleIcon [svgIcon]="prefixIcon()"></mat-icon>
+    </mat-datepicker-toggle>
+  }
+  @if (suffixIcon()) {
+    <mat-datepicker-toggle matIconSuffix [disabled]="disabled()" [for]="picker" >
+        <mat-icon matDatepickerToggleIcon [svgIcon]="suffixIcon()"></mat-icon>
+    </mat-datepicker-toggle>
+  }
+  <mat-datepicker [disabled]="disabled()" #picker></mat-datepicker>
+    <krih-form-field-error
+      matError
+      [controlRef]="controlRef()"
+      [errorsVisible]="errorsVisible()"
+      [errors]="errorsMessage()"
+      [groupErrors]="errorsGroupMessage()"
+    />
+</mat-form-field>
