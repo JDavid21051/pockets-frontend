@@ -44,6 +44,7 @@ export class IconRegisterService {
     ['palette', 'icons/palette.svg'],
     ['percent', 'icons/percent.svg'],
     ['currency_yuan', 'icons/currency_yuan.svg'],
+    ['today', 'icons/today.svg'],
   ];
 
   register(): void {
