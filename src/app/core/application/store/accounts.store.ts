@@ -18,6 +18,7 @@ import { handleRxResponse } from '@/infra/parsers/handle-rx-response';
 import { AccountsRepository } from '@/infra/repository/modules/accounts.repository';
 import type { MatDialogRef } from '@angular/material/dialog';
 import type { AccountFormContainer } from '@/features/admin/accounts/account-form-container/account-form-container';
+import type { AccountCreateDto, AccountsListModel } from '@/domain/models/accounts/accounts.model';
 
 export const AccountsStore = signalStore(
   { providedIn: 'root' },
@@ -49,12 +50,54 @@ export const AccountsStore = signalStore(
           ),
         );
       });
+
+      const createAccount = rxMethod<AccountCreateDto>(($) => {
+        patchState(store, { listLoading: true });
+        return $.pipe(
+          switchMap((params) =>
+            accountsRepository.create(params).pipe(
+              handleRxResponse(
+                (response) => {
+                  console.log({ response });
+                  const dialogRef = store.dialogRef();
+                  if (dialogRef) {
+                    const accountCreated: AccountsListModel = {
+                      balance: String(response.balance),
+                      account_location: response.account_location,
+                      account_type: response.account_type,
+                      bank: response.bank,
+                      currency: response.currency,
+                      id: response.id,
+                      status: response.status,
+                    };
+                    const newList = store.dataTableSource().data.concat([accountCreated]);
+
+                    store.dataTableSource().data = [...newList];
+                    patchState(store, {
+                      listLoading: false,
+                      accounts: newList,
+                    });
+                    snackService.showSuccess(translate.instant('account.msm.createSuccess'));
+
+                    dialogRef.close(true);
+                  }
+                },
+                (error): void => {
+                  snackService.showError(String(error.message ?? error));
+                  patchState(store, { listLoading: false });
+                },
+              ),
+            ),
+          ),
+        );
+      });
       function setDialogRef(param: MatDialogRef<AccountFormContainer, boolean> | null): void {
         patchState(store, { dialogRef: param });
       }
       return {
         getAccounts,
         setDialogRef,
+        createAccount,
       };
     },
   ),
